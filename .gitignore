@@ -26,3 +26,12 @@
 *.exe
 *.out
 *.app
+
+# Bach libraries
+Study/Betatron/Src/Lib/Eigen
+Study/Betatron/Src/Lib/boost
+
+# XCode
+Study/Study.xcworkspace/xcuserdata
+Study/Study.xcworkspace/xcshareddata
+Study/Betatron/Betatron.xcodeproj/xcuserdata

@@ -1,0 +1,618 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F8142D0D1A19157E007055BD /* BondElectrons.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8142D001A19157E007055BD /* BondElectrons.cpp */; };
+		F8142D0E1A19157E007055BD /* Atom.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8142D011A19157E007055BD /* Atom.cpp */; };
+		F8142D0F1A19157E007055BD /* Bond.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8142D031A19157E007055BD /* Bond.cpp */; };
+		F8142D101A19157E007055BD /* Molecule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8142D071A19157E007055BD /* Molecule.cpp */; };
+		F8142D111A19157E007055BD /* MoleculeFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8142D091A19157E007055BD /* MoleculeFactory.cpp */; };
+		F8142D121A19157E007055BD /* SpOrbital.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8142D0B1A19157E007055BD /* SpOrbital.cpp */; };
+		F8142D1A1A1915B5007055BD /* ChargeMagneticField.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8142D141A1915B5007055BD /* ChargeMagneticField.cpp */; };
+		F8142D1B1A1915B5007055BD /* BondForce.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8142D161A1915B5007055BD /* BondForce.cpp */; };
+		F8142D1C1A1915B5007055BD /* ElectricField.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8142D181A1915B5007055BD /* ElectricField.cpp */; };
+		F8142D201A1915D7007055BD /* ForceVectors.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8142D1E1A1915D7007055BD /* ForceVectors.cpp */; };
+		F8142D3A1A191609007055BD /* BetatronEquations.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8142D221A191609007055BD /* BetatronEquations.cpp */; };
+		F8142D3B1A191609007055BD /* BetatronEquationSolver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8142D231A191609007055BD /* BetatronEquationSolver.cpp */; };
+		F8142D3C1A191609007055BD /* BetatronFieldController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8142D241A191609007055BD /* BetatronFieldController.cpp */; };
+		F8142D3D1A191609007055BD /* Circuit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8142D281A191609007055BD /* Circuit.cpp */; };
+		F8142D3E1A191609007055BD /* WaterSwingArm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8142D2A1A191609007055BD /* WaterSwingArm.cpp */; };
+		F8142D3F1A191609007055BD /* MoleculeAccelSolverEquations.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8142D2C1A191609007055BD /* MoleculeAccelSolverEquations.cpp */; };
+		F8142D401A191609007055BD /* DipoleMomentFinder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8142D2D1A191609007055BD /* DipoleMomentFinder.cpp */; };
+		F8142D411A191609007055BD /* MoleculeAccelerationSolver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8142D2F1A191609007055BD /* MoleculeAccelerationSolver.cpp */; };
+		F8142D421A191609007055BD /* MoleculeEquilibriumEquations.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8142D321A191609007055BD /* MoleculeEquilibriumEquations.cpp */; };
+		F8142D431A191609007055BD /* MoleculeEquilibriumSolver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8142D341A191609007055BD /* MoleculeEquilibriumSolver.cpp */; };
+		F8142D441A191609007055BD /* MoleculeOde.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8142D361A191609007055BD /* MoleculeOde.cpp */; };
+		F8142D451A191609007055BD /* MoleculeValues.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8142D381A191609007055BD /* MoleculeValues.cpp */; };
+		F8142D491A19167A007055BD /* MagneticFieldDerivTests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8142D471A19167A007055BD /* MagneticFieldDerivTests.cpp */; };
+		F8142D7A1A1916FA007055BD /* BaderDeuflhardOde.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8142D4B1A1916FA007055BD /* BaderDeuflhardOde.cpp */; };
+		F8142D7B1A1916FA007055BD /* BisectionHunt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8142D4D1A1916FA007055BD /* BisectionHunt.cpp */; };
+		F8142D7C1A1916FA007055BD /* HermiteInterp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8142D501A1916FA007055BD /* HermiteInterp.cpp */; };
+		F8142D7D1A1916FA007055BD /* Jacobian.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8142D541A1916FA007055BD /* Jacobian.cpp */; };
+		F8142D7E1A1916FA007055BD /* NDimAccuracySpec.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8142D571A1916FA007055BD /* NDimAccuracySpec.cpp */; };
+		F8142D7F1A1916FA007055BD /* NDimNewtonRaphson.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8142D591A1916FA007055BD /* NDimNewtonRaphson.cpp */; };
+		F8142D801A1916FA007055BD /* OdeAccuracySpec.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8142D5B1A1916FA007055BD /* OdeAccuracySpec.cpp */; };
+		F8142D811A1916FA007055BD /* OdeData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8142D5D1A1916FA007055BD /* OdeData.cpp */; };
+		F8142D821A1916FA007055BD /* OdeDataCollector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8142D5F1A1916FA007055BD /* OdeDataCollector.cpp */; };
+		F8142D831A1916FA007055BD /* OdeNumericalDerivatives.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8142D631A1916FA007055BD /* OdeNumericalDerivatives.cpp */; };
+		F8142D841A1916FA007055BD /* OdeSolver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8142D651A1916FA007055BD /* OdeSolver.cpp */; };
+		F8142D851A1916FA007055BD /* OdeSolverWithDerivs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8142D671A1916FA007055BD /* OdeSolverWithDerivs.cpp */; };
+		F8142D861A1916FA007055BD /* PolynomialInterp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8142D691A1916FA007055BD /* PolynomialInterp.cpp */; };
+		F8142D871A1916FA007055BD /* RationalInterp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8142D6B1A1916FA007055BD /* RationalInterp.cpp */; };
+		F8142D881A1916FA007055BD /* RiddersExtrapolation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8142D6D1A1916FA007055BD /* RiddersExtrapolation.cpp */; };
+		F8142D891A1916FA007055BD /* RootSolverEquationsOdeWrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8142D701A1916FA007055BD /* RootSolverEquationsOdeWrapper.cpp */; };
+		F8142D8A1A1916FA007055BD /* SampledData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8142D721A1916FA007055BD /* SampledData.cpp */; };
+		F8142D8B1A1916FA007055BD /* SampledDerivedData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8142D741A1916FA007055BD /* SampledDerivedData.cpp */; };
+		F8142D8C1A1916FA007055BD /* SequentialAccessHunt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8142D761A1916FA007055BD /* SequentialAccessHunt.cpp */; };
+		F8142D8D1A1916FA007055BD /* TableSearch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8142D781A1916FA007055BD /* TableSearch.cpp */; };
+		F87DAC211A183C50003DDBA7 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F87DAC201A183C50003DDBA7 /* main.cpp */; };
+		F87DAC291A1846A2003DDBA7 /* AppleLog.mm in Sources */ = {isa = PBXBuildFile; fileRef = F87DAC251A1846A2003DDBA7 /* AppleLog.mm */; };
+		F87DAC2A1A1846A2003DDBA7 /* Utility.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F87DAC261A1846A2003DDBA7 /* Utility.cpp */; };
+		F87DAC2F1A1854FC003DDBA7 /* AppleStringUtilities.mm in Sources */ = {isa = PBXBuildFile; fileRef = F87DAC2E1A1854FC003DDBA7 /* AppleStringUtilities.mm */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		F87DAC131A17FD29003DDBA7 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		F8142D001A19157E007055BD /* BondElectrons.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BondElectrons.cpp; path = Src/Sim/Elements/BondElectrons.cpp; sourceTree = "<group>"; };
+		F8142D011A19157E007055BD /* Atom.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Atom.cpp; path = Src/Sim/Elements/Atom.cpp; sourceTree = "<group>"; };
+		F8142D021A19157E007055BD /* Atom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Atom.h; path = Src/Sim/Elements/Atom.h; sourceTree = "<group>"; };
+		F8142D031A19157E007055BD /* Bond.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Bond.cpp; path = Src/Sim/Elements/Bond.cpp; sourceTree = "<group>"; };
+		F8142D041A19157E007055BD /* Bond.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Bond.h; path = Src/Sim/Elements/Bond.h; sourceTree = "<group>"; };
+		F8142D051A19157E007055BD /* BondElectrons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BondElectrons.h; path = Src/Sim/Elements/BondElectrons.h; sourceTree = "<group>"; };
+		F8142D061A19157E007055BD /* Element.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Element.h; path = Src/Sim/Elements/Element.h; sourceTree = "<group>"; };
+		F8142D071A19157E007055BD /* Molecule.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Molecule.cpp; path = Src/Sim/Elements/Molecule.cpp; sourceTree = "<group>"; };
+		F8142D081A19157E007055BD /* Molecule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Molecule.h; path = Src/Sim/Elements/Molecule.h; sourceTree = "<group>"; };
+		F8142D091A19157E007055BD /* MoleculeFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MoleculeFactory.cpp; path = Src/Sim/Elements/MoleculeFactory.cpp; sourceTree = "<group>"; };
+		F8142D0A1A19157E007055BD /* MoleculeFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MoleculeFactory.h; path = Src/Sim/Elements/MoleculeFactory.h; sourceTree = "<group>"; };
+		F8142D0B1A19157E007055BD /* SpOrbital.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SpOrbital.cpp; path = Src/Sim/Elements/SpOrbital.cpp; sourceTree = "<group>"; };
+		F8142D0C1A19157E007055BD /* SpOrbital.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SpOrbital.h; path = Src/Sim/Elements/SpOrbital.h; sourceTree = "<group>"; };
+		F8142D141A1915B5007055BD /* ChargeMagneticField.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ChargeMagneticField.cpp; path = Src/Sim/Fields/ChargeMagneticField.cpp; sourceTree = "<group>"; };
+		F8142D151A1915B5007055BD /* ChargeMagneticField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChargeMagneticField.h; path = Src/Sim/Fields/ChargeMagneticField.h; sourceTree = "<group>"; };
+		F8142D161A1915B5007055BD /* BondForce.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BondForce.cpp; path = Src/Sim/Fields/BondForce.cpp; sourceTree = "<group>"; };
+		F8142D171A1915B5007055BD /* BondForce.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BondForce.h; path = Src/Sim/Fields/BondForce.h; sourceTree = "<group>"; };
+		F8142D181A1915B5007055BD /* ElectricField.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ElectricField.cpp; path = Src/Sim/Fields/ElectricField.cpp; sourceTree = "<group>"; };
+		F8142D191A1915B5007055BD /* ElectricField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ElectricField.h; path = Src/Sim/Fields/ElectricField.h; sourceTree = "<group>"; };
+		F8142D1E1A1915D7007055BD /* ForceVectors.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ForceVectors.cpp; path = Src/Sim/Functions/ForceVectors.cpp; sourceTree = "<group>"; };
+		F8142D1F1A1915D7007055BD /* ForceVectors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ForceVectors.h; path = Src/Sim/Functions/ForceVectors.h; sourceTree = "<group>"; };
+		F8142D221A191609007055BD /* BetatronEquations.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BetatronEquations.cpp; path = Src/Sim/Systems/BetatronEquations.cpp; sourceTree = "<group>"; };
+		F8142D231A191609007055BD /* BetatronEquationSolver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BetatronEquationSolver.cpp; path = Src/Sim/Systems/BetatronEquationSolver.cpp; sourceTree = "<group>"; };
+		F8142D241A191609007055BD /* BetatronFieldController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BetatronFieldController.cpp; path = Src/Sim/Systems/BetatronFieldController.cpp; sourceTree = "<group>"; };
+		F8142D251A191609007055BD /* BetatronEquations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BetatronEquations.h; path = Src/Sim/Systems/BetatronEquations.h; sourceTree = "<group>"; };
+		F8142D261A191609007055BD /* BetatronEquationSolver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BetatronEquationSolver.h; path = Src/Sim/Systems/BetatronEquationSolver.h; sourceTree = "<group>"; };
+		F8142D271A191609007055BD /* BetatronFieldController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BetatronFieldController.h; path = Src/Sim/Systems/BetatronFieldController.h; sourceTree = "<group>"; };
+		F8142D281A191609007055BD /* Circuit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Circuit.cpp; path = Src/Sim/Systems/Circuit.cpp; sourceTree = "<group>"; };
+		F8142D291A191609007055BD /* Circuit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Circuit.h; path = Src/Sim/Systems/Circuit.h; sourceTree = "<group>"; };
+		F8142D2A1A191609007055BD /* WaterSwingArm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = WaterSwingArm.cpp; path = Src/Sim/Systems/WaterSwingArm.cpp; sourceTree = "<group>"; };
+		F8142D2B1A191609007055BD /* WaterSwingArm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WaterSwingArm.h; path = Src/Sim/Systems/WaterSwingArm.h; sourceTree = "<group>"; };
+		F8142D2C1A191609007055BD /* MoleculeAccelSolverEquations.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MoleculeAccelSolverEquations.cpp; path = Src/Sim/Systems/MoleculeAccelSolverEquations.cpp; sourceTree = "<group>"; };
+		F8142D2D1A191609007055BD /* DipoleMomentFinder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DipoleMomentFinder.cpp; path = Src/Sim/Systems/DipoleMomentFinder.cpp; sourceTree = "<group>"; };
+		F8142D2E1A191609007055BD /* DipoleMomentFinder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DipoleMomentFinder.h; path = Src/Sim/Systems/DipoleMomentFinder.h; sourceTree = "<group>"; };
+		F8142D2F1A191609007055BD /* MoleculeAccelerationSolver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MoleculeAccelerationSolver.cpp; path = Src/Sim/Systems/MoleculeAccelerationSolver.cpp; sourceTree = "<group>"; };
+		F8142D301A191609007055BD /* MoleculeAccelerationSolver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MoleculeAccelerationSolver.h; path = Src/Sim/Systems/MoleculeAccelerationSolver.h; sourceTree = "<group>"; };
+		F8142D311A191609007055BD /* MoleculeAccelSolverEquations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MoleculeAccelSolverEquations.h; path = Src/Sim/Systems/MoleculeAccelSolverEquations.h; sourceTree = "<group>"; };
+		F8142D321A191609007055BD /* MoleculeEquilibriumEquations.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MoleculeEquilibriumEquations.cpp; path = Src/Sim/Systems/MoleculeEquilibriumEquations.cpp; sourceTree = "<group>"; };
+		F8142D331A191609007055BD /* MoleculeEquilibriumEquations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MoleculeEquilibriumEquations.h; path = Src/Sim/Systems/MoleculeEquilibriumEquations.h; sourceTree = "<group>"; };
+		F8142D341A191609007055BD /* MoleculeEquilibriumSolver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MoleculeEquilibriumSolver.cpp; path = Src/Sim/Systems/MoleculeEquilibriumSolver.cpp; sourceTree = "<group>"; };
+		F8142D351A191609007055BD /* MoleculeEquilibriumSolver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MoleculeEquilibriumSolver.h; path = Src/Sim/Systems/MoleculeEquilibriumSolver.h; sourceTree = "<group>"; };
+		F8142D361A191609007055BD /* MoleculeOde.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MoleculeOde.cpp; path = Src/Sim/Systems/MoleculeOde.cpp; sourceTree = "<group>"; };
+		F8142D371A191609007055BD /* MoleculeOde.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MoleculeOde.h; path = Src/Sim/Systems/MoleculeOde.h; sourceTree = "<group>"; };
+		F8142D381A191609007055BD /* MoleculeValues.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MoleculeValues.cpp; path = Src/Sim/Systems/MoleculeValues.cpp; sourceTree = "<group>"; };
+		F8142D391A191609007055BD /* MoleculeValues.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MoleculeValues.h; path = Src/Sim/Systems/MoleculeValues.h; sourceTree = "<group>"; };
+		F8142D471A19167A007055BD /* MagneticFieldDerivTests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MagneticFieldDerivTests.cpp; path = Src/Test/MagneticFieldDerivTests.cpp; sourceTree = "<group>"; };
+		F8142D481A19167A007055BD /* MagneticFieldDerivTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MagneticFieldDerivTests.h; path = Src/Test/MagneticFieldDerivTests.h; sourceTree = "<group>"; };
+		F8142D4B1A1916FA007055BD /* BaderDeuflhardOde.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BaderDeuflhardOde.cpp; path = Src/Math/BaderDeuflhardOde.cpp; sourceTree = "<group>"; };
+		F8142D4C1A1916FA007055BD /* BaderDeuflhardOde.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaderDeuflhardOde.h; path = Src/Math/BaderDeuflhardOde.h; sourceTree = "<group>"; };
+		F8142D4D1A1916FA007055BD /* BisectionHunt.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BisectionHunt.cpp; path = Src/Math/BisectionHunt.cpp; sourceTree = "<group>"; };
+		F8142D4E1A1916FA007055BD /* BisectionHunt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BisectionHunt.h; path = Src/Math/BisectionHunt.h; sourceTree = "<group>"; };
+		F8142D4F1A1916FA007055BD /* DependentData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DependentData.h; path = Src/Math/DependentData.h; sourceTree = "<group>"; };
+		F8142D501A1916FA007055BD /* HermiteInterp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = HermiteInterp.cpp; path = Src/Math/HermiteInterp.cpp; sourceTree = "<group>"; };
+		F8142D511A1916FA007055BD /* HermiteInterp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HermiteInterp.h; path = Src/Math/HermiteInterp.h; sourceTree = "<group>"; };
+		F8142D521A1916FA007055BD /* InterpolationIndex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InterpolationIndex.h; path = Src/Math/InterpolationIndex.h; sourceTree = "<group>"; };
+		F8142D531A1916FA007055BD /* Interpolator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Interpolator.h; path = Src/Math/Interpolator.h; sourceTree = "<group>"; };
+		F8142D541A1916FA007055BD /* Jacobian.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Jacobian.cpp; path = Src/Math/Jacobian.cpp; sourceTree = "<group>"; };
+		F8142D551A1916FA007055BD /* Jacobian.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Jacobian.h; path = Src/Math/Jacobian.h; sourceTree = "<group>"; };
+		F8142D561A1916FA007055BD /* MultivariateDerivatives.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MultivariateDerivatives.h; path = Src/Math/MultivariateDerivatives.h; sourceTree = "<group>"; };
+		F8142D571A1916FA007055BD /* NDimAccuracySpec.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NDimAccuracySpec.cpp; path = Src/Math/NDimAccuracySpec.cpp; sourceTree = "<group>"; };
+		F8142D581A1916FA007055BD /* NDimAccuracySpec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NDimAccuracySpec.h; path = Src/Math/NDimAccuracySpec.h; sourceTree = "<group>"; };
+		F8142D591A1916FA007055BD /* NDimNewtonRaphson.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NDimNewtonRaphson.cpp; path = Src/Math/NDimNewtonRaphson.cpp; sourceTree = "<group>"; };
+		F8142D5A1A1916FA007055BD /* NDimNewtonRaphson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NDimNewtonRaphson.h; path = Src/Math/NDimNewtonRaphson.h; sourceTree = "<group>"; };
+		F8142D5B1A1916FA007055BD /* OdeAccuracySpec.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OdeAccuracySpec.cpp; path = Src/Math/OdeAccuracySpec.cpp; sourceTree = "<group>"; };
+		F8142D5C1A1916FA007055BD /* OdeAccuracySpec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OdeAccuracySpec.h; path = Src/Math/OdeAccuracySpec.h; sourceTree = "<group>"; };
+		F8142D5D1A1916FA007055BD /* OdeData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OdeData.cpp; path = Src/Math/OdeData.cpp; sourceTree = "<group>"; };
+		F8142D5E1A1916FA007055BD /* OdeData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OdeData.h; path = Src/Math/OdeData.h; sourceTree = "<group>"; };
+		F8142D5F1A1916FA007055BD /* OdeDataCollector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OdeDataCollector.cpp; path = Src/Math/OdeDataCollector.cpp; sourceTree = "<group>"; };
+		F8142D601A1916FA007055BD /* OdeDataCollector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OdeDataCollector.h; path = Src/Math/OdeDataCollector.h; sourceTree = "<group>"; };
+		F8142D611A1916FA007055BD /* OdeDerivatives.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OdeDerivatives.h; path = Src/Math/OdeDerivatives.h; sourceTree = "<group>"; };
+		F8142D621A1916FA007055BD /* OdeEquations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OdeEquations.h; path = Src/Math/OdeEquations.h; sourceTree = "<group>"; };
+		F8142D631A1916FA007055BD /* OdeNumericalDerivatives.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OdeNumericalDerivatives.cpp; path = Src/Math/OdeNumericalDerivatives.cpp; sourceTree = "<group>"; };
+		F8142D641A1916FA007055BD /* OdeNumericalDerivatives.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OdeNumericalDerivatives.h; path = Src/Math/OdeNumericalDerivatives.h; sourceTree = "<group>"; };
+		F8142D651A1916FA007055BD /* OdeSolver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OdeSolver.cpp; path = Src/Math/OdeSolver.cpp; sourceTree = "<group>"; };
+		F8142D661A1916FA007055BD /* OdeSolver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OdeSolver.h; path = Src/Math/OdeSolver.h; sourceTree = "<group>"; };
+		F8142D671A1916FA007055BD /* OdeSolverWithDerivs.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OdeSolverWithDerivs.cpp; path = Src/Math/OdeSolverWithDerivs.cpp; sourceTree = "<group>"; };
+		F8142D681A1916FA007055BD /* OdeSolverWithDerivs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OdeSolverWithDerivs.h; path = Src/Math/OdeSolverWithDerivs.h; sourceTree = "<group>"; };
+		F8142D691A1916FA007055BD /* PolynomialInterp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PolynomialInterp.cpp; path = Src/Math/PolynomialInterp.cpp; sourceTree = "<group>"; };
+		F8142D6A1A1916FA007055BD /* PolynomialInterp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PolynomialInterp.h; path = Src/Math/PolynomialInterp.h; sourceTree = "<group>"; };
+		F8142D6B1A1916FA007055BD /* RationalInterp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RationalInterp.cpp; path = Src/Math/RationalInterp.cpp; sourceTree = "<group>"; };
+		F8142D6C1A1916FA007055BD /* RationalInterp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RationalInterp.h; path = Src/Math/RationalInterp.h; sourceTree = "<group>"; };
+		F8142D6D1A1916FA007055BD /* RiddersExtrapolation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RiddersExtrapolation.cpp; path = Src/Math/RiddersExtrapolation.cpp; sourceTree = "<group>"; };
+		F8142D6E1A1916FA007055BD /* RiddersExtrapolation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RiddersExtrapolation.h; path = Src/Math/RiddersExtrapolation.h; sourceTree = "<group>"; };
+		F8142D6F1A1916FA007055BD /* RootSolverEquations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RootSolverEquations.h; path = Src/Math/RootSolverEquations.h; sourceTree = "<group>"; };
+		F8142D701A1916FA007055BD /* RootSolverEquationsOdeWrapper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RootSolverEquationsOdeWrapper.cpp; path = Src/Math/RootSolverEquationsOdeWrapper.cpp; sourceTree = "<group>"; };
+		F8142D711A1916FA007055BD /* RootSolverEquationsOdeWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RootSolverEquationsOdeWrapper.h; path = Src/Math/RootSolverEquationsOdeWrapper.h; sourceTree = "<group>"; };
+		F8142D721A1916FA007055BD /* SampledData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SampledData.cpp; path = Src/Math/SampledData.cpp; sourceTree = "<group>"; };
+		F8142D731A1916FA007055BD /* SampledData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SampledData.h; path = Src/Math/SampledData.h; sourceTree = "<group>"; };
+		F8142D741A1916FA007055BD /* SampledDerivedData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SampledDerivedData.cpp; path = Src/Math/SampledDerivedData.cpp; sourceTree = "<group>"; };
+		F8142D751A1916FA007055BD /* SampledDerivedData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SampledDerivedData.h; path = Src/Math/SampledDerivedData.h; sourceTree = "<group>"; };
+		F8142D761A1916FA007055BD /* SequentialAccessHunt.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SequentialAccessHunt.cpp; path = Src/Math/SequentialAccessHunt.cpp; sourceTree = "<group>"; };
+		F8142D771A1916FA007055BD /* SequentialAccessHunt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SequentialAccessHunt.h; path = Src/Math/SequentialAccessHunt.h; sourceTree = "<group>"; };
+		F8142D781A1916FA007055BD /* TableSearch.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TableSearch.cpp; path = Src/Math/TableSearch.cpp; sourceTree = "<group>"; };
+		F8142D791A1916FA007055BD /* TableSearch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TableSearch.h; path = Src/Math/TableSearch.h; sourceTree = "<group>"; };
+		F87DAC151A17FD29003DDBA7 /* Betatron */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Betatron; sourceTree = BUILT_PRODUCTS_DIR; };
+		F87DAC201A183C50003DDBA7 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = Src/main.cpp; sourceTree = "<group>"; };
+		F87DAC241A1846A2003DDBA7 /* AppleLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppleLog.h; path = Src/Common/AppleLog.h; sourceTree = "<group>"; };
+		F87DAC251A1846A2003DDBA7 /* AppleLog.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppleLog.mm; path = Src/Common/AppleLog.mm; sourceTree = "<group>"; };
+		F87DAC261A1846A2003DDBA7 /* Utility.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Utility.cpp; path = Src/Common/Utility.cpp; sourceTree = "<group>"; };
+		F87DAC271A1846A2003DDBA7 /* Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Utility.h; path = Src/Common/Utility.h; sourceTree = "<group>"; };
+		F87DAC2C1A184D3F003DDBA7 /* BetatronDefs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BetatronDefs.h; path = Src/BetatronDefs.h; sourceTree = "<group>"; };
+		F87DAC2D1A1854FC003DDBA7 /* AppleStringUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppleStringUtilities.h; path = Src/Common/AppleStringUtilities.h; sourceTree = "<group>"; };
+		F87DAC2E1A1854FC003DDBA7 /* AppleStringUtilities.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppleStringUtilities.mm; path = Src/Common/AppleStringUtilities.mm; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F87DAC121A17FD29003DDBA7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F8142CFE1A191547007055BD /* Sim */ = {
+			isa = PBXGroup;
+			children = (
+				F8142D211A1915E1007055BD /* Systems */,
+				F8142D1D1A1915C1007055BD /* Functions */,
+				F8142D131A19158C007055BD /* Fields */,
+				F8142CFF1A191561007055BD /* Elements */,
+			);
+			name = Sim;
+			sourceTree = "<group>";
+		};
+		F8142CFF1A191561007055BD /* Elements */ = {
+			isa = PBXGroup;
+			children = (
+				F8142D001A19157E007055BD /* BondElectrons.cpp */,
+				F8142D011A19157E007055BD /* Atom.cpp */,
+				F8142D021A19157E007055BD /* Atom.h */,
+				F8142D031A19157E007055BD /* Bond.cpp */,
+				F8142D041A19157E007055BD /* Bond.h */,
+				F8142D051A19157E007055BD /* BondElectrons.h */,
+				F8142D061A19157E007055BD /* Element.h */,
+				F8142D071A19157E007055BD /* Molecule.cpp */,
+				F8142D081A19157E007055BD /* Molecule.h */,
+				F8142D091A19157E007055BD /* MoleculeFactory.cpp */,
+				F8142D0A1A19157E007055BD /* MoleculeFactory.h */,
+				F8142D0B1A19157E007055BD /* SpOrbital.cpp */,
+				F8142D0C1A19157E007055BD /* SpOrbital.h */,
+			);
+			name = Elements;
+			sourceTree = "<group>";
+		};
+		F8142D131A19158C007055BD /* Fields */ = {
+			isa = PBXGroup;
+			children = (
+				F8142D141A1915B5007055BD /* ChargeMagneticField.cpp */,
+				F8142D151A1915B5007055BD /* ChargeMagneticField.h */,
+				F8142D161A1915B5007055BD /* BondForce.cpp */,
+				F8142D171A1915B5007055BD /* BondForce.h */,
+				F8142D181A1915B5007055BD /* ElectricField.cpp */,
+				F8142D191A1915B5007055BD /* ElectricField.h */,
+			);
+			name = Fields;
+			sourceTree = "<group>";
+		};
+		F8142D1D1A1915C1007055BD /* Functions */ = {
+			isa = PBXGroup;
+			children = (
+				F8142D1E1A1915D7007055BD /* ForceVectors.cpp */,
+				F8142D1F1A1915D7007055BD /* ForceVectors.h */,
+			);
+			name = Functions;
+			sourceTree = "<group>";
+		};
+		F8142D211A1915E1007055BD /* Systems */ = {
+			isa = PBXGroup;
+			children = (
+				F8142D221A191609007055BD /* BetatronEquations.cpp */,
+				F8142D231A191609007055BD /* BetatronEquationSolver.cpp */,
+				F8142D241A191609007055BD /* BetatronFieldController.cpp */,
+				F8142D251A191609007055BD /* BetatronEquations.h */,
+				F8142D261A191609007055BD /* BetatronEquationSolver.h */,
+				F8142D271A191609007055BD /* BetatronFieldController.h */,
+				F8142D281A191609007055BD /* Circuit.cpp */,
+				F8142D291A191609007055BD /* Circuit.h */,
+				F8142D2A1A191609007055BD /* WaterSwingArm.cpp */,
+				F8142D2B1A191609007055BD /* WaterSwingArm.h */,
+				F8142D2C1A191609007055BD /* MoleculeAccelSolverEquations.cpp */,
+				F8142D2D1A191609007055BD /* DipoleMomentFinder.cpp */,
+				F8142D2E1A191609007055BD /* DipoleMomentFinder.h */,
+				F8142D2F1A191609007055BD /* MoleculeAccelerationSolver.cpp */,
+				F8142D301A191609007055BD /* MoleculeAccelerationSolver.h */,
+				F8142D311A191609007055BD /* MoleculeAccelSolverEquations.h */,
+				F8142D321A191609007055BD /* MoleculeEquilibriumEquations.cpp */,
+				F8142D331A191609007055BD /* MoleculeEquilibriumEquations.h */,
+				F8142D341A191609007055BD /* MoleculeEquilibriumSolver.cpp */,
+				F8142D351A191609007055BD /* MoleculeEquilibriumSolver.h */,
+				F8142D361A191609007055BD /* MoleculeOde.cpp */,
+				F8142D371A191609007055BD /* MoleculeOde.h */,
+				F8142D381A191609007055BD /* MoleculeValues.cpp */,
+				F8142D391A191609007055BD /* MoleculeValues.h */,
+			);
+			name = Systems;
+			sourceTree = "<group>";
+		};
+		F8142D461A19161F007055BD /* Test */ = {
+			isa = PBXGroup;
+			children = (
+				F8142D471A19167A007055BD /* MagneticFieldDerivTests.cpp */,
+				F8142D481A19167A007055BD /* MagneticFieldDerivTests.h */,
+			);
+			name = Test;
+			sourceTree = "<group>";
+		};
+		F8142D4A1A1916E9007055BD /* Math */ = {
+			isa = PBXGroup;
+			children = (
+				F8142D4B1A1916FA007055BD /* BaderDeuflhardOde.cpp */,
+				F8142D4C1A1916FA007055BD /* BaderDeuflhardOde.h */,
+				F8142D4D1A1916FA007055BD /* BisectionHunt.cpp */,
+				F8142D4E1A1916FA007055BD /* BisectionHunt.h */,
+				F8142D4F1A1916FA007055BD /* DependentData.h */,
+				F8142D501A1916FA007055BD /* HermiteInterp.cpp */,
+				F8142D511A1916FA007055BD /* HermiteInterp.h */,
+				F8142D521A1916FA007055BD /* InterpolationIndex.h */,
+				F8142D531A1916FA007055BD /* Interpolator.h */,
+				F8142D541A1916FA007055BD /* Jacobian.cpp */,
+				F8142D551A1916FA007055BD /* Jacobian.h */,
+				F8142D561A1916FA007055BD /* MultivariateDerivatives.h */,
+				F8142D571A1916FA007055BD /* NDimAccuracySpec.cpp */,
+				F8142D581A1916FA007055BD /* NDimAccuracySpec.h */,
+				F8142D591A1916FA007055BD /* NDimNewtonRaphson.cpp */,
+				F8142D5A1A1916FA007055BD /* NDimNewtonRaphson.h */,
+				F8142D5B1A1916FA007055BD /* OdeAccuracySpec.cpp */,
+				F8142D5C1A1916FA007055BD /* OdeAccuracySpec.h */,
+				F8142D5D1A1916FA007055BD /* OdeData.cpp */,
+				F8142D5E1A1916FA007055BD /* OdeData.h */,
+				F8142D5F1A1916FA007055BD /* OdeDataCollector.cpp */,
+				F8142D601A1916FA007055BD /* OdeDataCollector.h */,
+				F8142D611A1916FA007055BD /* OdeDerivatives.h */,
+				F8142D621A1916FA007055BD /* OdeEquations.h */,
+				F8142D631A1916FA007055BD /* OdeNumericalDerivatives.cpp */,
+				F8142D641A1916FA007055BD /* OdeNumericalDerivatives.h */,
+				F8142D651A1916FA007055BD /* OdeSolver.cpp */,
+				F8142D661A1916FA007055BD /* OdeSolver.h */,
+				F8142D671A1916FA007055BD /* OdeSolverWithDerivs.cpp */,
+				F8142D681A1916FA007055BD /* OdeSolverWithDerivs.h */,
+				F8142D691A1916FA007055BD /* PolynomialInterp.cpp */,
+				F8142D6A1A1916FA007055BD /* PolynomialInterp.h */,
+				F8142D6B1A1916FA007055BD /* RationalInterp.cpp */,
+				F8142D6C1A1916FA007055BD /* RationalInterp.h */,
+				F8142D6D1A1916FA007055BD /* RiddersExtrapolation.cpp */,
+				F8142D6E1A1916FA007055BD /* RiddersExtrapolation.h */,
+				F8142D6F1A1916FA007055BD /* RootSolverEquations.h */,
+				F8142D701A1916FA007055BD /* RootSolverEquationsOdeWrapper.cpp */,
+				F8142D711A1916FA007055BD /* RootSolverEquationsOdeWrapper.h */,
+				F8142D721A1916FA007055BD /* SampledData.cpp */,
+				F8142D731A1916FA007055BD /* SampledData.h */,
+				F8142D741A1916FA007055BD /* SampledDerivedData.cpp */,
+				F8142D751A1916FA007055BD /* SampledDerivedData.h */,
+				F8142D761A1916FA007055BD /* SequentialAccessHunt.cpp */,
+				F8142D771A1916FA007055BD /* SequentialAccessHunt.h */,
+				F8142D781A1916FA007055BD /* TableSearch.cpp */,
+				F8142D791A1916FA007055BD /* TableSearch.h */,
+			);
+			name = Math;
+			sourceTree = "<group>";
+		};
+		F87DAC0C1A17FD29003DDBA7 = {
+			isa = PBXGroup;
+			children = (
+				F87DAC2B1A18472E003DDBA7 /* Betatron */,
+				F87DAC161A17FD29003DDBA7 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F87DAC161A17FD29003DDBA7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F87DAC151A17FD29003DDBA7 /* Betatron */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F87DAC1F1A17FD9F003DDBA7 /* Src */ = {
+			isa = PBXGroup;
+			children = (
+				F8142D4A1A1916E9007055BD /* Math */,
+				F8142D461A19161F007055BD /* Test */,
+				F8142CFE1A191547007055BD /* Sim */,
+				F87DAC2C1A184D3F003DDBA7 /* BetatronDefs.h */,
+				F87DAC221A184692003DDBA7 /* Common */,
+				F87DAC201A183C50003DDBA7 /* main.cpp */,
+			);
+			name = Src;
+			sourceTree = "<group>";
+		};
+		F87DAC221A184692003DDBA7 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				F87DAC2D1A1854FC003DDBA7 /* AppleStringUtilities.h */,
+				F87DAC2E1A1854FC003DDBA7 /* AppleStringUtilities.mm */,
+				F87DAC241A1846A2003DDBA7 /* AppleLog.h */,
+				F87DAC251A1846A2003DDBA7 /* AppleLog.mm */,
+				F87DAC261A1846A2003DDBA7 /* Utility.cpp */,
+				F87DAC271A1846A2003DDBA7 /* Utility.h */,
+			);
+			name = Common;
+			sourceTree = "<group>";
+		};
+		F87DAC2B1A18472E003DDBA7 /* Betatron */ = {
+			isa = PBXGroup;
+			children = (
+				F87DAC1F1A17FD9F003DDBA7 /* Src */,
+			);
+			name = Betatron;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F87DAC141A17FD29003DDBA7 /* Betatron */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F87DAC1C1A17FD29003DDBA7 /* Build configuration list for PBXNativeTarget "Betatron" */;
+			buildPhases = (
+				F87DAC111A17FD29003DDBA7 /* Sources */,
+				F87DAC121A17FD29003DDBA7 /* Frameworks */,
+				F87DAC131A17FD29003DDBA7 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Betatron;
+			productName = Betatron;
+			productReference = F87DAC151A17FD29003DDBA7 /* Betatron */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F87DAC0D1A17FD29003DDBA7 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = "Lawrence Gunn";
+				TargetAttributes = {
+					F87DAC141A17FD29003DDBA7 = {
+						CreatedOnToolsVersion = 6.1;
+					};
+				};
+			};
+			buildConfigurationList = F87DAC101A17FD29003DDBA7 /* Build configuration list for PBXProject "Betatron" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = F87DAC0C1A17FD29003DDBA7;
+			productRefGroup = F87DAC161A17FD29003DDBA7 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F87DAC141A17FD29003DDBA7 /* Betatron */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F87DAC111A17FD29003DDBA7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F8142D7D1A1916FA007055BD /* Jacobian.cpp in Sources */,
+				F8142D3E1A191609007055BD /* WaterSwingArm.cpp in Sources */,
+				F8142D821A1916FA007055BD /* OdeDataCollector.cpp in Sources */,
+				F8142D111A19157E007055BD /* MoleculeFactory.cpp in Sources */,
+				F8142D8A1A1916FA007055BD /* SampledData.cpp in Sources */,
+				F8142D7E1A1916FA007055BD /* NDimAccuracySpec.cpp in Sources */,
+				F8142D0F1A19157E007055BD /* Bond.cpp in Sources */,
+				F8142D7A1A1916FA007055BD /* BaderDeuflhardOde.cpp in Sources */,
+				F8142D891A1916FA007055BD /* RootSolverEquationsOdeWrapper.cpp in Sources */,
+				F8142D491A19167A007055BD /* MagneticFieldDerivTests.cpp in Sources */,
+				F8142D401A191609007055BD /* DipoleMomentFinder.cpp in Sources */,
+				F8142D1A1A1915B5007055BD /* ChargeMagneticField.cpp in Sources */,
+				F8142D1C1A1915B5007055BD /* ElectricField.cpp in Sources */,
+				F8142D0E1A19157E007055BD /* Atom.cpp in Sources */,
+				F8142D3F1A191609007055BD /* MoleculeAccelSolverEquations.cpp in Sources */,
+				F8142D871A1916FA007055BD /* RationalInterp.cpp in Sources */,
+				F8142D1B1A1915B5007055BD /* BondForce.cpp in Sources */,
+				F8142D451A191609007055BD /* MoleculeValues.cpp in Sources */,
+				F8142D8B1A1916FA007055BD /* SampledDerivedData.cpp in Sources */,
+				F8142D421A191609007055BD /* MoleculeEquilibriumEquations.cpp in Sources */,
+				F8142D851A1916FA007055BD /* OdeSolverWithDerivs.cpp in Sources */,
+				F8142D3A1A191609007055BD /* BetatronEquations.cpp in Sources */,
+				F8142D841A1916FA007055BD /* OdeSolver.cpp in Sources */,
+				F8142D801A1916FA007055BD /* OdeAccuracySpec.cpp in Sources */,
+				F8142D0D1A19157E007055BD /* BondElectrons.cpp in Sources */,
+				F8142D7F1A1916FA007055BD /* NDimNewtonRaphson.cpp in Sources */,
+				F8142D121A19157E007055BD /* SpOrbital.cpp in Sources */,
+				F8142D8C1A1916FA007055BD /* SequentialAccessHunt.cpp in Sources */,
+				F8142D101A19157E007055BD /* Molecule.cpp in Sources */,
+				F87DAC2A1A1846A2003DDBA7 /* Utility.cpp in Sources */,
+				F8142D431A191609007055BD /* MoleculeEquilibriumSolver.cpp in Sources */,
+				F8142D3D1A191609007055BD /* Circuit.cpp in Sources */,
+				F8142D881A1916FA007055BD /* RiddersExtrapolation.cpp in Sources */,
+				F8142D3B1A191609007055BD /* BetatronEquationSolver.cpp in Sources */,
+				F8142D7B1A1916FA007055BD /* BisectionHunt.cpp in Sources */,
+				F8142D7C1A1916FA007055BD /* HermiteInterp.cpp in Sources */,
+				F8142D441A191609007055BD /* MoleculeOde.cpp in Sources */,
+				F87DAC291A1846A2003DDBA7 /* AppleLog.mm in Sources */,
+				F87DAC211A183C50003DDBA7 /* main.cpp in Sources */,
+				F8142D8D1A1916FA007055BD /* TableSearch.cpp in Sources */,
+				F8142D411A191609007055BD /* MoleculeAccelerationSolver.cpp in Sources */,
+				F8142D3C1A191609007055BD /* BetatronFieldController.cpp in Sources */,
+				F8142D861A1916FA007055BD /* PolynomialInterp.cpp in Sources */,
+				F8142D811A1916FA007055BD /* OdeData.cpp in Sources */,
+				F8142D831A1916FA007055BD /* OdeNumericalDerivatives.cpp in Sources */,
+				F8142D201A1915D7007055BD /* ForceVectors.cpp in Sources */,
+				F87DAC2F1A1854FC003DDBA7 /* AppleStringUtilities.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		F87DAC1A1A17FD29003DDBA7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		F87DAC1B1A17FD29003DDBA7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		F87DAC1D1A17FD29003DDBA7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					Src/Lib,
+					Src/Common,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		F87DAC1E1A17FD29003DDBA7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					Src/Lib,
+					Src/Common,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F87DAC101A17FD29003DDBA7 /* Build configuration list for PBXProject "Betatron" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F87DAC1A1A17FD29003DDBA7 /* Debug */,
+				F87DAC1B1A17FD29003DDBA7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F87DAC1C1A17FD29003DDBA7 /* Build configuration list for PBXNativeTarget "Betatron" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F87DAC1D1A17FD29003DDBA7 /* Debug */,
+				F87DAC1E1A17FD29003DDBA7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F87DAC0D1A17FD29003DDBA7 /* Project object */;
+}

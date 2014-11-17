@@ -36,13 +36,13 @@ namespace Bach {
 
   class InterpolationIndex {
   public:
-    static int ChooseInterpolationIndex(const Eigen::VectorXd& x, int indexLow, int interpSize) {
-      return ChooseInterpolationIndex(x.rows(), indexLow, interpSize);
+    static Integer ChooseInterpolationIndex(const Eigen::VectorXd& x, Integer indexLow, Integer interpSize) {
+      return ChooseInterpolationIndex((Integer) x.rows(), indexLow, interpSize);
     }
 
-    static int ChooseInterpolationIndex(int length,int indexLow, int interpSize) {
-      int i = indexLow-interpSize/2+1;
-      int j = length-interpSize;
+    static Integer ChooseInterpolationIndex(Integer length,Integer indexLow, Integer interpSize) {
+      Integer i = indexLow-interpSize/2+1;
+      Integer j = length-interpSize;
       i = (i > 0 ? i : 0);
       i = (i < j ? i : j);
       return i;

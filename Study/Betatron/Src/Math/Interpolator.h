@@ -43,7 +43,7 @@ namespace Bach {
     virtual double Interpolate(double xTarget, const Eigen::VectorXd& x,const Eigen::VectorXd& y, int index = 0) = 0;
 
     void ArrayInterpolation(double xTarget, const Eigen::VectorXd& x, std::vector<Eigen::VectorXd>& y, Eigen::VectorXd& results, int baseIndex = 0) {
-      int numY = y.size();
+      int numY = (int) y.size();
       if(m_errorEstimateVector.rows() != numY) {
         m_errorEstimateVector.resize(numY);
       }

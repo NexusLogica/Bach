@@ -14,7 +14,6 @@ All Rights Reserved.
 #include "BetatronFieldController.h"
 
 using namespace Bach;
-using namespace PS;
 using namespace boost;
 using namespace Eigen;
 

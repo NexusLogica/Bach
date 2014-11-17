@@ -17,7 +17,6 @@ All Rights Reserved.
 #include "BondForce.h"
 
 using namespace Bach;
-using namespace PS;
 using namespace boost;
 using namespace Eigen;
 
@@ -101,11 +100,11 @@ shared_ptr<Molecule> MoleculeFactory::CreateWater(Integer moleculeId) {
   shared_ptr<Atom> a;
   a = AddAtom(Atom::Oxygen, 1, A2m( 0.0000), A2m( 0.0645+yOffset), A2m(0.0000), -0.3736, 6.0);
 
-  PSReal theta = NXGR_DEG_TO_RAD*109.471;
-  // PSReal spLen = A2m(0.20); // LAT TODO: Absolute guess. Find correct value.
-  PSReal spLen = A2m(0.10); // LAT TODO: Absolute guess. Find correct value.
-  PSReal spY = spLen*cos(0.5*theta)+A2m( 0.0645+yOffset);
-  PSReal spZ = spLen*sin(0.5*theta);
+  Real theta = NXGR_DEG_TO_RAD*109.471;
+  // Real spLen = A2m(0.20); // LAT TODO: Absolute guess. Find correct value.
+  Real spLen = A2m(0.10); // LAT TODO: Absolute guess. Find correct value.
+  Real spY = spLen*cos(0.5*theta)+A2m( 0.0645+yOffset);
+  Real spZ = spLen*sin(0.5*theta);
   a->AddSpOrbital(Eigen::Vector3d(A2m( 0.0000), spY,  spZ), -2.0, 1);
   a->AddSpOrbital(Eigen::Vector3d(A2m( 0.0000), spY, -spZ), -2.0, 2);
 

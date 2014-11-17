@@ -16,7 +16,6 @@ All Rights Reserved.
 #include <sstream>
 
 using namespace Bach;
-using namespace PS;
 using namespace boost;
 using namespace Eigen;
 

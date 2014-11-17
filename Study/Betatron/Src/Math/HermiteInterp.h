@@ -30,8 +30,6 @@ All Rights Reserved.
 
 namespace Bach {
 
-using namespace PS;
-
   //*****************
   //* HermiteInterp *
   //*****************

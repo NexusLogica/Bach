@@ -26,7 +26,6 @@ All Rights Reserved.
 #include "OdeAccuracySpec.h"
 
 using namespace Bach;
-using namespace PS;
 using namespace boost;
 using namespace Eigen;
 
@@ -370,10 +369,10 @@ LogPlain(L"BH  x/x = %f", x);
 
 void BaderDeuflhardOde::Extrapolate(int iFromStep, double xFromStep, const VectorXd& yFromStep, VectorXd& yToReturn, VectorXd& yErrorEstimate) {
 
-  PS::LogPlain(L"BH EXTRAPOLATE:");
-  PS::LogPlain(L"BH  iest = %d", iFromStep);
-  PS::LogPlain(L"BH  xest = %d", xFromStep);
-  PS::LogPlain(L"BH  yest = %s", ToString(yFromStep).c_str());
+  Bach::LogPlain(L"BH EXTRAPOLATE:");
+  Bach::LogPlain(L"BH  iest = %d", iFromStep);
+  Bach::LogPlain(L"BH  xest = %d", xFromStep);
+  Bach::LogPlain(L"BH  yest = %s", ToString(yFromStep).c_str());
 
   double q;
   double f2;
@@ -381,7 +380,7 @@ void BaderDeuflhardOde::Extrapolate(int iFromStep, double xFromStep, const Vecto
   double delta;
 
   int nv = (int) yToReturn.rows();
-  PS::LogPlain(L"BH nv/nv = %d", nv);
+  Bach::LogPlain(L"BH nv/nv = %d", nv);
 
   m_xInterpTable(iFromStep) = xFromStep;
 
@@ -394,19 +393,19 @@ void BaderDeuflhardOde::Extrapolate(int iFromStep, double xFromStep, const Vecto
     for(j=0; j<nv; j++) {
       m_interpTable(j, 0) = yFromStep(j);
     }
-    PS::LogPlain(L"BH 0 d/m_interpTable = %s", ToString(m_interpTable).c_str());
+    Bach::LogPlain(L"BH 0 d/m_interpTable = %s", ToString(m_interpTable).c_str());
   }
   else {
     for(j=0;j<nv;j++) {
       m_extrapC(j) = yFromStep(j);
     }
-    PS::LogPlain(L"BH c/m_extrapC = %s", ToString(m_extrapC).c_str());
+    Bach::LogPlain(L"BH c/m_extrapC = %s", ToString(m_extrapC).c_str());
     for(int k1=0;k1<iFromStep;k1++) {
       delta=1.0/(m_xInterpTable(iFromStep-k1-1)-xFromStep);
-      PS::LogPlain(L"BH del/delta = %f", delta);
-      PS::LogPlain(L"BH x/m_xInterpTable = %s", ToString(m_xInterpTable).c_str());
-      PS::LogPlain(L"BH iFromStep-k1-1 = %d", iFromStep-k1-1);
-      PS::LogPlain(L"BH xest/xFromStep = %f", xFromStep);
+      Bach::LogPlain(L"BH del/delta = %f", delta);
+      Bach::LogPlain(L"BH x/m_xInterpTable = %s", ToString(m_xInterpTable).c_str());
+      Bach::LogPlain(L"BH iFromStep-k1-1 = %d", iFromStep-k1-1);
+      Bach::LogPlain(L"BH xest/xFromStep = %f", xFromStep);
       f1 = xFromStep*delta;
       f2 = m_xInterpTable(iFromStep-k1-1)*delta;
       for(j=0;j<nv;j++) {
@@ -423,6 +422,6 @@ void BaderDeuflhardOde::Extrapolate(int iFromStep, double xFromStep, const Vecto
     }
   }
 
-  PS::LogPlain(L"BH OUT yz = %s", ToString(yToReturn).c_str());
-  PS::LogPlain(L"BH OUT dy = %s", ToString(yErrorEstimate).c_str());
+  Bach::LogPlain(L"BH OUT yz = %s", ToString(yToReturn).c_str());
+  Bach::LogPlain(L"BH OUT dy = %s", ToString(yErrorEstimate).c_str());
 }

@@ -45,8 +45,8 @@ namespace Bach {
     boost::shared_ptr<Atom> GetAtomById(int id);
     boost::shared_ptr<Bond> GetBondById(int id);
     
-    int GetNumAtoms() { return m_atoms.size(); }
-    int GetNumBonds() { return m_bonds.size(); }
+    Integer GetNumAtoms() { return (Integer) m_atoms.size(); }
+    Integer GetNumBonds() { return (Integer) m_bonds.size(); }
     
   protected:
     Molecule(const std::wstring& moleculeType, Integer id);

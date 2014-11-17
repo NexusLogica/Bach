@@ -27,7 +27,6 @@ All Rights Reserved.
 #include "RationalInterp.h"
 
 using namespace Bach;
-using namespace PS;
 using namespace boost;
 using namespace Eigen;
 

@@ -19,8 +19,6 @@ All Rights Reserved.
 #include <vector>
 
 namespace Bach {
-
-  using namespace PS;
   
   //****************
   //* ForceVectors *
@@ -39,7 +37,7 @@ namespace Bach {
     std::wstring GetTargetName() { return m_targetName; }
     Eigen::Vector3d GetTargetTravelConstraint() { return m_targetTravelConstraint; }
     
-    Integer GetNum() { return m_forceVectors.size(); }
+    ULong GetNum() { return (Integer) m_forceVectors.size(); }
     std::wstring GetForceName(Integer index);
     Eigen::Vector3d GetForceVector(Integer index);
     
@@ -67,7 +65,7 @@ namespace Bach {
     
     void AddForceVector(boost::shared_ptr<ForceVectors> vectors);
 
-    Integer GetNum() { return m_forceVectorList.size(); }
+    ULong GetNum() { return m_forceVectorList.size(); }
     boost::shared_ptr<ForceVectors> GetByIndex(Integer index);
 
     void WriteToLog();

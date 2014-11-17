@@ -15,7 +15,6 @@ All Rights Reserved.
 #include "ChargeMagneticField.h"
 
 using namespace Bach;
-using namespace PS;
 using namespace boost;
 using namespace Eigen;
 

@@ -26,7 +26,6 @@ All Rights Reserved.
 #include "HermiteInterp.h"
 
 using namespace Bach;
-using namespace PS;
 using namespace boost;
 using namespace Eigen;
 

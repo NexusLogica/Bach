@@ -50,6 +50,9 @@
 		F8142D8B1A1916FA007055BD /* SampledDerivedData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8142D741A1916FA007055BD /* SampledDerivedData.cpp */; };
 		F8142D8C1A1916FA007055BD /* SequentialAccessHunt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8142D761A1916FA007055BD /* SequentialAccessHunt.cpp */; };
 		F8142D8D1A1916FA007055BD /* TableSearch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8142D781A1916FA007055BD /* TableSearch.cpp */; };
+		F8142D941A197015007055BD /* RandomUniform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8142D8E1A197015007055BD /* RandomUniform.cpp */; };
+		F8142D951A197015007055BD /* RandomGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8142D8F1A197015007055BD /* RandomGenerator.cpp */; };
+		F8142D961A197015007055BD /* RandomNormal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8142D911A197015007055BD /* RandomNormal.cpp */; };
 		F87DAC211A183C50003DDBA7 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F87DAC201A183C50003DDBA7 /* main.cpp */; };
 		F87DAC291A1846A2003DDBA7 /* AppleLog.mm in Sources */ = {isa = PBXBuildFile; fileRef = F87DAC251A1846A2003DDBA7 /* AppleLog.mm */; };
 		F87DAC2A1A1846A2003DDBA7 /* Utility.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F87DAC261A1846A2003DDBA7 /* Utility.cpp */; };
@@ -163,6 +166,12 @@
 		F8142D771A1916FA007055BD /* SequentialAccessHunt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SequentialAccessHunt.h; path = Src/Math/SequentialAccessHunt.h; sourceTree = "<group>"; };
 		F8142D781A1916FA007055BD /* TableSearch.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TableSearch.cpp; path = Src/Math/TableSearch.cpp; sourceTree = "<group>"; };
 		F8142D791A1916FA007055BD /* TableSearch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TableSearch.h; path = Src/Math/TableSearch.h; sourceTree = "<group>"; };
+		F8142D8E1A197015007055BD /* RandomUniform.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RandomUniform.cpp; path = Src/Math/RandomUniform.cpp; sourceTree = "<group>"; };
+		F8142D8F1A197015007055BD /* RandomGenerator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RandomGenerator.cpp; path = Src/Math/RandomGenerator.cpp; sourceTree = "<group>"; };
+		F8142D901A197015007055BD /* RandomGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RandomGenerator.h; path = Src/Math/RandomGenerator.h; sourceTree = "<group>"; };
+		F8142D911A197015007055BD /* RandomNormal.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RandomNormal.cpp; path = Src/Math/RandomNormal.cpp; sourceTree = "<group>"; };
+		F8142D921A197015007055BD /* RandomNormal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RandomNormal.h; path = Src/Math/RandomNormal.h; sourceTree = "<group>"; };
+		F8142D931A197015007055BD /* RandomUniform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RandomUniform.h; path = Src/Math/RandomUniform.h; sourceTree = "<group>"; };
 		F87DAC151A17FD29003DDBA7 /* Betatron */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Betatron; sourceTree = BUILT_PRODUCTS_DIR; };
 		F87DAC201A183C50003DDBA7 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = Src/main.cpp; sourceTree = "<group>"; };
 		F87DAC241A1846A2003DDBA7 /* AppleLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppleLog.h; path = Src/Common/AppleLog.h; sourceTree = "<group>"; };
@@ -281,6 +290,12 @@
 		F8142D4A1A1916E9007055BD /* Math */ = {
 			isa = PBXGroup;
 			children = (
+				F8142D8E1A197015007055BD /* RandomUniform.cpp */,
+				F8142D8F1A197015007055BD /* RandomGenerator.cpp */,
+				F8142D901A197015007055BD /* RandomGenerator.h */,
+				F8142D911A197015007055BD /* RandomNormal.cpp */,
+				F8142D921A197015007055BD /* RandomNormal.h */,
+				F8142D931A197015007055BD /* RandomUniform.h */,
 				F8142D4B1A1916FA007055BD /* BaderDeuflhardOde.cpp */,
 				F8142D4C1A1916FA007055BD /* BaderDeuflhardOde.h */,
 				F8142D4D1A1916FA007055BD /* BisectionHunt.cpp */,
@@ -439,8 +454,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				F8142D7D1A1916FA007055BD /* Jacobian.cpp in Sources */,
+				F8142D961A197015007055BD /* RandomNormal.cpp in Sources */,
 				F8142D3E1A191609007055BD /* WaterSwingArm.cpp in Sources */,
 				F8142D821A1916FA007055BD /* OdeDataCollector.cpp in Sources */,
+				F8142D941A197015007055BD /* RandomUniform.cpp in Sources */,
 				F8142D111A19157E007055BD /* MoleculeFactory.cpp in Sources */,
 				F8142D8A1A1916FA007055BD /* SampledData.cpp in Sources */,
 				F8142D7E1A1916FA007055BD /* NDimAccuracySpec.cpp in Sources */,
@@ -459,6 +476,7 @@
 				F8142D8B1A1916FA007055BD /* SampledDerivedData.cpp in Sources */,
 				F8142D421A191609007055BD /* MoleculeEquilibriumEquations.cpp in Sources */,
 				F8142D851A1916FA007055BD /* OdeSolverWithDerivs.cpp in Sources */,
+				F8142D951A197015007055BD /* RandomGenerator.cpp in Sources */,
 				F8142D3A1A191609007055BD /* BetatronEquations.cpp in Sources */,
 				F8142D841A1916FA007055BD /* OdeSolver.cpp in Sources */,
 				F8142D801A1916FA007055BD /* OdeAccuracySpec.cpp in Sources */,

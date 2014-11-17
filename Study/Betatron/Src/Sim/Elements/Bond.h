@@ -19,7 +19,6 @@ All Rights Reserved.
 
 namespace Bach {
 
-  using namespace PS;
   class BondElectrons;
   class BondForce;
   class ForceVectors;

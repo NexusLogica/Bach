@@ -55,8 +55,8 @@ namespace Bach {
     boost::shared_ptr<NDimAccuracySpec> m_derivativesAccuracySpec;
     
     Eigen::VectorXd m_stepSizes;
-    PS::Real m_rootValueTolerance;
-    PS::Real m_derivativesTolerance;
+    Real m_rootValueTolerance;
+    Real m_derivativesTolerance;
   };
 };
 

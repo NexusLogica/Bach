@@ -17,7 +17,6 @@ All Rights Reserved.
 #include <sstream>
 
 using namespace Bach;
-using namespace PS;
 using namespace boost;
 using namespace Eigen;
 
@@ -36,12 +35,12 @@ void ForceVectors::AddForceVector(const std::wstring& name, const Eigen::Vector3
 }
 
 std::wstring ForceVectors::GetForceName(Integer index) {
-  PSASSERT(index >= 0 && index < m_forceVectors.size());
+  BACH_ASSERT(index >= 0 && index < m_forceVectors.size());
   return m_forceNames[index];
 }
 
 Eigen::Vector3d ForceVectors::GetForceVector(Integer index) {
-  PSASSERT(index >= 0 && index < m_forceVectors.size());
+  BACH_ASSERT(index >= 0 && index < m_forceVectors.size());
   return m_forceVectors[index];
 }
 
@@ -73,7 +72,7 @@ void ForceVectorsList::AddForceVector(boost::shared_ptr<ForceVectors> vectors) {
 }
 
 shared_ptr<ForceVectors> ForceVectorsList::GetByIndex(Integer index) {
-  PSASSERT(index >= 0 && index < m_forceVectorList.size());
+  BACH_ASSERT(index >= 0 && index < m_forceVectorList.size());
   return m_forceVectorList[index];
 }
 

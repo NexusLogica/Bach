@@ -17,7 +17,6 @@ All Rights Reserved.
 #include "OdeData.h"
 
 using namespace Bach;
-using namespace PS;
 using namespace boost;
 using namespace Eigen;
 

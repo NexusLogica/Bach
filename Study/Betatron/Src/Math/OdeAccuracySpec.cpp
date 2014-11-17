@@ -19,7 +19,6 @@ All Rights Reserved.
 #include "OdeAccuracySpec.h"
 
 using namespace Bach;
-using namespace PS;
 using namespace boost;
 using namespace Eigen;
 
@@ -39,9 +38,9 @@ OdeAccuracySpec::OdeAccuracySpec(unsigned int size, double eps) :
 }
 
 void OdeAccuracySpec::CheckForMaximumValues(const Eigen::VectorXd& y) {
-  int size = m_maximumValues.rows();
+  ULong size = m_maximumValues.rows();
   Eigen::VectorXd temp = (y-m_relativeErrorOffsets).array().abs();
-  for(int i=0;i<size;i++) {
+  for(ULong i=0;i<size;i++) {
     if(m_maximumValues(i) > temp(i))  m_maximumValues(i) = temp(i);
   }
 }

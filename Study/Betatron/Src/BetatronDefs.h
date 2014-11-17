@@ -19,6 +19,8 @@ All Rights Reserved.
 
 namespace Bach {
   typedef double Real;
+  typedef int Integer;
+  typedef unsigned long ULong;
 
   const Real NXGR_PI            = 3.1415926535897932384626433832795f;
   const Real NXGR_E             = 2.71828182845904523536f;
@@ -43,6 +45,11 @@ namespace Bach {
   // These values are for use when setting step sizes for distance or time related algorithms.
   // The characteristic unit is a rough starting point but can be larger or smaller.
   const Real CHARACTERISTIC_BOND_DISTANCE_UNIT = 1.0e-12; // 0.01 Angstroms, so 1/100th of the length of a water bond.
+
+  const Real NX_ANGSTROMS_TO_METERS = 1.0e-10;
+  const Real NX_METERS_TO_ANGSTROMS = 1.0e10;
+  inline Real A2m(Real angstroms) { return angstroms*NX_ANGSTROMS_TO_METERS; }
+  inline Real m2A(Real meters)    { return meters*NX_METERS_TO_ANGSTROMS;    }
 
   enum Axis {
     X = 1,

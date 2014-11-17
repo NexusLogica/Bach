@@ -21,7 +21,6 @@ All Rights Reserved.
 #include "Jacobian.h"
 
 using namespace Bach;
-using namespace PS;
 using namespace boost;
 using namespace Eigen;
 

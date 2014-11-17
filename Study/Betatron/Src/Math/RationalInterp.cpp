@@ -27,7 +27,6 @@ All Rights Reserved.
 #include "PolynomialInterp.h"
 
 using namespace Bach;
-using namespace PS;
 using namespace boost;
 using namespace Eigen;
 

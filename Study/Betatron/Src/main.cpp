@@ -23,7 +23,6 @@ in all copies or substantial portions of the Software.
 #include <iostream>
 #include "Utility.h"
 
-#include "BetatronSimulationAgent.h"
 #include "BetatronEquationSolver.h"
 
 using namespace Bach;

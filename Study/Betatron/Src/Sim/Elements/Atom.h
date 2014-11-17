@@ -20,7 +20,6 @@ All Rights Reserved.
 
 namespace Bach {
 
-  using namespace PS;
   class Molecule;
   class SpOrbital;
   class ForceVectors;
@@ -47,7 +46,7 @@ namespace Bach {
     static boost::shared_ptr<Atom> CreateInstance(
       boost::shared_ptr<Molecule> molecule,
       AtomType atomType,
-      Int32 id,
+      Integer id,
       const Eigen::Vector3d& position,
       Real charge,
       Real effectiveNuclearCharge);
@@ -58,7 +57,7 @@ namespace Bach {
     boost::shared_ptr<SpOrbital> GetSpOrbitalByIndex(int index) { return m_spOrbitals[index]; }
     boost::shared_ptr<SpOrbital> GetSpOrbitalById(int id);
     
-    Integer GetNumSpOrbitals() { return m_spOrbitals.size(); }
+    Integer GetNumSpOrbitals() { return (Integer) m_spOrbitals.size(); }
 
     Integer GetId() { return m_id; }
     std::wstring GetShortName() { return m_shortName; }

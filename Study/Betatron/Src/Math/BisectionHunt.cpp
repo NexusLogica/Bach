@@ -28,7 +28,6 @@ All Rights Reserved.
 #include "BisectionHunt.h"
 
 using namespace Bach;
-using namespace PS;
 using namespace boost;
 using namespace Eigen;
 
@@ -37,7 +36,7 @@ using namespace Eigen;
   //*****************
 
 int BisectionHunt::Find(double xTarget, const Eigen::VectorXd& x) {
-  m_size = x.rows();
+  m_size = (int) x.rows();
   m_ascending = (x(m_size-1) > x(0));
 
   m_indexLow  = -1;

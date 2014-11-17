@@ -15,7 +15,6 @@ All Rights Reserved.
 #include "NDimAccuracySpec.h"
 
 using namespace Bach;
-using namespace PS;
 using namespace boost;
 using namespace Eigen;
 

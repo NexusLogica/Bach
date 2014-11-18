@@ -36,8 +36,8 @@ using namespace Eigen;
   //************************
 
 int SequentialAccessHunt::Find(double xTarget, const Eigen::VectorXd& x) {
-  m_size = x.rows();
-  m_ascending = (int) (x(m_size-1) > x(0));
+  m_size = (int) x.rows();
+  m_ascending = (x(m_size-1) > x(0));
 
   // Due to a poor initial guess try bisection.
   if(m_indexLow <= -1 || m_indexLow > m_size-1)  {

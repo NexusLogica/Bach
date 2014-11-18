@@ -165,14 +165,14 @@ void BaderDeuflhardOde::SolveStep(double x, boost::shared_ptr<OdeData> odeData) 
   boost::shared_ptr<OdeEquations> system = odeData->GetOdeSystem();
   bool exitFlag = false;
 
-  double red;
+  double red = 0.0;    // Compiler warning about being used before set - this value should cause a step size of zero.
   double fact;
-  double errmax;
+  double errmax = 0.0; // Compiler warning about being used before set - this value should do something, not sure what.
   double eps1;
-  double scale;
+  double scale = 0.0;  // Compiler warning about being used before set - this value should cause an overflow.
   double work;
   int reduct;
-  int km;
+  int km = -1;         // Compiler warning about being used before set - this value should bounds error if not set.
   int k;
 
   int nv = (int) m_y.size();

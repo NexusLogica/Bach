@@ -251,20 +251,18 @@
 			isa = PBXGroup;
 			children = (
 				F8142D221A191609007055BD /* BetatronEquations.cpp */,
-				F8142D231A191609007055BD /* BetatronEquationSolver.cpp */,
-				F8142D241A191609007055BD /* BetatronFieldController.cpp */,
 				F8142D251A191609007055BD /* BetatronEquations.h */,
+				F8142D231A191609007055BD /* BetatronEquationSolver.cpp */,
 				F8142D261A191609007055BD /* BetatronEquationSolver.h */,
+				F8142D241A191609007055BD /* BetatronFieldController.cpp */,
 				F8142D271A191609007055BD /* BetatronFieldController.h */,
 				F8142D281A191609007055BD /* Circuit.cpp */,
 				F8142D291A191609007055BD /* Circuit.h */,
-				F8142D2A1A191609007055BD /* WaterSwingArm.cpp */,
-				F8142D2B1A191609007055BD /* WaterSwingArm.h */,
-				F8142D2C1A191609007055BD /* MoleculeAccelSolverEquations.cpp */,
 				F8142D2D1A191609007055BD /* DipoleMomentFinder.cpp */,
 				F8142D2E1A191609007055BD /* DipoleMomentFinder.h */,
 				F8142D2F1A191609007055BD /* MoleculeAccelerationSolver.cpp */,
 				F8142D301A191609007055BD /* MoleculeAccelerationSolver.h */,
+				F8142D2C1A191609007055BD /* MoleculeAccelSolverEquations.cpp */,
 				F8142D311A191609007055BD /* MoleculeAccelSolverEquations.h */,
 				F8142D321A191609007055BD /* MoleculeEquilibriumEquations.cpp */,
 				F8142D331A191609007055BD /* MoleculeEquilibriumEquations.h */,
@@ -274,6 +272,8 @@
 				F8142D371A191609007055BD /* MoleculeOde.h */,
 				F8142D381A191609007055BD /* MoleculeValues.cpp */,
 				F8142D391A191609007055BD /* MoleculeValues.h */,
+				F8142D2A1A191609007055BD /* WaterSwingArm.cpp */,
+				F8142D2B1A191609007055BD /* WaterSwingArm.h */,
 			);
 			name = Systems;
 			sourceTree = "<group>";

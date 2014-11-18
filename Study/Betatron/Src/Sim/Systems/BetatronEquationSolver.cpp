@@ -62,7 +62,7 @@ void BetatronEquationSolver::SetInitialConditionsFromRadiusAndSpeed(double radiu
   // F = e * V x B
   m_magneticFieldMagnitude = centripetalForce/(Bach::ELECTRIC_CHARGE*speed);
   
-  m_fieldController->SetAsConstantInward(m_magneticFieldMagnitude);
+  m_fieldController->SetAsConstantB(m_magneticFieldMagnitude, Eigen::Vector3d(0.0, 0.0, 1.0));
   
   // Calculate an appropriate stepsize.
   double distanceTraveledOverOneDegree = 2.0*NXGR_PI*radius/360.0;

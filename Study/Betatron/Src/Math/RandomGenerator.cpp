@@ -102,7 +102,7 @@ long RandomGenerator::GetRandomInteger() {
 
 long RandomGenerator::GetRandomIntegerInRange(long minValue, long maxValue) {
   long randomValue = GetRandomInteger();
-  return (abs(randomValue) % (maxValue-minValue+1)) + minValue;
+  return (abs((int) randomValue) % (maxValue-minValue+1)) + minValue;
 }
 
 

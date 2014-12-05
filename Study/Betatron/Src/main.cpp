@@ -1,6 +1,6 @@
 /**********************************************************************
 
-File     : AppleLog.h
+File     : main.cpp
 Project  : Bach Betatron Library
 Purpose  : Header file for main.
 Revisions: Original definition by Lawrence Gunn.
@@ -24,6 +24,9 @@ in all copies or substantial portions of the Software.
 #include "Utility.h"
 
 #include "BetatronEquationSolver.h"
+#include "OdeData.h"
+#include "OdeDataCollector.h"
+#include "SampledData.h"
 
 using namespace Bach;
 using namespace boost;
@@ -31,12 +34,17 @@ using namespace Eigen;
 
 int main(int argc, const char * argv[]) {
 
-  std::cout << "Hello, World!\n";
-
+  
   shared_ptr<BetatronEquationSolver> solver = BetatronEquationSolver::CreateInstance();
   solver->SetInitialConditionsFromRadiusAndSpeed(0.1, 0.01*Bach::SPEED_OF_LIGHT);
   solver->Initialize();
+
+  shared_ptr<OdeDataCollector> collector = shared_ptr<OdeDataCollector>(new OdeDataCollector());
+  shared_ptr<OdeData> odeData = solver->GetOdeData();
+  odeData->SetCollector(collector);
+
   solver->Run();
+  odeData->GetCollector()->GetInternalData()->WriteToLog();
 
   return 0;
 }

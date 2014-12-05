@@ -41,6 +41,8 @@ namespace Bach {
     void Initialize();
     void Run();
 
+    boost::shared_ptr<OdeData> GetOdeData() { return m_odeData; }
+
   protected:
     BetatronEquationSolver();
     

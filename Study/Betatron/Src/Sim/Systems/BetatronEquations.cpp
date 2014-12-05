@@ -35,7 +35,7 @@ BetatronEquations::BetatronEquations() :
   m_mass(Bach::ELECTRON_MASS),
   m_iterationCount(0),
   m_magneticField(new PointMagneticField),
-  m_internalValues(4) {  // B, dBdt, velocity, distance from origin
+  m_internalValues(5) {  // B, dBdt, velocity, distance from origin, angle
   // y[0] = x position
   // y[1] = y position
   // y[2] = z position
@@ -56,8 +56,6 @@ void BetatronEquations::Initialize(shared_ptr<Bach::OdeData> odeData) {
 void BetatronEquations::Evaluate(double time, const Eigen::VectorXd& y, Eigen::VectorXd& dydt, shared_ptr<Bach::OdeData> odeData) {
 
   m_iterationCount++;
-  LogPlain(L"Iteration %d at %g", m_iterationCount, time);
-  LogPlain(L"Evaluate In: %s", ToString(y).c_str());
 
   m_position[0] = y[0];
   m_position[1] = y[1];
@@ -75,16 +73,17 @@ void BetatronEquations::Evaluate(double time, const Eigen::VectorXd& y, Eigen::V
   dydt[1] = y[4];
   dydt[2] = y[5];
 
-  dydt[3] = m_force[0]/massInv;
-  dydt[4] = m_force[1]/massInv;
-  dydt[5] = m_force[2]/massInv;
-  
-  m_internalValues[0] = m_magneticField->B();
-  m_internalValues[1] = m_magneticField->dBdt();
-  m_internalValues[2] = m_velocity.norm();
-  m_internalValues[3] = sqrt(Square(y[0])+Square(y[1])+Square(y[2]));
-  
-  odeData->SetInternalValues(m_internalValues);
+  dydt[3] = m_force[0]*massInv;
+  dydt[4] = m_force[1]*massInv;
+  dydt[5] = m_force[2]*massInv;
 
-  LogPlain(L"Evaluate Out: %s", ToString(dydt).c_str());
+  if(odeData->StoringThisCall()) {
+    m_internalValues[0] = m_magneticField->B();
+    m_internalValues[1] = m_magneticField->dBdt();
+    m_internalValues[2] = m_velocity.norm();
+    m_internalValues[3] = sqrt(Square(y[0])+Square(y[1])+Square(y[2]));
+    m_internalValues[4] = NXGR_RAD_TO_DEG*atan2(y[1], y[0]);
+
+    odeData->SetInternalValues(m_internalValues);
+  }
 }

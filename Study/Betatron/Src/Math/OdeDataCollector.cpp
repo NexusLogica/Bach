@@ -42,8 +42,12 @@ OdeDataCollector::~OdeDataCollector() {
 }
 
 void OdeDataCollector::Restart() {
-  m_stateData->Reset();
-  m_internalData->Reset();
+  if(m_stateData) {
+    m_stateData->Reset();
+  }
+  if(m_internalData) {
+    m_internalData->Reset();
+  }
 }
 
 void OdeDataCollector::StoreData(double x, const Eigen::VectorXd& y, const Eigen::VectorXd& dy, boost::shared_ptr<OdeData> odeData) {

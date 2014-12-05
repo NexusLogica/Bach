@@ -99,7 +99,6 @@ boost::shared_ptr<BaderDeuflhardOde> BaderDeuflhardOde::CreateInstance() {
 }
 
 void BaderDeuflhardOde::Solve(boost::shared_ptr<OdeData> odeData, bool reset) {
-LogPlain(L"**********************************************************************************************");
   int size = odeData->GetStateLength();
   if(m_y.rows() != size) {
     m_interpTable.resize(size, KMAXX);
@@ -150,6 +149,7 @@ LogPlain(L"*********************************************************************
   for(;;) {
     odeData->SetStoringThisCall(true);
     system->Evaluate(x, m_y, m_dydx, odeData);
+    odeData->StoreData(x, m_y, m_dydx);
     odeData->SetStoringThisCall(false);
 
     SolveStep(x, odeData);
@@ -184,7 +184,7 @@ void BaderDeuflhardOde::SolveStep(double x, boost::shared_ptr<OdeData> odeData) 
     for(k=0;k<KMAXX;k++) {
       m_a(k+1) = m_a(k)+m_stepSequence(k+1);
     }
-LogPlain(L"BH m_a = %s", ToString(m_a).c_str());
+
     for(int iq=1;iq<KMAXX;iq++) {
       for(k=0;k<iq;k++) {
         m_alf(k, iq) = pow(eps1,(m_a(k+1)-m_a(iq+1))/((m_a(iq+1)-m_a(0)+1.0)*(2*k+3)));
@@ -202,8 +202,6 @@ LogPlain(L"BH m_a = %s", ToString(m_a).c_str());
       }
     }
     kmax = m_kopt;
-LogPlain(L"BH alf/m_alf = %s", ToString(m_alf).c_str());
-LogPlain(L"BH a/m_a = %s", ToString(m_a).c_str());
   }
 
   for(int i=0;i<m_y.rows();i++) {
@@ -212,8 +210,6 @@ LogPlain(L"BH a/m_a = %s", ToString(m_a).c_str());
 
   // was jacobn_s(x,m_y,dfdx,dfdy);
   m_differentiator->GetDerivatives(x, m_y, m_dfdx, m_dfdy, odeData);
-LogPlain(L"BH JACOBIAN dfdx/m_dfdx = %s", ToString(m_dfdx).c_str());
-LogPlain(L"BH JACOBIAN dfdy/m_dfdy = %s", ToString(m_dfdy).c_str());
 
   if(x != m_xnew || m_stepSize != m_nextStepSize) {
     m_first=1;
@@ -229,17 +225,8 @@ LogPlain(L"BH JACOBIAN dfdy/m_dfdy = %s", ToString(m_dfdy).c_str());
       }
 
       // was simpr(m_ysav, m_dydx, dfdx,dfdy,x,m_stepSize,m_stepSequence[k],m_yResult, derivs);
-LogPlain(L"BH Before simpr ******");
-LogPlain(L"  step no = %d",m_stepSequence(k));
-LogPlain(L"  x = %f",x);
-LogPlain(L"  m_ySav = %s", ToString(m_ySav).c_str());
-LogPlain(L"  m_dydx = %s", ToString(m_dydx).c_str());
-LogPlain(L"  m_dfdx = %s", ToString(m_dfdx).c_str());
 
       TakeSemiImplicitStep(m_stepSequence(k), x, m_ySav, m_dydx, m_yResult, odeData);
-
-LogPlain(L"BH After simpr ******");
-LogPlain(L"  m_yResult = %s", ToString(m_yResult).c_str());
 
       xest = m_stepSize/m_stepSequence(k);
       xest *= xest;
@@ -297,8 +284,9 @@ LogPlain(L"  m_yResult = %s", ToString(m_yResult).c_str());
       m_kopt=kk+1;
     }
   }
+
   m_nextStepSize = m_stepSize/scale;
-LogPlain(L"BH hnext/m_stepSize = %f", m_nextStepSize);
+
   if(m_kopt >= k && m_kopt != kmax && !reduct) {
     fact = max(scale/m_alf(m_kopt-1, m_kopt), SCALMX);
     if(m_a(m_kopt+1)*fact <= wrkmin) {
@@ -306,8 +294,6 @@ LogPlain(L"BH hnext/m_stepSize = %f", m_nextStepSize);
       m_kopt++;
     }
   }
-LogPlain(L"BH hnext/m_stepSize = %f", m_nextStepSize);
-  LogPlain(L"BH END STEP Y Out = %s (actual = [%f, %f] -------------------------------------------------------------", ToString(m_y).c_str(), sin(x), sin(x));
 }
 
 void BaderDeuflhardOde::TakeSemiImplicitStep(
@@ -323,28 +309,18 @@ void BaderDeuflhardOde::TakeSemiImplicitStep(
   double subStepSize = m_stepSize/numberOfSteps;
 
   m_aSimStep = -subStepSize*m_dfdy;
-  // LogPlain(L"Diagonal +1 before = %s", ToString(m_aSimStep).c_str());
   m_aSimStep.diagonal().array() += 1.0;
-  // LogPlain(L"Diagonal +1 after = %s", ToString(m_aSimStep).c_str());
-
-LogPlain(L"BH a/m_aSimStep = %s", ToString(m_aSimStep).c_str());
 
   // was using this... FloatGenFact decomp(m_aSimStep);
-LogPlain(L"BH h/subStepSize = %f", subStepSize);
-LogPlain(L"   dydx/dyIn = %s", ToString(dyIn).c_str());
-LogPlain(L"   dfdx/m_dfdx = %s", ToString(m_dfdx).c_str());
   m_yTemp2 = (dyIn.array()+subStepSize*m_dfdx.array()).array()*subStepSize;
-LogPlain(L"BH yout/m_yTemp2 = %s", ToString(m_yTemp2).c_str());
+
   ColPivHouseholderQR<MatrixXd> aDecomposition = m_aSimStep.colPivHouseholderQr();
   m_yTemp = aDecomposition.solve(m_yTemp2);
   m_delta = m_yTemp;
   m_ySum = yIn+m_delta;
-LogPlain(L"BH del/m_delta = %s", ToString(m_delta).c_str());
-LogPlain(L"BH ytemp/m_ySum = %s", ToString(m_ySum).c_str());
 
   // This is the first step.
   double x = xStart+subStepSize;
-LogPlain(L"BH  x/x = %f", x);
   system->Evaluate(x, m_ySum, m_yTemp, odeData);
 
   // The remainder of the steps.
@@ -369,18 +345,12 @@ LogPlain(L"BH  x/x = %f", x);
 
 void BaderDeuflhardOde::Extrapolate(int iFromStep, double xFromStep, const VectorXd& yFromStep, VectorXd& yToReturn, VectorXd& yErrorEstimate) {
 
-  Bach::LogPlain(L"BH EXTRAPOLATE:");
-  Bach::LogPlain(L"BH  iest = %d", iFromStep);
-  Bach::LogPlain(L"BH  xest = %d", xFromStep);
-  Bach::LogPlain(L"BH  yest = %s", ToString(yFromStep).c_str());
-
   double q;
   double f2;
   double f1;
   double delta;
 
   int nv = (int) yToReturn.rows();
-  Bach::LogPlain(L"BH nv/nv = %d", nv);
 
   m_xInterpTable(iFromStep) = xFromStep;
 
@@ -393,19 +363,14 @@ void BaderDeuflhardOde::Extrapolate(int iFromStep, double xFromStep, const Vecto
     for(j=0; j<nv; j++) {
       m_interpTable(j, 0) = yFromStep(j);
     }
-    Bach::LogPlain(L"BH 0 d/m_interpTable = %s", ToString(m_interpTable).c_str());
   }
   else {
     for(j=0;j<nv;j++) {
       m_extrapC(j) = yFromStep(j);
     }
-    Bach::LogPlain(L"BH c/m_extrapC = %s", ToString(m_extrapC).c_str());
+
     for(int k1=0;k1<iFromStep;k1++) {
       delta=1.0/(m_xInterpTable(iFromStep-k1-1)-xFromStep);
-      Bach::LogPlain(L"BH del/delta = %f", delta);
-      Bach::LogPlain(L"BH x/m_xInterpTable = %s", ToString(m_xInterpTable).c_str());
-      Bach::LogPlain(L"BH iFromStep-k1-1 = %d", iFromStep-k1-1);
-      Bach::LogPlain(L"BH xest/xFromStep = %f", xFromStep);
       f1 = xFromStep*delta;
       f2 = m_xInterpTable(iFromStep-k1-1)*delta;
       for(j=0;j<nv;j++) {
@@ -421,7 +386,4 @@ void BaderDeuflhardOde::Extrapolate(int iFromStep, double xFromStep, const Vecto
       m_interpTable(j, iFromStep) = yErrorEstimate[j];
     }
   }
-
-  Bach::LogPlain(L"BH OUT yz = %s", ToString(yToReturn).c_str());
-  Bach::LogPlain(L"BH OUT dy = %s", ToString(yErrorEstimate).c_str());
 }

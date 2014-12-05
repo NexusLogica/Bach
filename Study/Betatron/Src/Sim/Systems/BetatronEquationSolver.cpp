@@ -67,7 +67,8 @@ void BetatronEquationSolver::SetInitialConditionsFromRadiusAndSpeed(double radiu
   // Calculate an appropriate stepsize.
   double distanceTraveledOverOneDegree = 2.0*NXGR_PI*radius/360.0;
   double timeToTravelOneDegree = distanceTraveledOverOneDegree/speed;
-  m_stepSize = timeToTravelOneDegree;
+  m_stepSize = timeToTravelOneDegree*0.1;
+  m_endTime = timeToTravelOneDegree*360.0;
 }
 
 void BetatronEquationSolver::Initialize() {

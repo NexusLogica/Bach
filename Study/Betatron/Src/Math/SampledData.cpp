@@ -234,12 +234,20 @@ int SampledData::Min(int nstate) const {
 }
 
 void SampledData::WriteToLog() {
-  IOFormat fmt(StreamPrecision, DontAlignCols, ", ", ", ", "", "", "", "");
-  Eigen::VectorXd y(m_numberOfDependent);
-  for(int i=0; i<m_numberOfSamples; i++) {
-    std::stringstream stream;
-    stream << m_x(i) << ", " << m_yArray[i]->format(fmt);
-    LogPlain(WideStringFromUTF8(stream.str()).c_str());
+  wchar_t buffer[256];
+  long num = m_yArray[0]->size();
+
+  for(long j=0; j<m_yArray.size() && m_yArray[j]; j++) {
+
+    std::swprintf(buffer, 256, L"x: %5.5e  y:", m_x(j));
+    std::wstring output(buffer);
+
+    for(long i=0; i<num; i++) {
+      double value = (*m_yArray[j])(i);
+      std::swprintf(buffer, 256, L"  %5.5e", value);
+      output.append(buffer);
+    }
+    LogPlain(output.c_str());
   }
 }
 

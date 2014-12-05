@@ -63,33 +63,36 @@ boost::shared_ptr<ILog> AppleLog::CreateInstance() {
 }
 
 void AppleLog::Write(const wchar_t* message) {
-	struct timeval tv;
-	struct timezone tz;
-  gettimeofday(&tv, &tz);
-	struct tm* currentTime = localtime(&tv.tv_sec);
-  
-  // Write the date into a buffer.
-  wchar_t buffer[2*256];
-  swprintf(buffer, 2*256, L"[%d.%02d.%02d %02d:%02d:%02d.%03d] ",
-           currentTime->tm_year+1900,
-           currentTime->tm_mon+1,
-           currentTime->tm_mday,
-           currentTime->tm_hour,
-           currentTime->tm_min,
-           currentTime->tm_sec,
-           tv.tv_usec / 1000);
-  std::wstring fullMessage = buffer;
-  fullMessage.append(message);
-  
-  NSString* macString = NSStringFromWideString(fullMessage);
-  NSLog(@"%@", macString);
+  std::fwprintf(stderr, L"%S\n",  message);
+//	struct timeval tv;
+//	struct timezone tz;
+//  gettimeofday(&tv, &tz);
+//	struct tm* currentTime = localtime(&tv.tv_sec);
+//  
+//  // Write the date into a buffer.
+//  wchar_t buffer[2*256];
+//  swprintf(buffer, 2*256, L"[%d.%02d.%02d %02d:%02d:%02d.%03d] ",
+//           currentTime->tm_year+1900,
+//           currentTime->tm_mon+1,
+//           currentTime->tm_mday,
+//           currentTime->tm_hour,
+//           currentTime->tm_min,
+//           currentTime->tm_sec,
+//           tv.tv_usec / 1000);
+//  std::wstring fullMessage = buffer;
+//  fullMessage.append(message);
+//  
+//  NSString* macString = NSStringFromWideString(fullMessage);
+//  NSLog(@"%@", macString);
 }
 
 void AppleLog::WritePlain(const wchar_t* message) {
-  std::wstring fullMessage = message;
-  
-  NSString* macString = NSStringFromWideString(fullMessage);
-  NSLog(@"%@", macString);
+  std::fwprintf(stderr, message);
+
+//  std::wstring fullMessage = message;
+//  
+//  NSString* macString = NSStringFromWideString(fullMessage);
+//  NSLog(@"%@", macString);
 }
 
 void Bach::Log(const wchar_t* formatString, ...) {

@@ -31,7 +31,7 @@ in all copies or substantial portions of the Software.
 using namespace Bach;
 using namespace boost;
 using namespace Eigen;
-
+/*
 int main(int argc, const char * argv[]) {
 
   
@@ -48,3 +48,4 @@ int main(int argc, const char * argv[]) {
 
   return 0;
 }
+*/

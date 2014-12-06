@@ -30,6 +30,8 @@
 # Bach libraries
 Study/Betatron/Src/Lib/Eigen
 Study/Betatron/Src/Lib/boost
+Study/Betatron/Src/Lib/asio-1.10.2
+Study/Betatron/Src/Lib/jsoncpp-master
 
 # XCode
 Study/Study.xcworkspace/xcuserdata

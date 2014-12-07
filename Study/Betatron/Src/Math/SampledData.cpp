@@ -233,6 +233,12 @@ int SampledData::Min(int nstate) const {
   return index;
 }
 
+std::string SampledData::AsJson() {
+  std::string json = "{ \"labels\": [ ";
+  json += "]";
+  return json;
+}
+
 void SampledData::WriteToLog() {
   wchar_t buffer[256];
   long num = m_yArray[0]->size();

@@ -12,13 +12,14 @@ All Rights Reserved.
 */
 
 #include "BetatronHandler.h"
-#include "BetatronEquations.h"
+#include "BetatronEquationSolver.h"
 #include "BetatronFieldController.h"
 #include "NDimAccuracySpec.h"
 #include "SampledData.h"
 #include "SampledDerivedData.h"
 #include "BaderDeuflhardOde.h"
 #include "OdeData.h"
+#include "OdeDataCollector.h"
 
 using namespace Bach;
 using namespace boost;
@@ -40,6 +41,18 @@ BetatronHandler::BetatronHandler() {
 BetatronHandler::~BetatronHandler() {
 }
 
-void BetatronHandler::HandleRequest(Json::Value request) {
-  
+std::string BetatronHandler::HandleRequest(Json::Value request) {
+
+  shared_ptr<BetatronEquationSolver> solver = BetatronEquationSolver::CreateInstance();
+  solver->SetInitialConditionsFromRadiusAndSpeed(0.1, 0.01*Bach::SPEED_OF_LIGHT);
+  solver->Initialize();
+
+  shared_ptr<OdeDataCollector> collector = shared_ptr<OdeDataCollector>(new OdeDataCollector());
+  shared_ptr<OdeData> odeData = solver->GetOdeData();
+  odeData->SetCollector(collector);
+
+  solver->Run();
+  std::string internalJson =  odeData->GetCollector()->GetInternalData()->AsJson();
+
+  return "{}";
 }

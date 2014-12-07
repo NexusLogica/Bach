@@ -11,6 +11,14 @@
 		17D609441A32E5C7002AB22A /* json_value.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 17D6093B1A32E5C7002AB22A /* json_value.cpp */; };
 		17D609451A32E5C7002AB22A /* json_writer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 17D6093D1A32E5C7002AB22A /* json_writer.cpp */; };
 		17D609491A33B5A9002AB22A /* BetatronHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 17D609471A33B5A9002AB22A /* BetatronHandler.cpp */; };
+		17D6095C1A344AD8002AB22A /* connection_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 17D6094B1A344AD8002AB22A /* connection_manager.cpp */; };
+		17D6095D1A344AD8002AB22A /* connection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 17D6094D1A344AD8002AB22A /* connection.cpp */; };
+		17D6095E1A344AD8002AB22A /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 17D609501A344AD8002AB22A /* main.cpp */; };
+		17D6095F1A344AD8002AB22A /* mime_types.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 17D609511A344AD8002AB22A /* mime_types.cpp */; };
+		17D609601A344AD8002AB22A /* reply.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 17D609531A344AD8002AB22A /* reply.cpp */; };
+		17D609611A344AD8002AB22A /* request_handler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 17D609551A344AD8002AB22A /* request_handler.cpp */; };
+		17D609621A344AD8002AB22A /* request_parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 17D609571A344AD8002AB22A /* request_parser.cpp */; };
+		17D609631A344AD8002AB22A /* server.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 17D6095A1A344AD8002AB22A /* server.cpp */; };
 		F8142D0D1A19157E007055BD /* BondElectrons.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8142D001A19157E007055BD /* BondElectrons.cpp */; };
 		F8142D0E1A19157E007055BD /* Atom.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8142D011A19157E007055BD /* Atom.cpp */; };
 		F8142D0F1A19157E007055BD /* Bond.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8142D031A19157E007055BD /* Bond.cpp */; };
@@ -96,6 +104,23 @@
 		17D609421A32E5C7002AB22A /* writer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = writer.h; path = Src/Lib/json/writer.h; sourceTree = "<group>"; };
 		17D609471A33B5A9002AB22A /* BetatronHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BetatronHandler.cpp; path = Src/Sim/Handlers/BetatronHandler.cpp; sourceTree = "<group>"; };
 		17D609481A33B5A9002AB22A /* BetatronHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BetatronHandler.h; path = Src/Sim/Handlers/BetatronHandler.h; sourceTree = "<group>"; };
+		17D6094B1A344AD8002AB22A /* connection_manager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = connection_manager.cpp; path = Src/Server/connection_manager.cpp; sourceTree = "<group>"; };
+		17D6094C1A344AD8002AB22A /* connection_manager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = connection_manager.hpp; path = Src/Server/connection_manager.hpp; sourceTree = "<group>"; };
+		17D6094D1A344AD8002AB22A /* connection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = connection.cpp; path = Src/Server/connection.cpp; sourceTree = "<group>"; };
+		17D6094E1A344AD8002AB22A /* connection.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = connection.hpp; path = Src/Server/connection.hpp; sourceTree = "<group>"; };
+		17D6094F1A344AD8002AB22A /* header.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = header.hpp; path = Src/Server/header.hpp; sourceTree = "<group>"; };
+		17D609501A344AD8002AB22A /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = Src/Server/main.cpp; sourceTree = "<group>"; };
+		17D609511A344AD8002AB22A /* mime_types.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = mime_types.cpp; path = Src/Server/mime_types.cpp; sourceTree = "<group>"; };
+		17D609521A344AD8002AB22A /* mime_types.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = mime_types.hpp; path = Src/Server/mime_types.hpp; sourceTree = "<group>"; };
+		17D609531A344AD8002AB22A /* reply.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = reply.cpp; path = Src/Server/reply.cpp; sourceTree = "<group>"; };
+		17D609541A344AD8002AB22A /* reply.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = reply.hpp; path = Src/Server/reply.hpp; sourceTree = "<group>"; };
+		17D609551A344AD8002AB22A /* request_handler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = request_handler.cpp; path = Src/Server/request_handler.cpp; sourceTree = "<group>"; };
+		17D609561A344AD8002AB22A /* request_handler.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = request_handler.hpp; path = Src/Server/request_handler.hpp; sourceTree = "<group>"; };
+		17D609571A344AD8002AB22A /* request_parser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = request_parser.cpp; path = Src/Server/request_parser.cpp; sourceTree = "<group>"; };
+		17D609581A344AD8002AB22A /* request_parser.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = request_parser.hpp; path = Src/Server/request_parser.hpp; sourceTree = "<group>"; };
+		17D609591A344AD8002AB22A /* request.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = request.hpp; path = Src/Server/request.hpp; sourceTree = "<group>"; };
+		17D6095A1A344AD8002AB22A /* server.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = server.cpp; path = Src/Server/server.cpp; sourceTree = "<group>"; };
+		17D6095B1A344AD8002AB22A /* server.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = server.hpp; path = Src/Server/server.hpp; sourceTree = "<group>"; };
 		F8142D001A19157E007055BD /* BondElectrons.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BondElectrons.cpp; path = Src/Sim/Elements/BondElectrons.cpp; sourceTree = "<group>"; };
 		F8142D011A19157E007055BD /* Atom.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Atom.cpp; path = Src/Sim/Elements/Atom.cpp; sourceTree = "<group>"; };
 		F8142D021A19157E007055BD /* Atom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Atom.h; path = Src/Sim/Elements/Atom.h; sourceTree = "<group>"; };
@@ -258,6 +283,30 @@
 				17D609481A33B5A9002AB22A /* BetatronHandler.h */,
 			);
 			name = Handlers;
+			sourceTree = "<group>";
+		};
+		17D6094A1A344AC5002AB22A /* Server */ = {
+			isa = PBXGroup;
+			children = (
+				17D6094B1A344AD8002AB22A /* connection_manager.cpp */,
+				17D6094C1A344AD8002AB22A /* connection_manager.hpp */,
+				17D6094D1A344AD8002AB22A /* connection.cpp */,
+				17D6094E1A344AD8002AB22A /* connection.hpp */,
+				17D6094F1A344AD8002AB22A /* header.hpp */,
+				17D609501A344AD8002AB22A /* main.cpp */,
+				17D609511A344AD8002AB22A /* mime_types.cpp */,
+				17D609521A344AD8002AB22A /* mime_types.hpp */,
+				17D609531A344AD8002AB22A /* reply.cpp */,
+				17D609541A344AD8002AB22A /* reply.hpp */,
+				17D609551A344AD8002AB22A /* request_handler.cpp */,
+				17D609561A344AD8002AB22A /* request_handler.hpp */,
+				17D609571A344AD8002AB22A /* request_parser.cpp */,
+				17D609581A344AD8002AB22A /* request_parser.hpp */,
+				17D609591A344AD8002AB22A /* request.hpp */,
+				17D6095A1A344AD8002AB22A /* server.cpp */,
+				17D6095B1A344AD8002AB22A /* server.hpp */,
+			);
+			name = Server;
 			sourceTree = "<group>";
 		};
 		F8142CFE1A191547007055BD /* Sim */ = {
@@ -433,6 +482,7 @@
 		F87DAC1F1A17FD9F003DDBA7 /* Src */ = {
 			isa = PBXGroup;
 			children = (
+				17D6094A1A344AC5002AB22A /* Server */,
 				17D609271A32E3EC002AB22A /* Lib */,
 				F8142D4A1A1916E9007055BD /* Math */,
 				F8142D461A19161F007055BD /* Test */,
@@ -531,6 +581,7 @@
 				F8142D8A1A1916FA007055BD /* SampledData.cpp in Sources */,
 				F8142D7E1A1916FA007055BD /* NDimAccuracySpec.cpp in Sources */,
 				F8142D0F1A19157E007055BD /* Bond.cpp in Sources */,
+				17D609601A344AD8002AB22A /* reply.cpp in Sources */,
 				F8142D7A1A1916FA007055BD /* BaderDeuflhardOde.cpp in Sources */,
 				17D609431A32E5C7002AB22A /* json_reader.cpp in Sources */,
 				F8142D891A1916FA007055BD /* RootSolverEquationsOdeWrapper.cpp in Sources */,
@@ -538,8 +589,10 @@
 				F8142D401A191609007055BD /* DipoleMomentFinder.cpp in Sources */,
 				F8142D1A1A1915B5007055BD /* ChargeMagneticField.cpp in Sources */,
 				F8142D1C1A1915B5007055BD /* ElectricField.cpp in Sources */,
+				17D609631A344AD8002AB22A /* server.cpp in Sources */,
 				F8142D0E1A19157E007055BD /* Atom.cpp in Sources */,
 				F8142D3F1A191609007055BD /* MoleculeAccelSolverEquations.cpp in Sources */,
+				17D6095C1A344AD8002AB22A /* connection_manager.cpp in Sources */,
 				F8142D871A1916FA007055BD /* RationalInterp.cpp in Sources */,
 				F8142D1B1A1915B5007055BD /* BondForce.cpp in Sources */,
 				F8142D451A191609007055BD /* MoleculeValues.cpp in Sources */,
@@ -552,6 +605,7 @@
 				F8142D801A1916FA007055BD /* OdeAccuracySpec.cpp in Sources */,
 				F8142D0D1A19157E007055BD /* BondElectrons.cpp in Sources */,
 				F8142D7F1A1916FA007055BD /* NDimNewtonRaphson.cpp in Sources */,
+				17D6095E1A344AD8002AB22A /* main.cpp in Sources */,
 				17D609491A33B5A9002AB22A /* BetatronHandler.cpp in Sources */,
 				F8142D121A19157E007055BD /* SpOrbital.cpp in Sources */,
 				F8142D8C1A1916FA007055BD /* SequentialAccessHunt.cpp in Sources */,
@@ -567,14 +621,18 @@
 				F8142D441A191609007055BD /* MoleculeOde.cpp in Sources */,
 				F87DAC291A1846A2003DDBA7 /* AppleLog.mm in Sources */,
 				F87DAC211A183C50003DDBA7 /* main.cpp in Sources */,
+				17D6095D1A344AD8002AB22A /* connection.cpp in Sources */,
 				F8142D8D1A1916FA007055BD /* TableSearch.cpp in Sources */,
 				F8142D411A191609007055BD /* MoleculeAccelerationSolver.cpp in Sources */,
 				F8142D3C1A191609007055BD /* BetatronFieldController.cpp in Sources */,
 				F8142D861A1916FA007055BD /* PolynomialInterp.cpp in Sources */,
+				17D609621A344AD8002AB22A /* request_parser.cpp in Sources */,
 				F8142D811A1916FA007055BD /* OdeData.cpp in Sources */,
 				F8142D831A1916FA007055BD /* OdeNumericalDerivatives.cpp in Sources */,
 				F8142D201A1915D7007055BD /* ForceVectors.cpp in Sources */,
 				F87DAC2F1A1854FC003DDBA7 /* AppleStringUtilities.mm in Sources */,
+				17D609611A344AD8002AB22A /* request_handler.cpp in Sources */,
+				17D6095F1A344AD8002AB22A /* mime_types.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -665,6 +723,18 @@
 					Src/Common,
 					Src/Lib/asio/include,
 				);
+				"HEADER_SEARCH_PATHS[arch=*]" = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					Src/Lib,
+					Src/Common,
+					Src/Lib/asio/include,
+				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				"LIBRARY_SEARCH_PATHS[arch=*]" = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Src/Lib/boost_1_57_0/stage/lib",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SYMROOT = build;
 			};
@@ -678,7 +748,10 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					Src/Lib,
 					Src/Common,
+					Src/Lib/asio/include,
 				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				"LIBRARY_SEARCH_PATHS[arch=*]" = Src/Lib/boost_1_57_0/stage/lib;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SYMROOT = build;
 			};

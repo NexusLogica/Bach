@@ -36,7 +36,7 @@ namespace Bach {
 
     virtual ~BetatronHandler();
     
-    void HandleRequest(Json::Value request);
+    std::string HandleRequest(Json::Value request);
 
   protected:
     BetatronHandler();

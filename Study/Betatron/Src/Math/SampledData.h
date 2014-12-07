@@ -69,6 +69,7 @@ namespace Bach {
     int Min(int yIndex) const;
     int Min() const;
 
+    std::string AsJson();
     void WriteToLog();
 
   protected:

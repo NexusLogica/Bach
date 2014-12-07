@@ -22,16 +22,13 @@ in all copies or substantial portions of the Software.
 
 #include <iostream>
 #include "Utility.h"
-
-#include "BetatronEquationSolver.h"
-#include "OdeData.h"
-#include "OdeDataCollector.h"
-#include "SampledData.h"
+#include "json.h"
+#include "BetatronHandler.h"
 
 using namespace Bach;
 using namespace boost;
 using namespace Eigen;
-
+/*
 int main(int argc, const char * argv[]) {
 
   std::cin >> std::noskipws;
@@ -39,21 +36,27 @@ int main(int argc, const char * argv[]) {
   // use stream iterators to copy the stream to a string
   std::istream_iterator<char> it(std::cin);
   std::istream_iterator<char> end;
-  std::string results(it, end);
+  std::string input(it, end);
 
-  std::cout << results;
-/*
-  
-  shared_ptr<BetatronEquationSolver> solver = BetatronEquationSolver::CreateInstance();
-  solver->SetInitialConditionsFromRadiusAndSpeed(0.1, 0.01*Bach::SPEED_OF_LIGHT);
-  solver->Initialize();
+  std::string output;
 
-  shared_ptr<OdeDataCollector> collector = shared_ptr<OdeDataCollector>(new OdeDataCollector());
-  shared_ptr<OdeData> odeData = solver->GetOdeData();
-  odeData->SetCollector(collector);
+  Json::Value root;
+  Json::Reader reader;
+  bool parsingSuccessful = reader.parse(input, root);
+  if(!parsingSuccessful) {
+    output = "{ \"error\": \"Parse error\", \"errorMessage\": \""+reader.getFormattedErrorMessages()+"\" }";
+  }
+  else {
+    std::string system = root.get("system", "betatron").asString();
+    if(system == "Betatron") {
+      shared_ptr<BetatronHandler> handler = BetatronHandler::CreateInstance();
+      output = handler->HandleRequest(root);
 
-  solver->Run();
-  odeData->GetCollector()->GetInternalData()->WriteToLog();
-*/
+    }
+    output = "{ \"status\": \"success\" }";
+  }
+
+  std::cout << output;
   return 0;
 }
+*/

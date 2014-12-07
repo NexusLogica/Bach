@@ -54,5 +54,5 @@ std::string BetatronHandler::HandleRequest(Json::Value request) {
   solver->Run();
   std::string internalJson =  odeData->GetCollector()->GetInternalData()->AsJson();
 
-  return "{}";
+  return internalJson;
 }

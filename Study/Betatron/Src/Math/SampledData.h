@@ -63,6 +63,8 @@ namespace Bach {
     int GetNumberOfSamples() const    {  return m_numberOfSamples;    }; // was GetLength()
     int GetMaxNumberOfSamples() const {  return m_maxNumberOfSamples; }; // was GetMaxLength()
 
+    void SetArrayColumnNames(const std::vector<std::string>& names);
+
     // the maximums and minimums of the data
     int Max(int yIndex) const;
     int Max() const;
@@ -76,6 +78,11 @@ namespace Bach {
 
     Eigen::VectorXd m_x;
     std::vector<Eigen::VectorXd*> m_yArray;
+
+    std::string m_independentName;
+    std::string m_independentUnits;
+    std::vector<std::string> m_arrayColumnNames;
+    std::vector<std::string> m_arrayColumnUnits;
 
     int m_numberOfSamples;
     int m_maxNumberOfSamples;

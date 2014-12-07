@@ -30,6 +30,7 @@ All Rights Reserved.
 #include "InterpolationIndex.h"
 #include "SequentialAccessHunt.h"
 #include "PolynomialInterp.h"
+#include <boost/lexical_cast.hpp>
 
 using namespace Bach;
 using namespace boost;
@@ -56,9 +57,13 @@ SampledData::SampledData(int numDependent, int maxNumberOfSamples) :
 
   int interpolationSize = m_interpolator->GetInterpolationSize();
 
+  m_independentName = "time";
+  m_independentUnits = "seconds";
   m_interpVectorArray.resize(m_numberOfDependent);
   for(int i=0; i<numDependent; i++) {
     m_interpVectorArray[i].resize(interpolationSize);
+    m_arrayColumnNames.push_back("data"+lexical_cast<std::string>(i));
+    m_arrayColumnUnits.push_back("");
   }
 }
 
@@ -203,6 +208,13 @@ void SampledData::Resize(int newSize) {
   }
 }
 
+void SampledData::SetArrayColumnNames(const std::vector<std::string>& names) {
+  m_arrayColumnNames.clear();
+  for(int i=0; i<names.size(); i++) {
+    m_arrayColumnNames.push_back(names[i]);
+  }
+}
+
 int SampledData::Max(int nstate) const {
   if(m_numberOfSamples < 1) {
     return -1;
@@ -234,8 +246,32 @@ int SampledData::Min(int nstate) const {
 }
 
 std::string SampledData::AsJson() {
-  std::string json = "{ \"labels\": [ ";
-  json += "]";
+
+  std::string json = "{\n \"independent\": { \"name\": \""+m_independentName+"\", \"units\": \""+m_independentUnits+"\", \"values\": [ ";
+  char buffer[256];
+  for(long i=0; i<m_numberOfSamples; i++) {
+    if(i != 0) { json += ","; }
+    std::sprintf(buffer, "%10.10e", m_x(i));
+    json += buffer;
+  }
+
+  json += "]\n},\n \"dependent\": [\n ";
+
+  for(long j=0; j<m_numberOfDependent; j++) {
+    if(j != 0) { json += ","; }
+    json += "{\n \"name\": \""+m_arrayColumnNames[j]+"\", \"units\": \""+m_arrayColumnUnits[j]+"\", \"values\": [ ";
+    for(long i=0; i<m_numberOfSamples; i++) {
+      if(i != 0) { json += ","; }
+      double value = (*m_yArray[i])(j);
+      std::sprintf(buffer, "%10.10e", value);
+      json += buffer;
+    }
+    json += "]\n}\n";
+  }
+
+
+  json += "]\n}\n";
+
   return json;
 }
 

@@ -7,17 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		17D6091F1A328825002AB22A /* connection_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 17D6090E1A328825002AB22A /* connection_manager.cpp */; };
-		17D609201A328825002AB22A /* connection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 17D609101A328825002AB22A /* connection.cpp */; };
-		17D609211A328825002AB22A /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 17D609131A328825002AB22A /* main.cpp */; };
-		17D609221A328825002AB22A /* mime_types.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 17D609141A328825002AB22A /* mime_types.cpp */; };
-		17D609231A328825002AB22A /* reply.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 17D609161A328825002AB22A /* reply.cpp */; };
-		17D609241A328825002AB22A /* request_handler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 17D609181A328825002AB22A /* request_handler.cpp */; };
-		17D609251A328825002AB22A /* request_parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 17D6091A1A328825002AB22A /* request_parser.cpp */; };
-		17D609261A328825002AB22A /* server.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 17D6091D1A328825002AB22A /* server.cpp */; };
 		17D609431A32E5C7002AB22A /* json_reader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 17D609391A32E5C7002AB22A /* json_reader.cpp */; };
 		17D609441A32E5C7002AB22A /* json_value.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 17D6093B1A32E5C7002AB22A /* json_value.cpp */; };
 		17D609451A32E5C7002AB22A /* json_writer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 17D6093D1A32E5C7002AB22A /* json_writer.cpp */; };
+		17D609491A33B5A9002AB22A /* BetatronHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 17D609471A33B5A9002AB22A /* BetatronHandler.cpp */; };
 		F8142D0D1A19157E007055BD /* BondElectrons.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8142D001A19157E007055BD /* BondElectrons.cpp */; };
 		F8142D0E1A19157E007055BD /* Atom.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8142D011A19157E007055BD /* Atom.cpp */; };
 		F8142D0F1A19157E007055BD /* Bond.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8142D031A19157E007055BD /* Bond.cpp */; };
@@ -83,23 +76,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		17D6090E1A328825002AB22A /* connection_manager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = connection_manager.cpp; path = Src/Server/connection_manager.cpp; sourceTree = "<group>"; };
-		17D6090F1A328825002AB22A /* connection_manager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = connection_manager.hpp; path = Src/Server/connection_manager.hpp; sourceTree = "<group>"; };
-		17D609101A328825002AB22A /* connection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = connection.cpp; path = Src/Server/connection.cpp; sourceTree = "<group>"; };
-		17D609111A328825002AB22A /* connection.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = connection.hpp; path = Src/Server/connection.hpp; sourceTree = "<group>"; };
-		17D609121A328825002AB22A /* header.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = header.hpp; path = Src/Server/header.hpp; sourceTree = "<group>"; };
-		17D609131A328825002AB22A /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = Src/Server/main.cpp; sourceTree = "<group>"; };
-		17D609141A328825002AB22A /* mime_types.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = mime_types.cpp; path = Src/Server/mime_types.cpp; sourceTree = "<group>"; };
-		17D609151A328825002AB22A /* mime_types.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = mime_types.hpp; path = Src/Server/mime_types.hpp; sourceTree = "<group>"; };
-		17D609161A328825002AB22A /* reply.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = reply.cpp; path = Src/Server/reply.cpp; sourceTree = "<group>"; };
-		17D609171A328825002AB22A /* reply.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = reply.hpp; path = Src/Server/reply.hpp; sourceTree = "<group>"; };
-		17D609181A328825002AB22A /* request_handler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = request_handler.cpp; path = Src/Server/request_handler.cpp; sourceTree = "<group>"; };
-		17D609191A328825002AB22A /* request_handler.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = request_handler.hpp; path = Src/Server/request_handler.hpp; sourceTree = "<group>"; };
-		17D6091A1A328825002AB22A /* request_parser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = request_parser.cpp; path = Src/Server/request_parser.cpp; sourceTree = "<group>"; };
-		17D6091B1A328825002AB22A /* request_parser.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = request_parser.hpp; path = Src/Server/request_parser.hpp; sourceTree = "<group>"; };
-		17D6091C1A328825002AB22A /* request.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = request.hpp; path = Src/Server/request.hpp; sourceTree = "<group>"; };
-		17D6091D1A328825002AB22A /* server.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = server.cpp; path = Src/Server/server.cpp; sourceTree = "<group>"; };
-		17D6091E1A328825002AB22A /* server.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = server.hpp; path = Src/Server/server.hpp; sourceTree = "<group>"; };
 		17D609311A32E5B0002AB22A /* assertions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = assertions.h; path = Src/Lib/json/assertions.h; sourceTree = "<group>"; };
 		17D609321A32E5C7002AB22A /* autolink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = autolink.h; path = Src/Lib/json/autolink.h; sourceTree = "<group>"; };
 		17D609331A32E5C7002AB22A /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = config.h; path = Src/Lib/json/config.h; sourceTree = "<group>"; };
@@ -118,6 +94,8 @@
 		17D609401A32E5C7002AB22A /* value.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = value.h; path = Src/Lib/json/value.h; sourceTree = "<group>"; };
 		17D609411A32E5C7002AB22A /* version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = version.h; path = Src/Lib/json/version.h; sourceTree = "<group>"; };
 		17D609421A32E5C7002AB22A /* writer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = writer.h; path = Src/Lib/json/writer.h; sourceTree = "<group>"; };
+		17D609471A33B5A9002AB22A /* BetatronHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BetatronHandler.cpp; path = Src/Sim/Handlers/BetatronHandler.cpp; sourceTree = "<group>"; };
+		17D609481A33B5A9002AB22A /* BetatronHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BetatronHandler.h; path = Src/Sim/Handlers/BetatronHandler.h; sourceTree = "<group>"; };
 		F8142D001A19157E007055BD /* BondElectrons.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BondElectrons.cpp; path = Src/Sim/Elements/BondElectrons.cpp; sourceTree = "<group>"; };
 		F8142D011A19157E007055BD /* Atom.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Atom.cpp; path = Src/Sim/Elements/Atom.cpp; sourceTree = "<group>"; };
 		F8142D021A19157E007055BD /* Atom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Atom.h; path = Src/Sim/Elements/Atom.h; sourceTree = "<group>"; };
@@ -240,30 +218,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		17D608F71A326D54002AB22A /* Server */ = {
-			isa = PBXGroup;
-			children = (
-				17D6090E1A328825002AB22A /* connection_manager.cpp */,
-				17D6090F1A328825002AB22A /* connection_manager.hpp */,
-				17D609101A328825002AB22A /* connection.cpp */,
-				17D609111A328825002AB22A /* connection.hpp */,
-				17D609121A328825002AB22A /* header.hpp */,
-				17D609131A328825002AB22A /* main.cpp */,
-				17D609141A328825002AB22A /* mime_types.cpp */,
-				17D609151A328825002AB22A /* mime_types.hpp */,
-				17D609161A328825002AB22A /* reply.cpp */,
-				17D609171A328825002AB22A /* reply.hpp */,
-				17D609181A328825002AB22A /* request_handler.cpp */,
-				17D609191A328825002AB22A /* request_handler.hpp */,
-				17D6091A1A328825002AB22A /* request_parser.cpp */,
-				17D6091B1A328825002AB22A /* request_parser.hpp */,
-				17D6091C1A328825002AB22A /* request.hpp */,
-				17D6091D1A328825002AB22A /* server.cpp */,
-				17D6091E1A328825002AB22A /* server.hpp */,
-			);
-			name = Server;
-			sourceTree = "<group>";
-		};
 		17D609271A32E3EC002AB22A /* Lib */ = {
 			isa = PBXGroup;
 			children = (
@@ -297,9 +251,19 @@
 			name = JsonCpp;
 			sourceTree = "<group>";
 		};
+		17D609461A33B201002AB22A /* Handlers */ = {
+			isa = PBXGroup;
+			children = (
+				17D609471A33B5A9002AB22A /* BetatronHandler.cpp */,
+				17D609481A33B5A9002AB22A /* BetatronHandler.h */,
+			);
+			name = Handlers;
+			sourceTree = "<group>";
+		};
 		F8142CFE1A191547007055BD /* Sim */ = {
 			isa = PBXGroup;
 			children = (
+				17D609461A33B201002AB22A /* Handlers */,
 				F8142D211A1915E1007055BD /* Systems */,
 				F8142D1D1A1915C1007055BD /* Functions */,
 				F8142D131A19158C007055BD /* Fields */,
@@ -470,7 +434,6 @@
 			isa = PBXGroup;
 			children = (
 				17D609271A32E3EC002AB22A /* Lib */,
-				17D608F71A326D54002AB22A /* Server */,
 				F8142D4A1A1916E9007055BD /* Math */,
 				F8142D461A19161F007055BD /* Test */,
 				F8142CFE1A191547007055BD /* Sim */,
@@ -570,7 +533,6 @@
 				F8142D0F1A19157E007055BD /* Bond.cpp in Sources */,
 				F8142D7A1A1916FA007055BD /* BaderDeuflhardOde.cpp in Sources */,
 				17D609431A32E5C7002AB22A /* json_reader.cpp in Sources */,
-				17D6091F1A328825002AB22A /* connection_manager.cpp in Sources */,
 				F8142D891A1916FA007055BD /* RootSolverEquationsOdeWrapper.cpp in Sources */,
 				F8142D491A19167A007055BD /* MagneticFieldDerivTests.cpp in Sources */,
 				F8142D401A191609007055BD /* DipoleMomentFinder.cpp in Sources */,
@@ -579,8 +541,6 @@
 				F8142D0E1A19157E007055BD /* Atom.cpp in Sources */,
 				F8142D3F1A191609007055BD /* MoleculeAccelSolverEquations.cpp in Sources */,
 				F8142D871A1916FA007055BD /* RationalInterp.cpp in Sources */,
-				17D609231A328825002AB22A /* reply.cpp in Sources */,
-				17D609201A328825002AB22A /* connection.cpp in Sources */,
 				F8142D1B1A1915B5007055BD /* BondForce.cpp in Sources */,
 				F8142D451A191609007055BD /* MoleculeValues.cpp in Sources */,
 				F8142D8B1A1916FA007055BD /* SampledDerivedData.cpp in Sources */,
@@ -589,22 +549,19 @@
 				F8142D951A197015007055BD /* RandomGenerator.cpp in Sources */,
 				F8142D3A1A191609007055BD /* BetatronEquations.cpp in Sources */,
 				F8142D841A1916FA007055BD /* OdeSolver.cpp in Sources */,
-				17D609251A328825002AB22A /* request_parser.cpp in Sources */,
 				F8142D801A1916FA007055BD /* OdeAccuracySpec.cpp in Sources */,
 				F8142D0D1A19157E007055BD /* BondElectrons.cpp in Sources */,
 				F8142D7F1A1916FA007055BD /* NDimNewtonRaphson.cpp in Sources */,
+				17D609491A33B5A9002AB22A /* BetatronHandler.cpp in Sources */,
 				F8142D121A19157E007055BD /* SpOrbital.cpp in Sources */,
 				F8142D8C1A1916FA007055BD /* SequentialAccessHunt.cpp in Sources */,
-				17D609211A328825002AB22A /* main.cpp in Sources */,
 				17D609441A32E5C7002AB22A /* json_value.cpp in Sources */,
 				F8142D101A19157E007055BD /* Molecule.cpp in Sources */,
-				17D609221A328825002AB22A /* mime_types.cpp in Sources */,
 				F87DAC2A1A1846A2003DDBA7 /* Utility.cpp in Sources */,
 				F8142D431A191609007055BD /* MoleculeEquilibriumSolver.cpp in Sources */,
 				F8142D3D1A191609007055BD /* Circuit.cpp in Sources */,
 				F8142D881A1916FA007055BD /* RiddersExtrapolation.cpp in Sources */,
 				F8142D3B1A191609007055BD /* BetatronEquationSolver.cpp in Sources */,
-				17D609241A328825002AB22A /* request_handler.cpp in Sources */,
 				F8142D7B1A1916FA007055BD /* BisectionHunt.cpp in Sources */,
 				F8142D7C1A1916FA007055BD /* HermiteInterp.cpp in Sources */,
 				F8142D441A191609007055BD /* MoleculeOde.cpp in Sources */,
@@ -613,7 +570,6 @@
 				F8142D8D1A1916FA007055BD /* TableSearch.cpp in Sources */,
 				F8142D411A191609007055BD /* MoleculeAccelerationSolver.cpp in Sources */,
 				F8142D3C1A191609007055BD /* BetatronFieldController.cpp in Sources */,
-				17D609261A328825002AB22A /* server.cpp in Sources */,
 				F8142D861A1916FA007055BD /* PolynomialInterp.cpp in Sources */,
 				F8142D811A1916FA007055BD /* OdeData.cpp in Sources */,
 				F8142D831A1916FA007055BD /* OdeNumericalDerivatives.cpp in Sources */,
@@ -707,9 +663,10 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					Src/Lib,
 					Src/Common,
-					"Src/Lib/asio-1.10.2/include",
+					Src/Lib/asio/include,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SYMROOT = build;
 			};
 			name = Debug;
 		};
@@ -723,6 +680,7 @@
 					Src/Common,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SYMROOT = build;
 			};
 			name = Release;
 		};

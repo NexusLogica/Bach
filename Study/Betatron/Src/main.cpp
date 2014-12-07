@@ -31,9 +31,18 @@ in all copies or substantial portions of the Software.
 using namespace Bach;
 using namespace boost;
 using namespace Eigen;
-/*
+
 int main(int argc, const char * argv[]) {
 
+  std::cin >> std::noskipws;
+
+  // use stream iterators to copy the stream to a string
+  std::istream_iterator<char> it(std::cin);
+  std::istream_iterator<char> end;
+  std::string results(it, end);
+
+  std::cout << results;
+/*
   
   shared_ptr<BetatronEquationSolver> solver = BetatronEquationSolver::CreateInstance();
   solver->SetInitialConditionsFromRadiusAndSpeed(0.1, 0.01*Bach::SPEED_OF_LIGHT);
@@ -45,7 +54,6 @@ int main(int argc, const char * argv[]) {
 
   solver->Run();
   odeData->GetCollector()->GetInternalData()->WriteToLog();
-
+*/
   return 0;
 }
-*/

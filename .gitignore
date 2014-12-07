@@ -28,6 +28,7 @@
 *.app
 
 # Bach libraries
+Study/DerivedData
 Study/Betatron/Src/Lib/Eigen
 Study/Betatron/Src/Lib/boost
 Study/Betatron/Src/Lib/asio-1.10.2

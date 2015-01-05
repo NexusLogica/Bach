@@ -63,7 +63,10 @@ namespace Bach {
     int GetNumberOfSamples() const    {  return m_numberOfSamples;    }; // was GetLength()
     int GetMaxNumberOfSamples() const {  return m_maxNumberOfSamples; }; // was GetMaxLength()
 
+    void SetIndependentName(const std::string& name) { m_independentName = name; }
+    void SetIndependentUnit(const std::string& unit) { m_independentUnits = unit; }
     void SetArrayColumnNames(const std::vector<std::string>& names);
+    void SetArrayColumnUnits(const std::vector<std::string>& units);
 
     // the maximums and minimums of the data
     int Max(int yIndex) const;

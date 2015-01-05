@@ -42,17 +42,23 @@ BetatronHandler::~BetatronHandler() {
 }
 
 std::string BetatronHandler::HandleRequest(Json::Value request) {
+  Json::Value inputs = request["inputs"];
+  double radius = inputs.get("radius", "0.0").asDouble();
+  double speed  = inputs.get("speed",  "0.0").asDouble();
 
   shared_ptr<BetatronEquationSolver> solver = BetatronEquationSolver::CreateInstance();
-  solver->SetInitialConditionsFromRadiusAndSpeed(0.1, 0.01*Bach::SPEED_OF_LIGHT);
+
+  solver->SetInitialConditionsFromRadiusAndSpeed(radius, speed*Bach::SPEED_OF_LIGHT);
+
+  if(inputs.isMember("fieldIncrease")) {
+    double fieldIncrease = inputs.get("fieldIncrease",  "0.0").asDouble();
+    solver->SetFieldIncreaseRatePerRotation(fieldIncrease);
+  }
+
   solver->Initialize();
 
-  shared_ptr<OdeDataCollector> collector = shared_ptr<OdeDataCollector>(new OdeDataCollector());
-  shared_ptr<OdeData> odeData = solver->GetOdeData();
-  odeData->SetCollector(collector);
-
   solver->Run();
-  std::string internalJson =  odeData->GetCollector()->GetInternalData()->AsJson();
+  std::string json = solver->GetOdeData()->GetCollector()->AsJson();
 
-  return internalJson;
+  return json;
 }

@@ -268,6 +268,9 @@ void BaderDeuflhardOde::SolveStep(double x, boost::shared_ptr<OdeData> odeData) 
     red = min(red,REDMIN);
     red = max(red,REDMAX);
     m_stepSize *= red;
+    if(m_stepSize > m_maxStepSize) {
+      m_stepSize = m_maxStepSize;
+    }
     reduct = 1;
   }
 
@@ -293,6 +296,10 @@ void BaderDeuflhardOde::SolveStep(double x, boost::shared_ptr<OdeData> odeData) 
       m_nextStepSize = m_stepSize/fact;
       m_kopt++;
     }
+  }
+
+  if(m_nextStepSize > m_maxStepSize) {
+    m_nextStepSize = m_maxStepSize;
   }
 }
 

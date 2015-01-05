@@ -15,6 +15,9 @@ All Rights Reserved.
 #include "BetatronEquations.h"
 #include "BetatronFieldController.h"
 #include "OdeData.h"
+#include "OdeDataCollector.h"
+#include "SampledData.h"
+#include "SampledDerivedData.h"
 
 using namespace Bach;
 using namespace boost;
@@ -51,6 +54,48 @@ BetatronEquations::~BetatronEquations() {
 
 void BetatronEquations::Initialize(shared_ptr<Bach::OdeData> odeData) {
   m_iterationCount = 0;
+
+  odeData->GetCollector()->InitializeWithSizes(6, 5);
+
+  std::vector<std::string> names;
+  names.push_back("| B |");
+  names.push_back("| dBbt |");
+  names.push_back("v");
+  names.push_back("r");
+  names.push_back("θ");
+
+  std::vector<std::string> units;
+  units.push_back("Teslas");
+  units.push_back("Teslas/s");
+  units.push_back("m/s");
+  units.push_back("m");
+  units.push_back("rad");
+  
+  odeData->GetCollector()->GetInternalData()->SetIndependentName("time");
+  odeData->GetCollector()->GetInternalData()->SetIndependentUnit("s");
+  odeData->GetCollector()->GetInternalData()->SetArrayColumnNames(names);
+  odeData->GetCollector()->GetInternalData()->SetArrayColumnUnits(units);
+
+  std::vector<std::string> stateNames;
+  stateNames.push_back("x");
+  stateNames.push_back("y");
+  stateNames.push_back("z");
+  stateNames.push_back("dx/dt");
+  stateNames.push_back("dy/dt");
+  stateNames.push_back("dz/dt");
+
+  std::vector<std::string> stateUnits;
+  stateUnits.push_back("m");
+  stateUnits.push_back("m");
+  stateUnits.push_back("m");
+  stateUnits.push_back("m/s");
+  stateUnits.push_back("m/s");
+  stateUnits.push_back("m/s");
+
+  odeData->GetCollector()->GetStateData()->SetIndependentName("time");
+  odeData->GetCollector()->GetStateData()->SetIndependentUnit("s");
+  odeData->GetCollector()->GetStateData()->SetArrayColumnNames(stateNames);
+  odeData->GetCollector()->GetStateData()->SetArrayColumnUnits(stateUnits);
 }
 
 void BetatronEquations::Evaluate(double time, const Eigen::VectorXd& y, Eigen::VectorXd& dydt, shared_ptr<Bach::OdeData> odeData) {
@@ -61,7 +106,16 @@ void BetatronEquations::Evaluate(double time, const Eigen::VectorXd& y, Eigen::V
   m_position[1] = y[1];
   m_position[2] = y[2];
 
+  double rotationalPosition = 0.0;
+  double rotationalAngle = atan2(y[1], y[0]);
+  if(rotationalAngle < 0.0) {
+    rotationalAngle = 2.0*NXGR_PI+rotationalAngle;
+  }
+  rotationalPosition = rotationalAngle/(2.0*NXGR_PI);
   m_fieldController->GetField(time, m_position, m_magneticField);
+
+  Log(L"RotaationalPos: %f y,x = %f, %f      B = %e", rotationalPosition, y[1], y[0], m_charge*m_magneticField->B());
+
   m_velocity[0] = y[3];
   m_velocity[1] = y[4];
   m_velocity[2] = y[5];
@@ -82,7 +136,7 @@ void BetatronEquations::Evaluate(double time, const Eigen::VectorXd& y, Eigen::V
     m_internalValues[1] = m_magneticField->dBdt();
     m_internalValues[2] = m_velocity.norm();
     m_internalValues[3] = sqrt(Square(y[0])+Square(y[1])+Square(y[2]));
-    m_internalValues[4] = NXGR_RAD_TO_DEG*atan2(y[1], y[0]);
+    m_internalValues[4] = NXGR_RAD_TO_DEG*rotationalAngle;
 
     odeData->SetInternalValues(m_internalValues);
   }

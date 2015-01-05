@@ -15,6 +15,7 @@ All Rights Reserved.
 #include "BetatronEquations.h"
 #include "BetatronFieldController.h"
 #include "NDimAccuracySpec.h"
+#include "OdeDataCollector.h"
 #include "SampledData.h"
 #include "SampledDerivedData.h"
 #include "BaderDeuflhardOde.h"
@@ -38,6 +39,7 @@ BetatronEquationSolver::BetatronEquationSolver() :
   m_startTime(0.0),
   m_endTime(1.0),
   m_magneticFieldMagnitude(0.0),
+  m_fieldIncreaseRate(0.0),
   m_initialPosition(3),
   m_initialVelocity(3),
   m_stepSize(0.00001),
@@ -63,7 +65,10 @@ void BetatronEquationSolver::SetInitialConditionsFromRadiusAndSpeed(double radiu
   m_magneticFieldMagnitude = centripetalForce/(Bach::ELECTRIC_CHARGE*speed);
   
   m_fieldController->SetAsConstantB(m_magneticFieldMagnitude, Eigen::Vector3d(0.0, 0.0, 1.0));
-  
+
+  // 0.1 means that the field increases by 10 percent per second.
+  m_fieldController->SetFractionalIncreaseBPerSecond(m_fieldIncreaseRate);
+
   // Calculate an appropriate stepsize.
   double distanceTraveledOverOneDegree = 2.0*NXGR_PI*radius/360.0;
   double timeToTravelOneDegree = distanceTraveledOverOneDegree/speed;
@@ -76,6 +81,8 @@ void BetatronEquationSolver::Initialize() {
   m_equations->SetFieldController(m_fieldController);
 
   m_odeData = OdeData::CreateInstance(m_equations);
+  m_odeData->SetCollector(shared_ptr<OdeDataCollector>(new OdeDataCollector()));
+
   m_odeData->SetStartTime(m_startTime);
   m_odeData->SetEndTime(m_endTime);
 
@@ -88,8 +95,11 @@ void BetatronEquationSolver::Initialize() {
   initialConditions(5) = m_initialVelocity(2);
   m_odeData->SetInitialConditions(initialConditions);
 
+  m_equations->Initialize(m_odeData);
+  
   m_solver = BaderDeuflhardOde::CreateInstance();
   m_solver->SetStepSize(m_stepSize);
+  m_solver->SetMaximumStepSize((m_endTime-m_startTime)/40.0);
 }
 
 void BetatronEquationSolver::Run() {

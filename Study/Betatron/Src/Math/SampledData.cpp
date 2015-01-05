@@ -215,6 +215,13 @@ void SampledData::SetArrayColumnNames(const std::vector<std::string>& names) {
   }
 }
 
+void SampledData::SetArrayColumnUnits(const std::vector<std::string>& units) {
+  m_arrayColumnUnits.clear();
+  for(int i=0; i<units.size(); i++) {
+    m_arrayColumnUnits.push_back(units[i]);
+  }
+}
+
 int SampledData::Max(int nstate) const {
   if(m_numberOfSamples < 1) {
     return -1;

@@ -48,11 +48,11 @@ namespace Bach {
     
     double GetConstantB() { return m_constantB; }
     virtual void SetAsConstantB(double B, const Eigen::Vector3d& direction);
-    
-    double GetConstantInward() { return m_constantInwardB; }
-    virtual void SetAsConstantInward(double B);
-    
-    virtual void GetField(double t, const Eigen::Vector3d& positionInField, boost::shared_ptr<PointMagneticField>& field);
+    virtual void SetFractionalIncreaseBPerSecond(double fractionalIncreaseBPerSecond) { m_fractionalIncreaseBPerSecond = fractionalIncreaseBPerSecond; }
+    virtual void GetField(
+                          double t,
+                          const Eigen::Vector3d& positionInField,
+                          boost::shared_ptr<PointMagneticField>& field);
     
   protected:
     BetatronFieldController();
@@ -60,13 +60,11 @@ namespace Bach {
     boost::weak_ptr<BetatronFieldController> m_weakThis;
     enum ControlType {
       ConstantB = 0,
-      ConstantInward = 1
     } m_controlType;
 
     double m_constantB;
     Eigen::Vector3d m_directionOfConstantB;
-
-    double m_constantInwardB;
+    double m_fractionalIncreaseBPerSecond;
   };
 };
 

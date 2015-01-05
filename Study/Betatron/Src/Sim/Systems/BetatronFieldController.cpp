@@ -27,7 +27,10 @@ shared_ptr<BetatronFieldController> BetatronFieldController::CreateInstance() {
   return instance;
 }
 
-BetatronFieldController::BetatronFieldController() : m_controlType(ConstantB), m_constantB(1.0) {
+BetatronFieldController::BetatronFieldController() :
+  m_controlType(ConstantB),
+  m_constantB(1.0),
+  m_increasePerRotationB(0.0) {
   m_directionOfConstantB[2] = 1.0;
 }
 
@@ -40,24 +43,17 @@ void BetatronFieldController::SetAsConstantB(double B, const Eigen::Vector3d &di
   m_directionOfConstantB = direction;
 }
 
-void BetatronFieldController::SetAsConstantInward(double B) {
-  m_controlType = ConstantInward;
-  m_constantInwardB = B;
-}
+void BetatronFieldController::GetField(
+  double t,
+  const Eigen::Vector3d& positionInField,
+  double rotationalPosition,
+  boost::shared_ptr<PointMagneticField>& field) {
 
-void BetatronFieldController::GetField(double t, const Eigen::Vector3d& positionInField, boost::shared_ptr<PointMagneticField>& field) {
   switch(m_controlType) {
     case ConstantB : {
+      double totalB = m_constantB+m_increasePerRotationB*t;
       field->SetDirection(m_directionOfConstantB);
-      field->SetB(m_constantB);
-      field->SetdBdt(0.0);
-      break;
-    }
-    case ConstantInward : {
-      Eigen::Vector3d direction = -positionInField;
-      direction[2] = 0.0; // z is always zero.
-      field->SetDirection(direction);
-      field->SetB(m_constantInwardB);
+      field->SetB(totalB);
       field->SetdBdt(0.0);
       break;
     }

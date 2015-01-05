@@ -25,6 +25,7 @@ All Rights Reserved.
 #include "SampledDerivedData.h"
 #include "HermiteInterp.h"
 #include "SequentialAccessHunt.h"
+#include <boost/lexical_cast.hpp>
 
 using namespace Bach;
 using namespace boost;
@@ -44,6 +45,13 @@ SampledDerivedData::SampledDerivedData(int numDependent, int maxNumberOfSamples)
   m_yArray.resize(m_maxNumberOfSamples);
 
   m_indexHunter = boost::shared_ptr<TableSearch>(new SequentialAccessHunt());
+
+  m_independentName = "time";
+  m_independentUnits = "seconds";
+  for(int i=0; i<numDependent; i++) {
+    m_arrayColumnNames.push_back("data"+lexical_cast<std::string>(i));
+    m_arrayColumnUnits.push_back("");
+  }
 }
 
 SampledDerivedData::~SampledDerivedData() {
@@ -176,6 +184,20 @@ void SampledDerivedData::Resize(int newSize) {
   }
 }
 
+void SampledDerivedData::SetArrayColumnNames(const std::vector<std::string>& names) {
+  m_arrayColumnNames.clear();
+  for(int i=0; i<names.size(); i++) {
+    m_arrayColumnNames.push_back(names[i]);
+  }
+}
+
+void SampledDerivedData::SetArrayColumnUnits(const std::vector<std::string>& units) {
+  m_arrayColumnUnits.clear();
+  for(int i=0; i<units.size(); i++) {
+    m_arrayColumnUnits.push_back(units[i]);
+  }
+}
+
 int SampledDerivedData::Max(int nstate) const {
   if(m_numberOfSamples < 1) {
     return -1;
@@ -204,6 +226,36 @@ int SampledDerivedData::Min(int nstate) const {
     }
   }
   return index;
+}
+
+std::string SampledDerivedData::AsJson() {
+
+  std::string json = "{\n \"independent\": { \"name\": \""+m_independentName+"\", \"units\": \""+m_independentUnits+"\", \"values\": [ ";
+  char buffer[256];
+  for(long i=0; i<m_numberOfSamples; i++) {
+    if(i != 0) { json += ","; }
+    std::sprintf(buffer, "%10.10e", m_x(i));
+    json += buffer;
+  }
+
+  json += "]\n},\n \"dependent\": [\n ";
+
+  for(long j=0; j<m_numberOfDependent; j++) {
+    if(j != 0) { json += ","; }
+    json += "{\n \"name\": \""+m_arrayColumnNames[j]+"\", \"units\": \""+m_arrayColumnUnits[j]+"\", \"values\": [ ";
+    for(long i=0; i<m_numberOfSamples; i++) {
+      if(i != 0) { json += ","; }
+      double value = (*m_yArray[i])(j);
+      std::sprintf(buffer, "%10.10e", value);
+      json += buffer;
+    }
+    json += "]\n}\n";
+  }
+
+
+  json += "]\n}\n";
+
+  return json;
 }
 
 void SampledDerivedData::WriteToLog() {

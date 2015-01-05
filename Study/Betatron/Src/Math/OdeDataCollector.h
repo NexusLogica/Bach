@@ -32,6 +32,8 @@ namespace Bach {
     OdeDataCollector();
     ~OdeDataCollector();
 
+    void InitializeWithSizes(long numStates, long numInternal);
+
     void StoreData(double time, const Eigen::VectorXd& states, const Eigen::VectorXd& derivs, boost::shared_ptr<OdeData> odeData);
 
     void SetStateData(boost::shared_ptr<SampledDerivedData> sd) { m_stateData = sd; }
@@ -41,6 +43,8 @@ namespace Bach {
     boost::shared_ptr<SampledData> GetInternalData() { return m_internalData; }
 
     void Restart();
+
+    std::string AsJson();
 
   protected:
     boost::shared_ptr<SampledDerivedData> m_stateData;

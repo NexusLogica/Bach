@@ -65,7 +65,7 @@ void request_handler::handle_request(const request& req, reply& rep)
     }
     else {
       std::string system = root.get("system", "betatron").asString();
-      if(system == "Betatron") {
+      if(system == "betatron") {
         boost::shared_ptr<BetatronHandler> handler = BetatronHandler::CreateInstance();
         output = handler->HandleRequest(root);
 

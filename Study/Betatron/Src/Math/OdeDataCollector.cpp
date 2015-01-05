@@ -41,6 +41,11 @@ OdeDataCollector::OdeDataCollector() {
 OdeDataCollector::~OdeDataCollector() {
 }
 
+void OdeDataCollector::InitializeWithSizes(long numStates, long numInternal) {
+  m_stateData = shared_ptr<SampledDerivedData>(new SampledDerivedData((int) numStates, INITIAL_DATA_SIZE));
+  m_internalData = shared_ptr<SampledData>(new SampledData((int) numInternal, INITIAL_DATA_SIZE));
+}
+
 void OdeDataCollector::Restart() {
   if(m_stateData) {
     m_stateData->Reset();
@@ -104,12 +109,18 @@ int OdeDataCollector::GetNewStateSamplesSize(double time, boost::shared_ptr<OdeD
   return newLength;
 }
 
-int OdeDataCollector::GetNewInternalSamplesSize(double time, boost::shared_ptr<OdeData> odeData)
-{
+int OdeDataCollector::GetNewInternalSamplesSize(double time, boost::shared_ptr<OdeData> odeData) {
   int presentLength = m_internalData->GetNumberOfSamples();
   double start = odeData->GetStartTime();
   double end   = odeData->GetEndTime();
   int newLength = presentLength*(int)ceil((end-start)/(time-start));
   newLength = (int)(newLength*1.30);
   return newLength;
+}
+
+std::string OdeDataCollector::AsJson() {
+  std::string stateJson = m_stateData->AsJson();
+  std::string internalJson = m_internalData->AsJson();
+  std::string json = "{ \"state\": "+stateJson+", \"additional\": "+internalJson+" }";
+  return json;
 }

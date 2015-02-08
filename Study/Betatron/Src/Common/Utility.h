@@ -25,14 +25,14 @@ in all copies or substantial portions of the Software.
 #ifndef __BACH_UTILITY_H__
 #define __BACH_UTILITY_H__
 
-#include "BetatronDefs.h"
+#include "BachDefs.h"
 
 namespace Bach {
   namespace Utility {
 
-    //***************
-    //* PS::Utility *
-    //***************
+    //*****************
+    //* Bach::Utility *
+    //*****************
 
     std::wstring LoadFileToString(const std::wstring& filePath); // throws std::exception on error
     bool FileExists(const std::wstring& filePath);

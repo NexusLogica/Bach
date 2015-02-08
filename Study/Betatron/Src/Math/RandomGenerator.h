@@ -17,7 +17,7 @@ All Rights Reserved.
 #ifndef __PS_RANDOMGENERATOR_H__
 #define __PS_RANDOMGENERATOR_H__
 
-#include "BetatronDefs.h"
+#include "BachDefs.h"
 #include <boost/smart_ptr.hpp>
 
 #define NXRG_TABLESIZE 55

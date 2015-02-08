@@ -39,7 +39,9 @@ BetatronEquationSolver::BetatronEquationSolver() :
   m_startTime(0.0),
   m_endTime(1.0),
   m_magneticFieldMagnitude(0.0),
+  m_fieldIncreaseRatePerRotation(0.0),
   m_fieldIncreaseRate(0.0),
+  m_numRotations(5.0),
   m_initialPosition(3),
   m_initialVelocity(3),
   m_stepSize(0.00001),
@@ -60,6 +62,17 @@ void BetatronEquationSolver::SetInitialConditionsFromRadiusAndSpeed(double radiu
   m_initialVelocity(1) = speed;  // positive Y
   m_initialVelocity(2) = 0.0;
   
+  // Calculate an appropriate stepsize.
+  double distanceTraveledPerRotation = 2.0*NXGR_PI*radius;
+  double secondsPerRotation = distanceTraveledPerRotation/speed;
+  
+  m_startTime = 0.0;
+  m_stepSize = 0.1*secondsPerRotation/360.0; // time to travel 0.1 degrees.
+  m_endTime = secondsPerRotation*m_numRotations;
+  
+  // increase/s = increase/rotation * rotations/second;
+  m_fieldIncreaseRate = m_fieldIncreaseRatePerRotation/secondsPerRotation;
+
   double centripetalForce = Bach::ELECTRON_MASS*speed*speed/radius;
   // F = e * V x B
   m_magneticFieldMagnitude = centripetalForce/(Bach::ELECTRIC_CHARGE*speed);
@@ -68,12 +81,6 @@ void BetatronEquationSolver::SetInitialConditionsFromRadiusAndSpeed(double radiu
 
   // 0.1 means that the field increases by 10 percent per second.
   m_fieldController->SetFractionalIncreaseBPerSecond(m_fieldIncreaseRate);
-
-  // Calculate an appropriate stepsize.
-  double distanceTraveledOverOneDegree = 2.0*NXGR_PI*radius/360.0;
-  double timeToTravelOneDegree = distanceTraveledOverOneDegree/speed;
-  m_stepSize = timeToTravelOneDegree*0.1;
-  m_endTime = timeToTravelOneDegree*360.0;
 }
 
 void BetatronEquationSolver::Initialize() {

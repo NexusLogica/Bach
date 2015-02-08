@@ -36,6 +36,8 @@ shared_ptr<BetatronEquations> BetatronEquations::CreateInstance() {
 BetatronEquations::BetatronEquations() :
   m_charge(-1.0),
   m_mass(Bach::ELECTRON_MASS),
+  m_forceDueToB(0.0, 0.0, 0.0),
+  m_forceDueTodBdt(0.0, 0.0, 0.0),
   m_iterationCount(0),
   m_magneticField(new PointMagneticField),
   m_internalValues(5) {  // B, dBdt, velocity, distance from origin, angle
@@ -120,16 +122,19 @@ void BetatronEquations::Evaluate(double time, const Eigen::VectorXd& y, Eigen::V
   m_velocity[1] = y[4];
   m_velocity[2] = y[5];
 
-  m_force = m_velocity.cross(m_magneticField->UnitVectorB())*m_charge*m_magneticField->B()*Bach::ELECTRIC_CHARGE;
+  m_forceDueToB = m_velocity.cross(m_magneticField->UnitVectorB())*m_charge*m_magneticField->B()*Bach::ELECTRIC_CHARGE;
+
+  m_forceDueTodBdt = m_magneticField->UnitVectorB().cross(m_magneticField->dDelBdt());
+  
   double massInv = 1.0/m_mass;
 
   dydt[0] = y[3];
   dydt[1] = y[4];
   dydt[2] = y[5];
 
-  dydt[3] = m_force[0]*massInv;
-  dydt[4] = m_force[1]*massInv;
-  dydt[5] = m_force[2]*massInv;
+  dydt[3] = m_forceDueToB[0]*massInv;
+  dydt[4] = m_forceDueToB[1]*massInv;
+  dydt[5] = m_forceDueToB[2]*massInv;
 
   if(odeData->StoringThisCall()) {
     m_internalValues[0] = m_magneticField->B();

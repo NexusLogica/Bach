@@ -15,7 +15,7 @@ All Rights Reserved.
 #ifndef __BACH_ELECTRIC_FIELD_H__
 #define __BACH_ELECTRIC_FIELD_H__
 
-#include "BetatronDefs.h"
+#include "BachDefs.h"
 
 namespace Bach {
 

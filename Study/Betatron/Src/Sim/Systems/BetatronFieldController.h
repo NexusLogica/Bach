@@ -24,15 +24,18 @@ namespace Bach {
     void SetB(double newB) { m_B = newB; }
     void SetdBdt(double newdBdt) { m_dBdt = newdBdt; }
     void SetDirection(const Eigen::Vector3d& unitVectorB) { m_unitVectorB = unitVectorB; }
+    void SetdDelBdt(const Eigen::Vector3d& newdDelBdt) { m_dDelBdt = newdDelBdt; }
     
     const double B() { return m_B; }
     const double dBdt() { return m_dBdt; }
     const Eigen::Vector3d& UnitVectorB() { return m_unitVectorB; }
+    const Eigen::Vector3d& dDelBdt() { return m_dDelBdt; }
 
   private:
     double m_B;
     double m_dBdt;
     Eigen::Vector3d m_unitVectorB;
+    Eigen::Vector3d m_dDelBdt;
   };
 
   //***************************
@@ -46,8 +49,9 @@ namespace Bach {
 
     virtual ~BetatronFieldController();
     
-    double GetConstantB() { return m_constantB; }
     virtual void SetAsConstantB(double B, const Eigen::Vector3d& direction);
+    virtual void SetAsBetatronAcceleration(double initialB, double targetAccelerationRate);
+
     virtual void SetFractionalIncreaseBPerSecond(double fractionalIncreaseBPerSecond) { m_fractionalIncreaseBPerSecond = fractionalIncreaseBPerSecond; }
     virtual void GetField(
                           double t,
@@ -60,10 +64,17 @@ namespace Bach {
     boost::weak_ptr<BetatronFieldController> m_weakThis;
     enum ControlType {
       ConstantB = 0,
+      BetatronAcceleration = 1
     } m_controlType;
 
+    // Constant magnetic field.
     double m_constantB;
     Eigen::Vector3d m_directionOfConstantB;
+
+    // Magnetic field to accelerate the electron while maintaining a constant radius - i.e. a Betatron.
+    double m_initialB;
+    double m_targetAccelerationRate;
+    
     double m_fractionalIncreaseBPerSecond;
   };
 };

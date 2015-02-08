@@ -19,7 +19,7 @@ All Rights Reserved.
 #ifndef __BACH_DEPENDENT_DATA_H__
 #define __BACH_DEPENDENT_DATA_H__
 
-#include "BetatronDefs.h"
+#include "BachDefs.h"
 
 namespace Bach {
 

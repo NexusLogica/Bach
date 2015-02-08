@@ -23,7 +23,7 @@ All Rights Reserved.
 #ifndef __BACH_BADER_DEUFLHARD_ODE_H__
 #define __BACH_BADER_DEUFLHARD_ODE_H__
 
-#include "BetatronDefs.h"
+#include "BachDefs.h"
 #include "OdeSolverWithDerivs.h"
 
 namespace Bach {

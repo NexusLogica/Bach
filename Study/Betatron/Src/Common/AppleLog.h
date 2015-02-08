@@ -25,7 +25,7 @@ in all copies or substantial portions of the Software.
 #ifndef __PS_APPLE_LOG_H__
 #define __PS_APPLE_LOG_H__
 
-#include "BetatronDefs.h"
+#include "BachDefs.h"
 
 namespace Bach {
 

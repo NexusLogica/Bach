@@ -30,7 +30,7 @@ shared_ptr<BetatronFieldController> BetatronFieldController::CreateInstance() {
 BetatronFieldController::BetatronFieldController() :
   m_controlType(ConstantB),
   m_constantB(1.0),
-  m_increasePerRotationB(0.0) {
+  m_fractionalIncreaseBPerSecond(0.0) {
   m_directionOfConstantB[2] = 1.0;
 }
 
@@ -43,18 +43,26 @@ void BetatronFieldController::SetAsConstantB(double B, const Eigen::Vector3d &di
   m_directionOfConstantB = direction;
 }
 
+void BetatronFieldController::SetAsBetatronAcceleration(double initialB, double targetAccelerationRate) {
+  m_controlType = BetatronAcceleration;
+  m_initialB = initialB;
+}
+
 void BetatronFieldController::GetField(
   double t,
   const Eigen::Vector3d& positionInField,
-  double rotationalPosition,
   boost::shared_ptr<PointMagneticField>& field) {
 
   switch(m_controlType) {
     case ConstantB : {
-      double totalB = m_constantB+m_increasePerRotationB*t;
+      double totalB = m_constantB*(1.0+m_fractionalIncreaseBPerSecond*t);
       field->SetDirection(m_directionOfConstantB);
       field->SetB(totalB);
       field->SetdBdt(0.0);
+      field->SetdDelBdt(Eigen::Vector3d(0.0, 0.0, 0.0));
+      break;
+    }
+    case BetatronAcceleration : {
       break;
     }
   }

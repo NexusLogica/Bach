@@ -20,7 +20,7 @@ All Rights Reserved.
 #ifndef __BACH_ODE_DERIVATIVES_H__
 #define __BACH_ODE_DERIVATIVES_H__
 
-#include "BetatronDefs.h"
+#include "BachDefs.h"
 
 namespace Bach {
 

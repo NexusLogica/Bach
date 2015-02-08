@@ -1,6 +1,6 @@
 /**********************************************************************
 
-File     : BetatronDefs.h
+File     : BachDefs.h
 Project  : Memoria Logica PlaySpace Library
 Purpose  : Header file for PlaySpace common definitions.
 Revisions: Original definition by L. Gunn.
@@ -10,8 +10,8 @@ Copyright (c) 2012 by Lawrence Gunn
 All Rights Reserved.
 
 */
-#ifndef __BACH_BETATRON_DEFS_H__
-#define __BACH_BETATRON_DEFS_H__
+#ifndef __BACH_DEFS_H__
+#define __BACH_DEFS_H__
 
 #include <boost/smart_ptr.hpp>
 #include <vector>
@@ -98,7 +98,9 @@ namespace Bach {
   std::wstring Vec3dToStringFixed(const Eigen::Vector3d& vec);
   bool IsApproxEqual(const Eigen::VectorXd& vec1, const Eigen::VectorXd& vec2, double tolerance = 0.0001);
   bool IsApproxEqual(const Eigen::Vector4d& vec1, const Eigen::Vector4d& vec2, double tolerance = 0.0001);
-
+  Eigen::Vector3d Vec4dTo3d(const Eigen::Vector4d& vec);
+  Eigen::Vector4d Vec3dTo4d(const Eigen::Vector3d& vec, double element4 = 1.0);
+  
   // Bond force version to use.
   //   Version 1:
   //     A basic symetrical equation with a max force and limit force. All intermediate
@@ -129,4 +131,4 @@ namespace Bach {
 # define BACH_ASSERT(test)
 #endif // _DEBUG
 
-#endif // __BACH_BETATRON_DEFS_H__
+#endif // __BACH_DEFS_H__

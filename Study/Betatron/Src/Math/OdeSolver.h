@@ -19,7 +19,7 @@ All Rights Reserved.
 #ifndef __BACH_ODE_SOLVER_H__
 #define __BACH_ODE_SOLVER_H__
 
-#include "BetatronDefs.h"
+#include "BachDefs.h"
 
 namespace Bach {
 

@@ -48,12 +48,12 @@ std::string BetatronHandler::HandleRequest(Json::Value request) {
 
   shared_ptr<BetatronEquationSolver> solver = BetatronEquationSolver::CreateInstance();
 
-  solver->SetInitialConditionsFromRadiusAndSpeed(radius, speed*Bach::SPEED_OF_LIGHT);
-
   if(inputs.isMember("fieldIncrease")) {
     double fieldIncrease = inputs.get("fieldIncrease",  "0.0").asDouble();
     solver->SetFieldIncreaseRatePerRotation(fieldIncrease);
   }
+  
+  solver->SetInitialConditionsFromRadiusAndSpeed(radius, speed*Bach::SPEED_OF_LIGHT);
 
   solver->Initialize();
 

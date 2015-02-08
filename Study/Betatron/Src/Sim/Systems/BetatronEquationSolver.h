@@ -37,7 +37,8 @@ namespace Bach {
     
     void SetEndTime(double endTime) { m_endTime = endTime; }
     void SetInitialConditionsFromRadiusAndSpeed(double radius, double speed);
-    void SetFieldIncreaseRatePerRotation(double fieldIncreaseRate) { m_fieldIncreaseRate = fieldIncreaseRate; }
+    void SetFieldIncreaseRatePerRotation(double fieldIncreaseRatePerRotation) { m_fieldIncreaseRatePerRotation = fieldIncreaseRatePerRotation; }
+    void SetNumRotations(double numRotations) { m_numRotations = numRotations; }
     
     void Initialize();
     void Run();
@@ -56,7 +57,9 @@ namespace Bach {
     double m_startTime;
     double m_endTime;
     double m_magneticFieldMagnitude;
+    double m_fieldIncreaseRatePerRotation;
     double m_fieldIncreaseRate;
+    double m_numRotations;
     Eigen::VectorXd m_initialPosition;
     Eigen::VectorXd m_initialVelocity;
     double m_stepSize;

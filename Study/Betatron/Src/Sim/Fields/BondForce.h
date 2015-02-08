@@ -15,7 +15,7 @@ All Rights Reserved.
 #ifndef __BACH_BOND_FORCE_H__
 #define __BACH_BOND_FORCE_H__
 
-#include "BetatronDefs.h"
+#include "BachDefs.h"
 #include "vector"
 
 namespace Bach {

@@ -18,7 +18,7 @@ All Rights Reserved.
 #ifndef __BACH_NDIM_ACCURACY_SPEC_H__
 #define __BACH_NDIM_ACCURACY_SPEC_H__
 
-#include "BetatronDefs.h"
+#include "BachDefs.h"
 
 namespace Bach {
 

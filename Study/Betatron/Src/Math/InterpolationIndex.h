@@ -26,7 +26,7 @@ All Rights Reserved.
 #ifndef __BACH_INTERPOLATION_INDEX_H__
 #define __BACH_INTERPOLATION_INDEX_H__
 
-#include "BetatronDefs.h"
+#include "BachDefs.h"
 
 namespace Bach {
 

@@ -19,6 +19,9 @@
 		17D609611A344AD8002AB22A /* request_handler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 17D609551A344AD8002AB22A /* request_handler.cpp */; };
 		17D609621A344AD8002AB22A /* request_parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 17D609571A344AD8002AB22A /* request_parser.cpp */; };
 		17D609631A344AD8002AB22A /* server.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 17D6095A1A344AD8002AB22A /* server.cpp */; };
+		CD9B6FD41A834CCE00DC42B3 /* FieldFlowHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD9B6FD21A834CCE00DC42B3 /* FieldFlowHandler.cpp */; };
+		CD9B6FEC1A85CB6700DC42B3 /* ChargeCircuitFieldCalculator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD9B6FEA1A85CB6700DC42B3 /* ChargeCircuitFieldCalculator.cpp */; };
+		CDC4632E1A61FA61002BFB2B /* TwoElectronRelativityHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDC4632C1A61FA61002BFB2B /* TwoElectronRelativityHandler.cpp */; };
 		F8142D0D1A19157E007055BD /* BondElectrons.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8142D001A19157E007055BD /* BondElectrons.cpp */; };
 		F8142D0E1A19157E007055BD /* Atom.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8142D011A19157E007055BD /* Atom.cpp */; };
 		F8142D0F1A19157E007055BD /* Bond.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F8142D031A19157E007055BD /* Bond.cpp */; };
@@ -121,6 +124,12 @@
 		17D609591A344AD8002AB22A /* request.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = request.hpp; path = Src/Server/request.hpp; sourceTree = "<group>"; };
 		17D6095A1A344AD8002AB22A /* server.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = server.cpp; path = Src/Server/server.cpp; sourceTree = "<group>"; };
 		17D6095B1A344AD8002AB22A /* server.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = server.hpp; path = Src/Server/server.hpp; sourceTree = "<group>"; };
+		CD9B6FD21A834CCE00DC42B3 /* FieldFlowHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FieldFlowHandler.cpp; path = Src/Sim/Handlers/FieldFlowHandler.cpp; sourceTree = "<group>"; };
+		CD9B6FD31A834CCE00DC42B3 /* FieldFlowHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FieldFlowHandler.h; path = Src/Sim/Handlers/FieldFlowHandler.h; sourceTree = "<group>"; };
+		CD9B6FEA1A85CB6700DC42B3 /* ChargeCircuitFieldCalculator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ChargeCircuitFieldCalculator.cpp; path = Src/Sim/Systems/ChargeCircuitFieldCalculator.cpp; sourceTree = "<group>"; };
+		CD9B6FEB1A85CB6700DC42B3 /* ChargeCircuitFieldCalculator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChargeCircuitFieldCalculator.h; path = Src/Sim/Systems/ChargeCircuitFieldCalculator.h; sourceTree = "<group>"; };
+		CDC4632C1A61FA61002BFB2B /* TwoElectronRelativityHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TwoElectronRelativityHandler.cpp; path = Src/Sim/Handlers/TwoElectronRelativityHandler.cpp; sourceTree = "<group>"; };
+		CDC4632D1A61FA61002BFB2B /* TwoElectronRelativityHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TwoElectronRelativityHandler.h; path = Src/Sim/Handlers/TwoElectronRelativityHandler.h; sourceTree = "<group>"; };
 		F8142D001A19157E007055BD /* BondElectrons.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BondElectrons.cpp; path = Src/Sim/Elements/BondElectrons.cpp; sourceTree = "<group>"; };
 		F8142D011A19157E007055BD /* Atom.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Atom.cpp; path = Src/Sim/Elements/Atom.cpp; sourceTree = "<group>"; };
 		F8142D021A19157E007055BD /* Atom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Atom.h; path = Src/Sim/Elements/Atom.h; sourceTree = "<group>"; };
@@ -227,7 +236,7 @@
 		F87DAC251A1846A2003DDBA7 /* AppleLog.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppleLog.mm; path = Src/Common/AppleLog.mm; sourceTree = "<group>"; };
 		F87DAC261A1846A2003DDBA7 /* Utility.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Utility.cpp; path = Src/Common/Utility.cpp; sourceTree = "<group>"; };
 		F87DAC271A1846A2003DDBA7 /* Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Utility.h; path = Src/Common/Utility.h; sourceTree = "<group>"; };
-		F87DAC2C1A184D3F003DDBA7 /* BetatronDefs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BetatronDefs.h; path = Src/BetatronDefs.h; sourceTree = "<group>"; };
+		F87DAC2C1A184D3F003DDBA7 /* BachDefs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BachDefs.h; path = Src/BachDefs.h; sourceTree = "<group>"; };
 		F87DAC2D1A1854FC003DDBA7 /* AppleStringUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppleStringUtilities.h; path = Src/Common/AppleStringUtilities.h; sourceTree = "<group>"; };
 		F87DAC2E1A1854FC003DDBA7 /* AppleStringUtilities.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppleStringUtilities.mm; path = Src/Common/AppleStringUtilities.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -281,6 +290,10 @@
 			children = (
 				17D609471A33B5A9002AB22A /* BetatronHandler.cpp */,
 				17D609481A33B5A9002AB22A /* BetatronHandler.h */,
+				CD9B6FD21A834CCE00DC42B3 /* FieldFlowHandler.cpp */,
+				CD9B6FD31A834CCE00DC42B3 /* FieldFlowHandler.h */,
+				CDC4632C1A61FA61002BFB2B /* TwoElectronRelativityHandler.cpp */,
+				CDC4632D1A61FA61002BFB2B /* TwoElectronRelativityHandler.h */,
 			);
 			name = Handlers;
 			sourceTree = "<group>";
@@ -372,6 +385,8 @@
 				F8142D261A191609007055BD /* BetatronEquationSolver.h */,
 				F8142D241A191609007055BD /* BetatronFieldController.cpp */,
 				F8142D271A191609007055BD /* BetatronFieldController.h */,
+				CD9B6FEA1A85CB6700DC42B3 /* ChargeCircuitFieldCalculator.cpp */,
+				CD9B6FEB1A85CB6700DC42B3 /* ChargeCircuitFieldCalculator.h */,
 				F8142D281A191609007055BD /* Circuit.cpp */,
 				F8142D291A191609007055BD /* Circuit.h */,
 				F8142D2D1A191609007055BD /* DipoleMomentFinder.cpp */,
@@ -487,7 +502,7 @@
 				F8142D4A1A1916E9007055BD /* Math */,
 				F8142D461A19161F007055BD /* Test */,
 				F8142CFE1A191547007055BD /* Sim */,
-				F87DAC2C1A184D3F003DDBA7 /* BetatronDefs.h */,
+				F87DAC2C1A184D3F003DDBA7 /* BachDefs.h */,
 				F87DAC221A184692003DDBA7 /* Common */,
 				F87DAC201A183C50003DDBA7 /* main.cpp */,
 			);
@@ -603,6 +618,7 @@
 				F8142D3A1A191609007055BD /* BetatronEquations.cpp in Sources */,
 				F8142D841A1916FA007055BD /* OdeSolver.cpp in Sources */,
 				F8142D801A1916FA007055BD /* OdeAccuracySpec.cpp in Sources */,
+				CDC4632E1A61FA61002BFB2B /* TwoElectronRelativityHandler.cpp in Sources */,
 				F8142D0D1A19157E007055BD /* BondElectrons.cpp in Sources */,
 				F8142D7F1A1916FA007055BD /* NDimNewtonRaphson.cpp in Sources */,
 				17D6095E1A344AD8002AB22A /* main.cpp in Sources */,
@@ -624,6 +640,7 @@
 				17D6095D1A344AD8002AB22A /* connection.cpp in Sources */,
 				F8142D8D1A1916FA007055BD /* TableSearch.cpp in Sources */,
 				F8142D411A191609007055BD /* MoleculeAccelerationSolver.cpp in Sources */,
+				CD9B6FEC1A85CB6700DC42B3 /* ChargeCircuitFieldCalculator.cpp in Sources */,
 				F8142D3C1A191609007055BD /* BetatronFieldController.cpp in Sources */,
 				F8142D861A1916FA007055BD /* PolynomialInterp.cpp in Sources */,
 				17D609621A344AD8002AB22A /* request_parser.cpp in Sources */,
@@ -633,6 +650,7 @@
 				F87DAC2F1A1854FC003DDBA7 /* AppleStringUtilities.mm in Sources */,
 				17D609611A344AD8002AB22A /* request_handler.cpp in Sources */,
 				17D6095F1A344AD8002AB22A /* mime_types.cpp in Sources */,
+				CD9B6FD41A834CCE00DC42B3 /* FieldFlowHandler.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -731,10 +749,7 @@
 					Src/Lib/asio/include,
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				"LIBRARY_SEARCH_PATHS[arch=*]" = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Src/Lib/boost_1_57_0/stage/lib",
-				);
+				"LIBRARY_SEARCH_PATHS[arch=*]" = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SYMROOT = build;
 			};

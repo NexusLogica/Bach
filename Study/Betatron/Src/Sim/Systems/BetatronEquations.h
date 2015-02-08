@@ -53,7 +53,8 @@ namespace Bach {
     boost::shared_ptr<PointMagneticField> m_magneticField;
     Eigen::Vector3d m_position;
     Eigen::Vector3d m_velocity;
-    Eigen::Vector3d m_force;
+    Eigen::Vector3d m_forceDueToB;
+    Eigen::Vector3d m_forceDueTodBdt;
     Eigen::VectorXd m_internalValues;
     int m_iterationCount;
   };

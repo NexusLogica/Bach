@@ -15,7 +15,7 @@ All Rights Reserved.
 #ifndef __BACH_CHARGE_MAGNETIC_FIELD_H__
 #define __BACH_CHARGE_MAGNETIC_FIELD_H__
 
-#include "BetatronDefs.h"
+#include "BachDefs.h"
 
 namespace Bach {
 

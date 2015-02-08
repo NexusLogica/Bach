@@ -157,3 +157,12 @@ bool Bach::IsApproxEqual(const Eigen::Vector4d& vec1, const Eigen::Vector4d& vec
   }
   return true;
 }
+
+Eigen::Vector3d Bach::Vec4dTo3d(const Eigen::Vector4d& vec) {
+  return Eigen::Vector3d(vec(0), vec(1), vec(2));
+}
+
+Eigen::Vector4d Bach::Vec3dTo4d(const Eigen::Vector3d& vec, double element4) {
+  return Eigen::Vector4d(vec(0), vec(1), vec(2), element4);
+}
+

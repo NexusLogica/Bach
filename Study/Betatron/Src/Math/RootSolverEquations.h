@@ -19,7 +19,7 @@ All Rights Reserved.
 #ifndef __BACH_ROOT_SOLVER_EQUATIONS_H__
 #define __BACH_ROOT_SOLVER_EQUATIONS_H__
 
-#include "BetatronDefs.h"
+#include "BachDefs.h"
 
 namespace Bach {
 

@@ -18,6 +18,8 @@
 #include <boost/lexical_cast.hpp>
 #include "json.h"
 #include "BetatronHandler.h"
+#include "TwoElectronRelativityHandler.h"
+#include "FieldFlowHandler.h"
 
 using namespace Bach;
 using namespace Eigen;
@@ -65,10 +67,20 @@ void request_handler::handle_request(const request& req, reply& rep)
     }
     else {
       std::string system = root.get("system", "betatron").asString();
+
       if(system == "betatron") {
         boost::shared_ptr<BetatronHandler> handler = BetatronHandler::CreateInstance();
         output = handler->HandleRequest(root);
-
+        
+      }
+      else if(system == "twoElectronRelativity") {
+        boost::shared_ptr<TwoElectronRelativityHandler> handler = TwoElectronRelativityHandler::CreateInstance();
+        output = handler->HandleRequest(root);
+        
+      }
+      else if(system == "fieldFlow") {
+        boost::shared_ptr<FieldFlowHandler> handler = FieldFlowHandler::CreateInstance();
+        output = handler->HandleRequest(root);
       }
       else {
         output = "{ \"error\": \"Request command error\", \"errorMessage\": \"The system '"+system+"' was not found.\" }";

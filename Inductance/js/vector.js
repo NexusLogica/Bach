@@ -36,6 +36,20 @@ Bach.Vector.prototype.vectorLength = function() {
   return Math.sqrt(this.x*this.x+this.y*this.y+this.z*this.z);
 };
 
+Bach.Vector.prototype.scalarMultiply = function(s) {
+  return new Bach.Vector(this.x*s, this.y*s, this.z*s);
+};
+
+/***
+ * Add this vector to another and return a new vector of the sum.
+ * @method add
+ * @param {Bach.Vector} v - A vector
+ * @returns {Bach.Vector} - Return a new vector that sums self and v.
+ */
+Bach.Vector.prototype.add = function(v) {
+  return new Bach.Vector(this.x+v.x, this.y+v.y, this.z+v.z);
+};
+
 Bach.Vector.prototype.normalize = function() {
   var lenInv = 1.0/Math.sqrt(this.x*this.x+this.y*this.y+this.z*this.z);
   this.x *= lenInv;

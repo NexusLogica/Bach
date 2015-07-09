@@ -24,6 +24,7 @@ Bach.RelativisticPoint = function(config) {
   this.direction = config.direction || new Bach.Vector(1.0);
   this.speed = _.isUndefined(config.speed) ? 0.0 : config.speed;
   this.timeSteps = [];
+  this.c = 1.0; // The speed of light taken as light-seconds per second (hence, 1.0).
 };
 
 /***
@@ -36,16 +37,40 @@ Bach.RelativisticPoint = function(config) {
  * @param {float} stepSize - size of increments from tStart to tEnd
  */
 Bach.RelativisticPoint.prototype.calculateObserverTime = function(tStart, tEnd, observer, stepSize) {
-  var t = tStart;
-  while(t <= tEnd) {
+  this.tStart = tStart;
+  this.tEnd = tEnd;
+
+  var t = this.tStart;
+  while(t <= this.tEnd) {
     this.findTime(t, observer);
     t += stepSize;
-    if(t > tEnd) {
-      t = tEnd;
+    if(t > this.tEnd) {
+      t = this.tEnd;
     }
   }
 };
 
+/***
+ * Find the times and positions related to the point's time.
+ * @method findTime
+ * @param t
+ * @param observer
+ */
 Bach.RelativisticPoint.prototype.findTime = function(t, observer) {
+  // Where is it
+  var distanceSinceStart = (t-this.tStart)*this.speed;
+  var pos = this.initial.add(this.direction.scalarMultiply(distanceSinceStart));
+  var distFromObsToPos = observer.distance(pos); // in light seconds
+  var timeFromObsToPos = distFromObsToPos/this.c;
+  var tTotal = t+oToPos;
 
+  // Where is it when it actually when it is observed?
+  var distanceSinceStartWhenObserved = (tTotal-this.tStart)*this.speed;
+  var posWhenObserved = this.initial.add(this.direction.scalarMultiply(distanceSinceStartWhenObserved));
+
+  this.timeSteps.push({
+    "t": t,
+    "observedTime": tTotal,
+    "observedPos": pos,
+    "actualPosWhenObserved": posWhenObserved });
 };

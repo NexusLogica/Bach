@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title>Bach - Relativity</title>
+
+  <base href="../../.." />
+  <link rel="stylesheet" href="lib/bower_components/qunit/qunit/qunit.css"/>
+
+  <script src="lib/bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="lib/bower_components/lodash/dist/lodash.js"></script>
+  <script src="lib/bower_components/lodash-deep/lodash-deep.js"></script>
+  <script src="lib/bower_components/underscore.string/dist/underscore.string.min.js"></script>
+  <script src="lib/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+  <script src="lib/bower_components/bootbox/bootbox.js"></script>
+  <script src="lib/bower_components/javascript-state-machine/state-machine.js"></script>
+  <script src="lib/random/random-0.26.js"></script>
+  <script src="lib/bower_components/q/q.js"></script>
+  <script src="lib/bower_components/svg.js/dist/svg.js"></script>
+  <script src="lib/bower_components/signals/dist/signals.js"></script>
+  <script src="lib/bower_components/toastr/toastr.js"></script>
+  <script src="lib/bower_components/qunit/qunit/qunit.js"></script>
+
+  <script src="js/inductance.js"></script>
+  <script src="js/vector.js"></script>
+  <script src="js/table-search.js"></script>
+  <script src="js/relativistic-point.js"></script>
+
+  <script>
+    test('Vector object', function() {
+      var v1 = new Bach.Vector(1.0, 2.0, 3.0);
+      var v2 = new Bach.Vector(2.0, 2.0, 3.0);
+      equal(v1.y, v2.y, "y for v1 equals v2");
+      notEqual(v1.x, v2.x, "x for v1 does not equal v2");
+
+      var v3 = new Bach.Vector(v1);
+      equal(v1.x, v3.x, "vector copy x");
+
+      QUnit.assert.near(v1.vectorLength(), Math.sqrt(14.0), 1.0e-10, 'scalar length of v1');
+
+      var v4 = v1.scalarMultiply(2.0);
+      equal(v4.x, 2.0, "scalar multiply of v1 x");
+      equal(v4.y, 4.0, "scalar multiply of v1 y");
+      equal(v4.z, 6.0, "scalar multiply of v1 z");
+
+      var v5 = v1.scalarAdd(2.0);
+      equal(v5.x, 3.0, "scalar add of v1 x");
+      equal(v5.y, 4.0, "scalar add of v1 y");
+      equal(v5.z, 5.0, "scalar add of v1 z");
+
+      var v6 = v1.add(v2);
+      equal(v6.x, 3.0, "add of v1 and v2 x");
+      equal(v6.y, 4.0, "add of v1 and v2 y");
+      equal(v6.z, 6.0, "add of v1 and v2 z");
+
+      v3.normalize();
+      equal(v3.x, 1.0/Math.sqrt(14.0), "v3 normalized x");
+      equal(v3.y, 2.0/Math.sqrt(14.0), "v3 normalized y");
+      equal(v3.z, 3.0/Math.sqrt(14.0), "v3 normalized z");
+
+      var dp = v1.dotProduct(v2);
+      equal(dp, 15.0, "v1 dotProduct v2");
+
+      var d = v1.distance(v2.scalarMultiply(2.0));
+      equal(dp, 15.0, "v1 dotProduct v2");
+
+      var v7 = v2.clone();
+      equal(v7.x, 2.0, "clone v2 x");
+      equal(v7.y, 2.0, "clone v2 y");
+      equal(v7.z, 3.0, "clone v2 z");
+    });
+  </script>
+
+</head>
+<body>
+  <div id="qunit"></div>
+</body>
+</html>

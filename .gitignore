@@ -42,6 +42,10 @@ Study/Study.xcworkspace/xcuserdata
 Study/Study.xcworkspace/xcshareddata
 Study/Betatron/Betatron.xcodeproj/xcuserdata
 
+# Inductance
+Inductance/lib/bower_components
+
+
 logs/*
 !.gitkeep
 .idea

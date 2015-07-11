@@ -11,7 +11,7 @@
 var Bach = Bach || {};
 
 Bach.Vector = function(x, y, z) {
-  if(x && x.hasOwnProperty(x)) {
+  if(x && x.hasOwnProperty('x')) {
     this.x = x.x;
     this.y = x.y;
     this.z = x.z;
@@ -36,8 +36,24 @@ Bach.Vector.prototype.vectorLength = function() {
   return Math.sqrt(this.x*this.x+this.y*this.y+this.z*this.z);
 };
 
+/***
+ * Multiply each element by a scalar and return a new vector with the result.
+ * @method scalarMultiply
+ * @param {float} s - Scalar to multiply by.
+ * @returns {Bach.Vector}
+ */
 Bach.Vector.prototype.scalarMultiply = function(s) {
   return new Bach.Vector(this.x*s, this.y*s, this.z*s);
+};
+
+/***
+ * Add a scalar value to each element and return a new vector with the result.
+ * @method scalarAdd
+ * @param {float} s - Scalar to add.
+ * @returns {Bach.Vector}
+ */
+Bach.Vector.prototype.scalarAdd = function(s) {
+  return new Bach.Vector(this.x+s, this.y+s, this.z+s);
 };
 
 /***
@@ -70,12 +86,5 @@ Bach.Vector.prototype.distance = function(vec) {
 };
 
 Bach.Vector.prototype.clone = function() {
-  return new Bach.Vector(this.x, this.y, this.z);
-};
-
-Bach.Vector.prototype.offset = function(x, y, z) {
-  this.x += x;
-  this.y += y;
-  this.z += z;
   return new Bach.Vector(this.x, this.y, this.z);
 };

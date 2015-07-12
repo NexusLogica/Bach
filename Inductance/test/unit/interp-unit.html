@@ -25,6 +25,7 @@
   <script src="js/vector.js"></script>
   <script src="js/table-search.js"></script>
   <script src="js/polynomial-interpolation.js"></script>
+  <script src="js/sampled-data.js"></script>
   <script src="js/relativistic-point.js"></script>
 
   <script>
@@ -160,12 +161,14 @@
       }
 
       vx = [];
-      vyy = [ [], [], [] ];
+      var vyy = [ [], [], [] ];
       var funcs = [
         function(x) { return Math.sin(x); },
         function(x) { return x*x; },
         function(x) { return 3.0*Math.cos(x); }
       ];
+
+      x = -0.2;
       for(i=1; i<12; i++) {
         do {
           diff = rand.normal(0.2, 0.15);
@@ -180,7 +183,7 @@
       min = vx[0];
       max = vx[vx.length-1];
       var maxError = [ 0.0, 0.0, 0.0];
-      var maxErrorEstimates = [ 0.017, 0.14, 0.192 ];
+      var maxErrorEstimates = [ 0.060, 0.14, 0.192 ];
       for(j=0; j<iterations; j++) {
         target = (max-min)*rand.random(min, max)+min;
         index = search.find(target, vx);
@@ -196,8 +199,8 @@
           if(error > maxError[k]) {
             maxError[k] = error;
           }
-          assert.near(result[k], funcs[k](target), interp.errorEstimate*4.0, "target["+j+"]["+k+"] is " + target+" -> "+result[k]+" vs exact "+funcs[k](target));
-          assert.lessThan(interp.errorEstimateVector[k], maxErrorEstimates[k], "error estimate["+j+"]["+k+"] is " + interp.errorEstimate);
+          assert.near(result[k], funcs[k](target), interp.errorEstimateVector[k]*5.0, "target["+j+"]["+k+"] at " + target+" -> "+result[k]+" vs exact "+funcs[k](target));
+          assert.lessThan(Math.abs(interp.errorEstimateVector[k]), maxErrorEstimates[k], "error estimate["+j+"]["+k+"] is " + interp.errorEstimateVector[k]);
         }
 
         // For use in verifying curves...
@@ -206,9 +209,63 @@
 
       assert.lessThan(maxError[0], 0.007, "Maximum error of curve 0");
       assert.lessThan(maxError[1], 0.000001, "Maximum error of curve 1");
-      assert.lessThan(maxError[2], 0.006, "Maximum error of curve 2");
+      assert.lessThan(maxError[2], 0.0193, "Maximum error of curve 2");
       //console.log("Max errors: "+maxError[0]+"/"+maxError[1]+"/"+maxError[2]);
     });
+
+    QUnit.test('Sampled data', function(assert) {
+      var maxErrorEstimate = 0.005;
+      var sampledData = new Bach.SampledData(3);
+      var rand = new Random(42);
+
+      var iterations = 100;
+      var target, index, result, diff;
+
+      var funcs = [
+        function(x) { return Math.sin(x); },
+        function(x) { return x*x; },
+        function(x) { return 3.0*Math.cos(x); }
+      ];
+      var x = -0.2;
+      for(var i=0; i<12; i++) {
+        do {
+          diff = rand.normal(0.2, 0.15);
+        } while(diff < 0.0);
+        x += diff;
+        var y = [];
+        for(var ii = 0; ii<funcs.length; ii++) {
+          y.push(funcs[ii](x));
+        }
+        sampledData.append(x, y);
+      }
+
+      var min = sampledData.x[0];
+      var max = sampledData.x[sampledData.x.length-1];
+      var maxError = [ 0.0, 0.0, 0.0];
+      var maxErrorEstimates = [ 0.060, 0.14, 0.192 ];
+      for(var j=0; j<iterations; j++) {
+        target = (max-min)*rand.random(min, max)+min;
+        result = sampledData.retrieve(target);
+
+        for(var k=0; k<result.length; k++) {
+          var error = Math.abs(result[k]-funcs[k](target));
+          if(error > maxError[k]) {
+            maxError[k] = error;
+          }
+          assert.near(result[k], funcs[k](target), sampledData.interp.errorEstimateVector[k]*5.0, "target["+j+"]["+k+"] at " + target+" -> "+result[k]+" vs exact "+funcs[k](target));
+          assert.lessThan(sampledData.interp.errorEstimateVector[k], maxErrorEstimates[k], "error estimate["+j+"]["+k+"] is " + sampledData.interp.errorEstimateVector[k]);
+        }
+
+        // For use in verifying curves...
+        // console.log(target+"\t"+result[0]+"\t"+result[1]+"\t"+result[2]);
+      }
+
+      assert.lessThan(maxError[0], 0.007, "Maximum error of curve 0");
+      assert.lessThan(maxError[1], 0.000001, "Maximum error of curve 1");
+      assert.lessThan(maxError[2], 0.0193, "Maximum error of curve 2");
+      //console.log("Max errors: "+maxError[0]+"/"+maxError[1]+"/"+maxError[2]);
+    });
+
   </script>
 
 </head>

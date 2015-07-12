@@ -50,11 +50,11 @@ Bach.SampledData.prototype.append = function(x, y) {
 
 /***
  * Retrieve by index an independent variable and the corresponding dependent variables.
- * @method retrieve
- * @param {integer} index - index of the samples
+ * @method retrieveByIndex
+ * @param {number} index - index of the samples
  * @return {Object} - object with x as the independent variable and y as the array of dependent variables
  */
-Bach.SampledData.prototype.retrieve = function(index) {
+Bach.SampledData.prototype.retrieveByIndex = function(index) {
   var y = [];
   for(var i=0; i<this.numY; i++) {
     y.push(this.y[i][index]);
@@ -67,15 +67,14 @@ Bach.SampledData.prototype.retrieve = function(index) {
 
 /***
  * Retrieve by index an independent variable and the corresponding dependent variables.
- * @method retrieveByIndex
+ * @method retrieve
  * @param {float} targetX - index of the samples
  * @return {Array} - an array of interpolated dependent variables
  */
-Bach.SampledData.prototype.retrieveByIndex = function(targetX) {
+Bach.SampledData.prototype.retrieve = function(targetX) {
   var index = this.search.find(targetX, this.x);
   if(index > this.x.length-3) {
     index = this.x.length-3;
   }
-
-  return interp.interpolateArrayOfVectors(targetX, this.x, this.y, index);
+  return this.interp.interpolateArrayOfVectors(targetX, this.x, this.y, index);
 };

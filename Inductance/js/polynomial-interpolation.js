@@ -57,6 +57,7 @@ Bach.PolynomialInterpolation.prototype.interpolateArrayOfVectors = function(xTar
     results.push(this.interpolate(xTarget, xSlice, yArray[i].slice(baseIndex, baseIndex+this.interpSize), 0));
     this.errorEstimateVector.push(this.errorEstimate);
   }
+  return results;
 };
 
 Bach.PolynomialInterpolation.prototype.checkForExtrapolation = function(xTarget, x) {
@@ -70,7 +71,7 @@ Bach.PolynomialInterpolation.prototype.checkForExtrapolation = function(xTarget,
 
 Bach.PolynomialInterpolation.prototype.interpolate = function(xTarget, x, y, index) {
   if(index !== 0) {
-    return this.performPolynomialInterpolation(xTarget, x.block(index, 0, this.interpSize, 1), y.block(index, 0, this.interpSize, 1));
+    return this.performPolynomialInterpolation(xTarget, x.slice(index, index+this.interpSize), y.slice(index, index+this.interpSize));
   } else {
     return this.performPolynomialInterpolation(xTarget, x, y);
   }
@@ -115,7 +116,7 @@ Bach.PolynomialInterpolation.prototype.performPolynomialInterpolation = function
     for(i=0; i<this.interpSize-m; i++) {
       var idif = x[i]-xTarget;
       var imdif = x[i+m]-xTarget;
-      var width = this.c[i+1]-this.d[i];
+      var width = c[i+1]-d[i];
       var denominator = idif-imdif;
 
       if(denominator === 0.0) {

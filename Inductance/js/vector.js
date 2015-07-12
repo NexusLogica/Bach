@@ -74,10 +74,22 @@ Bach.Vector.prototype.normalize = function() {
   return this;
 };
 
+/***
+ * Returns the dot product value of self and vec.
+ * @method dotProduct
+ * @param vec
+ * @returns {number}
+ */
 Bach.Vector.prototype.dotProduct = function(vec) {
   return this.x*vec.x+this.y*vec.y+this.z*this.z;
 };
 
+/***
+ * Returns the distance between self and vec.
+ * @method distance
+ * @param {Bach.Vector} vec - The vector to measure the distance from.
+ * @returns {number}
+ */
 Bach.Vector.prototype.distance = function(vec) {
   var x = this.x-vec.x;
   var y = this.y-vec.y;
@@ -85,6 +97,21 @@ Bach.Vector.prototype.distance = function(vec) {
   return Math.sqrt(x*x+y*y+z*z);
 };
 
+/***
+ * Apply the function to the vector values.
+ * @method applyToNew
+ * @param func
+ * @returns {Bach.Vector}
+ */
+Bach.Vector.prototype.applyToNew = function(func) {
+  return new Bach.Vector(func(this.x), func(this.y), func(this.z));
+};
+
+/***
+ * Create a copy of self.
+ * @method clone
+ * @returns {Bach.Vector}
+ */
 Bach.Vector.prototype.clone = function() {
   return new Bach.Vector(this.x, this.y, this.z);
 };

@@ -17,9 +17,13 @@ if(QUnit && QUnit.assert) {
     var actualMessage = (hasEps ? message : eps);
     var tolerance = 1.0e-6;
     if (hasEps) {
-      tolerance = eps;
+      tolerance = Math.abs(eps);
     }
     var diff = Math.abs(actual - expected);
     QUnit.push(diff < tolerance, actual, expected, actualMessage);
+  };
+
+  QUnit.assert.lessThan = function (actual, expected, message) {
+    QUnit.push(actual < expected, actual, expected, message);
   };
 }

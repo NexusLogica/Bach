@@ -46,6 +46,7 @@ Bach.SampledData.prototype.append = function(x, y) {
   for(var i=0; i<this.numY; i++) {
     this.y[i].push(y[i]);
   }
+  this.length = this.x.length;
 };
 
 /***

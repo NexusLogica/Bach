@@ -24,6 +24,7 @@ Bach.RelativisticPoint = function(config) {
   this.direction = config.direction || new Bach.Vector(1.0);
   this.speed = _.isUndefined(config.speed) ? 0.0 : config.speed;
   this.timeSteps = [];
+  this.sampledDataByObservedTime = new Bach.SampledData(3);
   this.c = 1.0; // The speed of light taken as light-seconds per second (hence, 1.0).
 };
 
@@ -44,7 +45,7 @@ Bach.RelativisticPoint.prototype.calculateObserverTime = function(tStart, tEnd, 
   while(t <= this.tEnd) {
     this.findTime(t, observer);
     t += stepSize;
-    if(t > this.tEnd) {
+    if(Math.abs(t-this.tEnd) < 0.1*stepSize) {
       t = this.tEnd;
     }
   }
@@ -62,7 +63,7 @@ Bach.RelativisticPoint.prototype.findTime = function(t, observer) {
   var pos = this.initial.add(this.direction.scalarMultiply(distanceSinceStart));
   var distFromObsToPos = observer.distance(pos); // in light seconds
   var timeFromObsToPos = distFromObsToPos/this.c;
-  var tTotal = t+oToPos;
+  var tTotal = t+timeFromObsToPos;
 
   // Where is it when it actually when it is observed?
   var distanceSinceStartWhenObserved = (tTotal-this.tStart)*this.speed;
@@ -73,4 +74,24 @@ Bach.RelativisticPoint.prototype.findTime = function(t, observer) {
     "observedTime": tTotal,
     "observedPos": pos,
     "actualPosWhenObserved": posWhenObserved });
+
+  var data = [ tTotal, pos.x, pos.y, pos.z, posWhenObserved.x, posWhenObserved.y, posWhenObserved.z ];
+  this.sampledDataByObservedTime.append(t, data);
+};
+
+/***
+ * Interpolate the sampled data structure to get the observer's information.
+ * @param {number} t - time for observer
+ * @returns {{observer-time: number, observed-position: Bach.Vector, actual-position: Bach.Vector, observed-time: number, observed-velocity: Bach.Vector, observed-time-rate: number}}
+ */
+Bach.RelativisticPoint.prototype.retrieveTime = function(t) {
+  this.sampledDataByObservedTime.retrieve(t);
+  return {
+    "observer-time": t,
+    "observed-position": new Bach.Vector(),
+    "actual-position": new Bach.Vector(),
+    "observed-time": 0.0,
+    "observed-velocity": new Bach.Vector(),
+    "observed-time-rate": 1.0
+  };
 };

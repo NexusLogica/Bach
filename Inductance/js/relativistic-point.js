@@ -24,7 +24,7 @@ Bach.RelativisticPoint = function(config) {
   this.direction = config.direction || new Bach.Vector(1.0);
   this.speed = _.isUndefined(config.speed) ? 0.0 : config.speed;
   this.timeSteps = [];
-  this.sampledDataByObservedTime = new Bach.SampledData(3);
+  this.sampledDataByObservedTime = new Bach.SampledData(7);
   this.c = 1.0; // The speed of light taken as light-seconds per second (hence, 1.0).
 };
 
@@ -75,23 +75,30 @@ Bach.RelativisticPoint.prototype.findTime = function(t, observer) {
     "observedPos": pos,
     "actualPosWhenObserved": posWhenObserved });
 
-  var data = [ tTotal, pos.x, pos.y, pos.z, posWhenObserved.x, posWhenObserved.y, posWhenObserved.z ];
-  this.sampledDataByObservedTime.append(t, data);
+  var data = [ t, pos.x, pos.y, pos.z, posWhenObserved.x, posWhenObserved.y, posWhenObserved.z ];
+  this.sampledDataByObservedTime.append(tTotal, data);
+};
+
+
+Bach.RelativisticPoint.prototype.getObservedTimeRange = function() {
+  var len = this.sampledDataByObservedTime.length;
+  return { start: this.sampledDataByObservedTime.x[0], end: this.sampledDataByObservedTime.x[len-1] };
 };
 
 /***
  * Interpolate the sampled data structure to get the observer's information.
  * @param {number} t - time for observer
- * @returns {{observer-time: number, observed-position: Bach.Vector, actual-position: Bach.Vector, observed-time: number, observed-velocity: Bach.Vector, observed-time-rate: number}}
+ * @returns {{particle-time: number, observed-position: Bach.Vector, actual-position: Bach.Vector, observed-time: number, observed-velocity: Bach.Vector, observed-time-rate: number}}
  */
 Bach.RelativisticPoint.prototype.retrieveTime = function(t) {
-  this.sampledDataByObservedTime.retrieve(t);
+  var result = this.sampledDataByObservedTime.retrieve(t);
   return {
-    "observer-time": t,
-    "observed-position": new Bach.Vector(),
-    "actual-position": new Bach.Vector(),
-    "observed-time": 0.0,
-    "observed-velocity": new Bach.Vector(),
-    "observed-time-rate": 1.0
+    "observerTime": t,
+    "particleTime": result[0],
+    "observedPosition": new Bach.Vector(result[1], result[2], result[3]),
+    "actualPosition": new Bach.Vector(result[4], result[5], result[6]),
+    "observedTime": 0.0,
+    "observedVelocity": new Bach.Vector(),
+    "observedTimeRate": 1.0
   };
 };

@@ -30,17 +30,30 @@
 
   <script>
     QUnit.test('Relativistic point', function(assert) {
-      var observer = new Bach.Vector(1.0, 2.0, 3.0);
+      var observer = new Bach.Vector(2.0, 2.0, 3.0);
 
       var pt = new Bach.RelativisticPoint( {
-        initial: new Bach.Vector(2.0, 2.0, 3.0),
+        initial: new Bach.Vector(1.0, 2.0, 3.0),
         direction: new Bach.Vector(1.0, 0.0, 0.0),
         speed: 0.5
       });
 
-      pt.calculateObserverTime(0.0, 2.0, observer, 1.0);
+      pt.calculateObserverTime(0.0, 4.0, observer, 2.0);
 
       equal(pt.sampledDataByObservedTime.length, 3, "number of data samples");
+
+      var range = pt.getObservedTimeRange();
+      assert.near(range.start, 1.0, 0.00001, "start observed range");
+      assert.near(range.end, 5.0, 0.00001, "end observed range");
+
+      var results = pt.retrieveTime(1.0);
+      assert.vectorNear(results.observedPosition, new Bach.Vector(1.0, 2.0, 3.0), 0.00001, "observer is same as point at 1.0");
+
+      results = pt.retrieveTime(2.0);
+      assert.vectorNear(results.observedPosition, observer, 0.00001, "observer is same as point at 2.0");
+
+      results = pt.retrieveTime(range.end);
+      assert.vectorNear(results.observedPosition, new Bach.Vector(3.0, 2.0, 3.0), 0.00001, "observer is same as point at 5.0");
 
     });
 

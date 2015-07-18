@@ -26,4 +26,28 @@ if(QUnit && QUnit.assert) {
   QUnit.assert.lessThan = function (actual, expected, message) {
     QUnit.push(actual < expected, actual, expected, message);
   };
+
+  QUnit.assert.vectorNear = function (actual, expected, eps, message) {
+    var hasEps = (arguments.length > 2 && typeof eps !== "string");
+    var actualMessage = (hasEps ? message : eps);
+    var tolerance = 1.0e-6;
+    if (hasEps) {
+      tolerance = Math.abs(eps);
+    }
+    var diffX = Math.abs(actual.x - expected.x);
+    var diffY = Math.abs(actual.y - expected.y);
+    var diffZ = Math.abs(actual.z - expected.z);
+
+    var err = "z";
+    var diffMax = diffZ;
+    if(diffX > diffY && diffX > diffZ) {
+      err = "x";
+      diffMax = diffX;
+    } else if(diffY > diffX && diffY >   diffZ) {
+      err = "y";
+      diffMax = diffY;
+    }
+    QUnit.push(diffMax < tolerance, actual[err], expected[err], actualMessage+": Max is "+err);
+  };
+
 }

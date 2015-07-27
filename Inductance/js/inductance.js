@@ -10,8 +10,13 @@
 
 var Bach = Bach || {};
 Bach.Inductance = Bach.Inductance || {};
+Bach.Inductance3D = Bach.Inductance3D || {};
 
-if(QUnit && QUnit.assert) {
+Bach.Inductance3D.FollowActual = 1;
+Bach.Inductance3D.FollowRelativistic = 2;
+Bach.Inductance3D.SizeRealPositionRelative = 3;
+
+if(window.QUnit && window.QUnit.assert) {
   QUnit.assert.near = function (actual, expected, eps, message) {
     var hasEps = (arguments.length > 2 && typeof eps !== "string");
     var actualMessage = (hasEps ? message : eps);

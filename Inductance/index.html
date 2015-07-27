@@ -4,6 +4,11 @@
   <meta charset="UTF-8">
   <title>Bach - Relativity</title>
 
+  <link href='http://fonts.googleapis.com/css?family=Raleway:400,100,200,700' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Anonymous+Pro:400,700' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Overlock|Amatic+SC|Share|Love+Ya+Like+A+Sister|Roboto+Condensed:400,300|Roboto:400,100,300,500' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="styles/inductance.css"/>
+
   <script src="lib/bower_components/jquery/dist/jquery.min.js"></script>
   <script src="lib/bower_components/lodash/dist/lodash.js"></script>
   <script src="lib/bower_components/lodash-deep/lodash-deep.js"></script>
@@ -16,6 +21,10 @@
   <script src="lib/bower_components/svg.js/dist/svg.js"></script>
   <script src="lib/bower_components/signals/dist/signals.js"></script>
   <script src="lib/bower_components/toastr/toastr.js"></script>
+  <script src="lib/bower_components/threejs/build/three.js"></script>
+  <script src="lib/bower_components/threejs/examples/js/controls/EditorControls.js"></script>
+  <script src="lib/bower_components/threejs/examples/js/controls/TransformControls.js"></script>
+  <script src="lib/bower_components/threejs/examples/js/controls/OrbitControls.js"></script>
 
   <script src="js/inductance.js"></script>
   <script src="js/vector.js"></script>
@@ -23,9 +32,38 @@
   <script src="js/polynomial-interpolation.js"></script>
   <script src="js/sampled-data.js"></script>
   <script src="js/relativistic-point.js"></script>
+  <script src="js/relativistic-cube.js"></script>
+  <script src="js/graphics/relativity-scene.js"></script>
+  <script src="js/graphics/relativistic-grid.js"></script>
 
 </head>
 <body>
 
+  <div class="page-title">BACH <span class="subtitle">Inductance</span></div>
+  <div class="scene-container"></div>
+
+  <script>
+
+    var cube = new Bach.RelativisticCube({
+      initial: new Bach.Vector(-1, -1, -1),
+      direction: new Bach.Vector(1, 0, 0),
+      speed: 0.5,
+      size: new Bach.Vector(0.25, 0.25, 0.25)
+    });
+
+    cube.calculateObserverTime(0.0, 4.0, new Bach.Vector(0, 0, 0), 0.10);
+
+
+
+    var scene = new Bach.RelativityScene();
+    scene.create({
+      containerElement: $('.scene-container'),
+      showGrid: true
+    });
+
+
+    scene.renderContinuously();
+
+  </script>
 </body>
 </html>

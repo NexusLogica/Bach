@@ -16,6 +16,7 @@
     "sprintf": "git://github.com/alexei/sprintf.js",
     "svg.js": "git://github.com/wout/svg.js.git",
     "signals": "git://github.com/millermedeiros/js-signals",
-    "toastr": "git://github.com/CodeSeven/toastr"
+    "toastr": "git://github.com/CodeSeven/toastr",
+    "threejs": "git://github.com/mrdoob/three.js/"
   }
 }

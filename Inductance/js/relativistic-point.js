@@ -23,7 +23,7 @@ Bach.RelativisticPoint = function(config) {
   this.initial = config.initial || new Bach.Vector();
   this.direction = config.direction || new Bach.Vector(1.0);
   this.speed = _.isUndefined(config.speed) ? 0.0 : config.speed;
-  this.timeSteps = [];
+  this.sampledDataByUniversalTime = new Bach.SampledData(7);
   this.sampledDataByObservedTime = new Bach.SampledData(7);
   this.c = 1.0; // The speed of light taken as light-seconds per second (hence, 1.0).
 };
@@ -69,11 +69,8 @@ Bach.RelativisticPoint.prototype.findTime = function(t, observer) {
   var distanceSinceStartWhenObserved = (tTotal-this.tStart)*this.speed;
   var posWhenObserved = this.initial.add(this.direction.scalarMultiply(distanceSinceStartWhenObserved));
 
-  this.timeSteps.push({
-    "t": t,
-    "observedTime": tTotal,
-    "observedPos": pos,
-    "actualPosWhenObserved": posWhenObserved });
+  var universalData = [ tTotal, pos.x, pos.y, pos.z, posWhenObserved.x, posWhenObserved.y, posWhenObserved.z ];
+  this.sampledDataByUniversalTime.append(t, universalData);
 
   var data = [ t, pos.x, pos.y, pos.z, posWhenObserved.x, posWhenObserved.y, posWhenObserved.z ];
   this.sampledDataByObservedTime.append(tTotal, data);
@@ -88,17 +85,30 @@ Bach.RelativisticPoint.prototype.getObservedTimeRange = function() {
 /***
  * Interpolate the sampled data structure to get the observer's information.
  * @param {number} t - time for observer
- * @returns {{particle-time: number, observed-position: Bach.Vector, actual-position: Bach.Vector, observed-time: number, observed-velocity: Bach.Vector, observed-time-rate: number}}
+ * @returns {{particleTime: number, observed-position: Bach.Vector, universalPosition: Bach.Vector, observed-time: number, observed-velocity: Bach.Vector, observed-time-rate: number}}
  */
-Bach.RelativisticPoint.prototype.retrieveTime = function(t) {
+Bach.RelativisticPoint.prototype.retrieveByObservedTime = function(t) {
   var result = this.sampledDataByObservedTime.retrieve(t);
   return {
-    "observerTime": t,
-    "particleTime": result[0],
+    "observerTime": result[0],
+    "universalTime": t,
     "observedPosition": new Bach.Vector(result[1], result[2], result[3]),
-    "actualPosition": new Bach.Vector(result[4], result[5], result[6]),
-    "observedTime": 0.0,
-    "observedVelocity": new Bach.Vector(),
-    "observedTimeRate": 1.0
+    "universalPosition": new Bach.Vector(result[4], result[5], result[6])
+  };
+};
+
+/***
+ * Interpolate the sampled data structure assuming that the speed of light is infinite. This
+ * returns the observer's information.
+ * @param {number} t - 'universal' time
+ * @returns {{particle-time: number, observed-position: Bach.Vector, actual-position: Bach.Vector, observed-time: number, observed-velocity: Bach.Vector, observed-time-rate: number}}
+ */
+Bach.RelativisticPoint.prototype.retrieveByUniversalTime = function(t) {
+  var result = this.sampledDataByUniversalTime.retrieve(t);
+  return {
+    "observerTime": t,
+    "universalTime": result[0],
+    "observedPosition": new Bach.Vector(result[1], result[2], result[3]),
+    "universalPosition": new Bach.Vector(result[4], result[5], result[6])
   };
 };

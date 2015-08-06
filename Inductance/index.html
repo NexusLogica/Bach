@@ -53,16 +53,23 @@
 
     cube.calculateObserverTime(0.0, 4.0, new Bach.Vector(0, 0, 0), 0.10);
 
-
-
-    var scene = new Bach.RelativityScene();
-    scene.create({
+    var relativityScene = new Bach.RelativityScene();
+    relativityScene.create({
       containerElement: $('.scene-container'),
       showGrid: true
     });
 
 
-    scene.renderContinuously();
+    var cubeGraphic = new Bach.Inductance3D.RelativisticGrid();
+    cubeGraphic.create({
+      points: cube.points,
+      follow: Bach.Inductance3D.FollowUniversal,
+      connectionSets: cube.connectionSets
+    });
+
+    relativityScene.scene.add(cubeGraphic.threeJsLine);
+
+    relativityScene.renderContinuously();
 
   </script>
 </body>

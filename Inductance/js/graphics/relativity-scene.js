@@ -9,6 +9,7 @@
 'use strict';
 
 Bach.RelativityScene = function() {
+  this.scale = 1.0;
 };
 
 /***
@@ -19,6 +20,9 @@ Bach.RelativityScene = function() {
  */
 Bach.RelativityScene.prototype.create = function(config) {
   this.scene =  new THREE.Scene();
+  if(config.hasOwnProperty('scale')) {
+    this.scale = config.scale;
+  }
 
   this.renderer = new THREE.WebGLRenderer(); //{ antialias: true });
   this.width = config.containerElement.innerWidth();
@@ -29,9 +33,9 @@ Bach.RelativityScene.prototype.create = function(config) {
 
   config.containerElement.append(this.renderer.domElement);
 
-  this.camera = new THREE.PerspectiveCamera(60, this.width / this.height, 0.001, 10000);
-  this.camera.translateZ(-80.0);
-  this.camera.translateY(-40.0);
+  this.camera = new THREE.PerspectiveCamera(60, this.width / this.height, 0.001, 1000);
+  this.camera.translateZ(-0.8*this.scale);
+  this.camera.translateY(-0.4*this.scale);
   this.addDefaultLighting(this.scene);
   this.createDebugCloud();
 
@@ -66,8 +70,8 @@ Bach.RelativityScene.prototype.render = function() {
 Bach.RelativityScene.prototype.showGrid = function(show) {
   if(show) {
     if(!this.gridHelper) {
-      var gridHelperWidth = 1024;
-      this.gridHelper = new THREE.GridHelper(Math.floor(gridHelperWidth / 25) * 25, 25);
+      var gridHelperWidth = 1.0*this.scale;
+      this.gridHelper = new THREE.GridHelper(Math.floor(gridHelperWidth / 0.025*this.scale) * 0.025*this.scale, 0.025*this.scale);
       this.gridHelper.setColors(0x3662B2, 0x7b99c4);
       this.scene.add(this.gridHelper);
     }
@@ -106,26 +110,27 @@ Bach.RelativityScene.prototype.enablePanAndRotate = function(enable) {
   if(enable) {
     if(!this.panAndRotateControl) {
       this.panAndRotateControl = new THREE.OrbitControls(this.camera, this.renderer.domElement);
+      var _this = this;
       this.panAndRotateControl.addEventListener('change', function () {
-        render();
+        _this.render();
       });
     }
     this.panAndRotateControl.enabled = true;
   } else {
-    //if(this.panAndRotateControl) {
-    //  this.panAndRotateControl.enabled = false;
-    //}
+    if(this.panAndRotateControl) {
+      this.panAndRotateControl.enabled = false;
+    }
   }
 };
 
 Bach.RelativityScene.prototype.createDebugCloud = function() {
-  var geometry = new THREE.BoxGeometry(20, 20, 20);
+  var geometry = new THREE.BoxGeometry(0.02*this.scale, 0.02*this.scale, 0.02*this.scale);
   var material = new THREE.MeshBasicMaterial( {color: 0xF2995F} );
   material.wireframe = true;
   //var geometry = new THREE.CylinderGeometry(0, 10, 30, 4, 1);
   //var material = new THREE.MeshLambertMaterial({color: 0xffffff, shading: THREE.FlatShading});
 
-  var spread = 1000.0;
+  var spread = 1.0*this.scale;
 
   for (var i = 0; i < 200; i++) {
     var mesh = new THREE.Mesh(geometry, material);
@@ -137,7 +142,3 @@ Bach.RelativityScene.prototype.createDebugCloud = function() {
     this.scene.add(mesh);
   }
 };
-
-
-
-

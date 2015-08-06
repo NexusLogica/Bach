@@ -32,18 +32,21 @@ Bach.RelativisticCube = function(config) {
       pos.y = (j-0.5)*this.size.y;
       for (var k = 0; k < 2; k++) {  // z
         pos.z = (k-0.5)*this.size.z;
-        var pt = new Bach.RelativisticPoint({
-          
+        var relPoint = new Bach.RelativisticPoint({
+          speed: this.speed,
+          initial: pos.clone(),
+          direction: this.direction.clone()
         });
-        pt.
-        this.points.push(). pos.clone());
+        this.points.push(relPoint);
       }
     }
   }
 
-  this.frontIndices     = [[0, 1], [1, 2], [2, 3], [3, 0]];
-  this.backIndices      = [[4, 5], [5, 6], [6, 7], [7, 4]];
-  this.frontBackIndices = [[0, 4], [1, 5], [2, 6], [3, 7]];
+  this.front      = { indices: [[0, 1], [1, 2], [2, 3], [3, 0]], color: 0xFF0000 };
+  this.back       = { indices: [[4, 5], [5, 6], [6, 7], [7, 4]], color: 0x00FF00 };
+  this.lengthwise = { indices: [[0, 4], [1, 5], [2, 6], [3, 7]], color: 0x0000FF };
+
+  this.connectionSets = [ this.front, this.back, this.lengthwise ];
 };
 
 /***

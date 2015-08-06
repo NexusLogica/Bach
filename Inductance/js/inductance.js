@@ -12,7 +12,7 @@ var Bach = Bach || {};
 Bach.Inductance = Bach.Inductance || {};
 Bach.Inductance3D = Bach.Inductance3D || {};
 
-Bach.Inductance3D.FollowActual = 1;
+Bach.Inductance3D.FollowUniversal = 1;
 Bach.Inductance3D.FollowRelativistic = 2;
 Bach.Inductance3D.SizeRealPositionRelative = 3;
 

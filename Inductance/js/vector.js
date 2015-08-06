@@ -22,6 +22,28 @@ Bach.Vector = function(x, y, z) {
   }
 };
 
+/***
+ * Set the x, y, and z values in one function call.
+ * @param x
+ * @param y
+ * @param z
+ */
+Bach.Vector.prototype.set = function(x, y, z) {
+  this.x = x;
+  this.y = y;
+  this.z = z;
+};
+
+/***
+ * Set the x, y, and z values another vector's values.
+ * @param {Bach.Vector} vec - a Bach vector to copy, or any object that has x, y, and z properties.
+ */
+Bach.Vector.prototype.setFrom = function(vec) {
+  this.x = vec.x;
+  this.y = vec.y;
+  this.z = vec.z;
+};
+
 Bach.Vector.prototype.shorten = function(basePoint, newLen) {
   var vec = new Bach.Vector(this, basePoint);
   var len = vec.vectorLength();
@@ -95,6 +117,16 @@ Bach.Vector.prototype.distance = function(vec) {
   var y = this.y-vec.y;
   var z = this.z-vec.z;
   return Math.sqrt(x*x+y*y+z*z);
+};
+
+/***
+ * Apply the function to the vector values.
+ * @method applyToNew
+ * @param func
+ * @returns {Bach.Vector}
+ */
+Bach.Vector.prototype.applyToNew = function(func) {
+  return new Bach.Vector(func(this.x), func(this.y), func(this.z));
 };
 
 /***

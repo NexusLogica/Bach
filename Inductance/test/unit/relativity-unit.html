@@ -46,13 +46,13 @@
       assert.near(range.start, 1.0, 0.00001, "start observed range");
       assert.near(range.end, 5.0, 0.00001, "end observed range");
 
-      var results = pt.retrieveTime(1.0);
+      var results = pt.retrieveByObservedTime(1.0);
       assert.vectorNear(results.observedPosition, new Bach.Vector(1.0, 2.0, 3.0), 0.00001, "observer is same as point at 1.0");
 
-      results = pt.retrieveTime(2.0);
+      results = pt.retrieveByObservedTime(2.0);
       assert.vectorNear(results.observedPosition, observer, 0.00001, "observer is same as point at 2.0");
 
-      results = pt.retrieveTime(range.end);
+      results = pt.retrieveByObservedTime(range.end);
       assert.vectorNear(results.observedPosition, new Bach.Vector(3.0, 2.0, 3.0), 0.00001, "observer is same as point at 5.0");
 
       var ptStill = new Bach.RelativisticPoint( {
@@ -66,8 +66,8 @@
       assert.near(rangeStill.start, 6.403, 0.002, "still start observed range");
       assert.near(rangeStill.end, 15.403, 0.002, "still end observed range");
 
-      results = ptStill.retrieveTime(10);
-      var results2 = ptStill.retrieveTime(11);
+      results = ptStill.retrieveByObservedTime(10);
+      var results2 = ptStill.retrieveByObservedTime(11);
       assert.vectorNear(results.observedPosition, results2.observedPosition, 0.00001, "still object does not move");
 
 

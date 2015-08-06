@@ -52,21 +52,21 @@ Bach.Inductance3D.RelativisticGrid.prototype.create = function(config) {
 
   this.updateVertices(this.initialTime);
 
-  var geometry = new THREE.Geometry();
-  geometry.vertices = this.vertices;
+  this.geometry = new THREE.Geometry();
+  this.geometry.vertices = this.vertices;
 
   var vertexIndex = 0;
   for(i=0; i<this.connectionSets.length; i++) {
     var connectionSet = this.connectionSets[i];
     connectionSet.threeJsColor = new THREE.Color(connectionSet.color);
     for(j=0; j<connectionSet.indices.length; j+=2) {
-      geometry.colors[j] = connectionSet.threeJsColor;
-      geometry.colors[j+1] = connectionSet.threeJsColor;
+     this.geometry.colors[j] = connectionSet.threeJsColor;
+     this.geometry.colors[j+1] = connectionSet.threeJsColor;
     }
   }
-
+  
   var material = new THREE.LineBasicMaterial({
-    linewidth: 2,
+    linewidth: 10,
     color: 0xffffff,
     vertexColors: THREE.VertexColors
   });

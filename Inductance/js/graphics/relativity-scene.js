@@ -37,6 +37,7 @@ Bach.RelativityScene.prototype.create = function(config) {
   this.camera.translateZ(-0.8*this.scale);
   this.camera.translateY(-0.4*this.scale);
   this.addDefaultLighting(this.scene);
+  this.addAxisMarker();
   this.createDebugCloud();
 
   this.showGrid(config.showGrid);
@@ -104,6 +105,11 @@ Bach.RelativityScene.prototype.addDefaultLighting = function (object3D) {
   light.serialisable = false;
   light.cannotBeEdited = true;
   object3D.add(light);
+};
+
+Bach.RelativityScene.prototype.addAxisMarker = function() {
+  var axisHelper = new THREE.AxisHelper(0.25);
+  this.scene.add(axisHelper);
 };
 
 Bach.RelativityScene.prototype.enablePanAndRotate = function(enable) {

@@ -20,6 +20,18 @@ body {
     font-weight: 100;
   }
 }
+
+.shear-controls {
+  position: absolute;
+  top: 30px;
+  left: 20px;
+  width: 200px;
+  height: 500px;
+  background-color: darken($theme-background, 2%);
+  border: solid 1px $theme-dark;
+  padding: 5px 5px;
+}
+
 .shear-canvas-container {
   box-sizing: border-box;
   margin: 10px auto;
@@ -27,6 +39,6 @@ body {
   width: $scene-width;
   height: $scene-height;
 
-  border: $theme-medium-sharp 1px solid;
+  border: $theme-dark 1px solid;
 }
 

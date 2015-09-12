@@ -23,5 +23,5 @@ Shear.FieldPoint.prototype.update = function(time, scale) {
   var t = time-this.startTime;
   var x = scale*(this.initialPosition.x+this.direction.x*t*this.velocity);
   var y = scale*(this.initialPosition.y+this.direction.y*t*this.velocity);
-  this.circle.move(x, y);
+  this.circle.center(x, y);
 };

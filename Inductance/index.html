@@ -7,6 +7,7 @@
   <link href='http://fonts.googleapis.com/css?family=Raleway:400,100,200,700' rel='stylesheet' type='text/css'>
   <link href='http://fonts.googleapis.com/css?family=Anonymous+Pro:400,700' rel='stylesheet' type='text/css'>
   <link href='http://fonts.googleapis.com/css?family=Overlock|Amatic+SC|Share|Love+Ya+Like+A+Sister|Roboto+Condensed:400,300|Roboto:400,100,300,500' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="lib/bower_components/bootstrap/dist/css/bootstrap.css"/>
   <link rel="stylesheet" href="styles/inductance.css"/>
   <link rel="stylesheet" href="styles/shear.css"/>
 
@@ -48,12 +49,25 @@
 <body>
 
   <div class="page-title">BACH <span class="subtitle">Inductance</span></div>
+  <div class="shear-controls">
+    <button class="btn" onclick="pausePlayClicked($(this))">Pause</button>
+  </div>
   <div class="shear-canvas-container"></div>
 
   <script>
 
     var shearRun = new Shear.Run();
     shearRun.start($('.shear-canvas-container'));
+
+    var pausePlayClicked = function(button) {
+      if(shearRun.state === "playing") {
+        shearRun.pause();
+        button.text('Play');
+      } else {
+        shearRun.play();
+        button.text('Pause');
+      }
+    };
 
 /*
     var cube = new Bach.RelativisticCube({

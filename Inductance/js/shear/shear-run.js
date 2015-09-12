@@ -9,6 +9,7 @@ Shear.Run = function() {
   this.fieldPointSets = [];
   this.scale = 10000.0; // pixels per light-second
   this.timeScale = 0.001;
+  this.pausedAt = undefined;
 };
 
 Shear.Run.prototype.start = function(canvasContainerElement) {
@@ -21,19 +22,28 @@ Shear.Run.prototype.start = function(canvasContainerElement) {
   this.rate = 1.0;
   this.startRealTime = window.performance.now();
   this.next = 1.0;
-  this.update();
+  this.play();
+};
+
+Shear.Run.prototype.pause = function() {
+  this.state = 'paused';
+  clearInterval(this.intervalTimer);
+  this.pausedAt = window.performance.now();
+};
+
+Shear.Run.prototype.play = function() {
+  this.state = 'playing';
+
+  if(this.pausedAt) {
+    var now = window.performance.now();
+    this.startRealTime += now-this.pausedAt;
+    this.pausedAt = undefined;
+  }
 
   var _this = this;
-  setInterval(function() {
+  this.intervalTimer = setInterval(function() {
     _this.update();
   }, 60);
-//   var loop = function() {
-//     _this.update();
-//     requestAnimationFrame(loop);
-//   };
-
-//   requestAnimationFrame(loop);
-
 };
 
 Shear.Run.prototype.update = function() {

@@ -1,0 +1,32 @@
+$theme-white: #FFFFFF;
+$theme-background: #fcfaf7;
+$theme-black: #0D0D0D;
+$theme-light: #F2DDB6;
+$theme-medium-bland: #D9B991;
+$theme-dark: #555459;
+$theme-medium-sharp: #F2995F;
+
+$scene-width: 900px;
+$scene-height: 700px;
+
+body {
+  background-color: $theme-light;
+}
+
+.page-title {
+  color: $theme-white;
+  font-family: "Raleway", sans-serif;
+  .subtitle {
+    font-weight: 100;
+  }
+}
+.shear-canvas-container {
+  box-sizing: border-box;
+  margin: 10px auto;
+  background-color: $theme-background;
+  width: $scene-width;
+  height: $scene-height;
+
+  border: $theme-medium-sharp 1px solid;
+}
+

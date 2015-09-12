@@ -1,0 +1,16 @@
+body {
+  background-color: #f2ddb6; }
+
+.page-title {
+  color: white;
+  font-family: "Raleway", sans-serif; }
+  .page-title .subtitle {
+    font-weight: 100; }
+
+.shear-canvas-container {
+  box-sizing: border-box;
+  margin: 10px auto;
+  background-color: #fcfaf7;
+  width: 900px;
+  height: 700px;
+  border: #f2995f 1px solid; }

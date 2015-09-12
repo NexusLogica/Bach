@@ -44,30 +44,28 @@
   <script src="js/shear/shear-run.js"></script>
   <script src="js/shear/shear-particle.js"></script>
   <script src="js/shear/shear-field-point.js"></script>
+  <script src="js/shear/shear-controls.js"></script>
 
 </head>
 <body>
 
   <div class="page-title">BACH <span class="subtitle">Inductance</span></div>
   <div class="shear-controls">
-    <button class="btn" onclick="pausePlayClicked($(this))">Pause</button>
+    <form>
+      <div class="form-group">
+        <label for="velocity">Velocity</label>
+        <input type="number" min="0.0" max="1.0" step="0.05" class="form-control" id="velocity" placeholder="(1.0 is c)">
+      </div>
+      <button type="submit" class="btn pause-play-button">Run</button>
+    </form>
   </div>
+
   <div class="shear-canvas-container"></div>
 
   <script>
 
     var shearRun = new Shear.Run();
-    shearRun.start($('.shear-canvas-container'));
-
-    var pausePlayClicked = function(button) {
-      if(shearRun.state === "playing") {
-        shearRun.pause();
-        button.text('Play');
-      } else {
-        shearRun.play();
-        button.text('Pause');
-      }
-    };
+    shearRun.initialize($('.shear-canvas-container'), $('.shear-controls'));
 
 /*
     var cube = new Bach.RelativisticCube({

@@ -15,7 +15,7 @@ body {
   height: 500px;
   background-color: #f9f5f0;
   border: solid 1px #555459;
-  padding: 5px 5px; }
+  padding: 10px 10px; }
 
 .shear-canvas-container {
   box-sizing: border-box;

@@ -45,9 +45,9 @@
   <script>
 
     var cube = new Bach.RelativisticCube({
-      initial: new Bach.Vector(-1, -1, -1),
-      direction: new Bach.Vector(1, 0, 0),
-      speed: 0.5,
+      initial: new Bach.Vector(0, 0, 0),
+      direction: new Bach.Vector(-5, 0, 0),
+      speed: 0.75,
       size: new Bach.Vector(0.25, 0.25, 0.25)
     });
 
@@ -63,13 +63,31 @@
     var cubeGraphic = new Bach.Inductance3D.RelativisticGrid();
     cubeGraphic.create({
       points: cube.points,
-      follow: Bach.Inductance3D.FollowUniversal,
+      follow: Bach.Inductance3D.FollowRelativistic,
       connectionSets: cube.connectionSets
     });
 
+//    var cubeGraphic = new Bach.Inductance3D.RelativisticGrid();
+//    cubeGraphic.create({
+//      points: cube.points,
+//      follow: Bach.Inductance3D.FollowUniversal,
+//      connectionSets: cube.connectionSets
+//    });
+//
     relativityScene.scene.add(cubeGraphic.threeJsLine);
 
-    relativityScene.renderContinuously();
+    var tStart = 0.0;
+    var t = tStart;
+    var tEnd = 1.0;
+    var tInc = 0.01;
+    var onRenderFunction = function() {
+      cubeGraphic.updateVertices(t);
+      t += tInc;
+      if(t > tEnd) {
+        t = tStart;
+      }
+    };
+    relativityScene.renderContinuously(onRenderFunction);
 
   </script>
 </body>

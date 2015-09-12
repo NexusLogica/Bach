@@ -27,12 +27,14 @@ Bach.Inductance3D.RelativisticGrid.prototype.create = function(config) {
 
   this.getMinAndMaxTimes();
 
-  if(config.hasOwnProperty('initialTime')) {
-    this.initialTime = config.initialTime;
+  if(config.hasOwnProperty('startTime')) {
+    this.startTime = config.startTime;
   } else if(this.follow === Bach.Inductance3D.FollowUniversal) {
-    this.initialTime = 0.0;
+    this.startTime = this.startTimeUniversal;
+    this.endTime = this.endTimeUniversal;
   } else { // FollowRelativistic or SizeRealPositionRelative
-    this.initialTime = 0.0;
+    this.startTime = this.startTimeObserved;
+    this.endTime = this.endTimeObserved;
   }
 
   var numVertices = 0;
@@ -50,7 +52,7 @@ Bach.Inductance3D.RelativisticGrid.prototype.create = function(config) {
     this.pointPositions[k] = new THREE.Vector3(0.0, 0.0, 0.0);
   }
 
-  this.updateVertices(this.initialTime);
+  this.updateVertices(this.startTime);
 
   this.geometry = new THREE.Geometry();
   this.geometry.vertices = this.vertices;
@@ -101,6 +103,16 @@ Bach.Inductance3D.RelativisticGrid.prototype.updateOnRender = function() {
  * @method updateVertices
  */
 Bach.Inductance3D.RelativisticGrid.prototype.updateVertices = function(t) {
+  if(this.geometry) {
+    this.geometry.verticesNeedUpdate = true;
+    this.geometry.elementsNeedUpdate = true;
+    this.geometry.morphTargetsNeedUpdate = true;
+    this.geometry.uvsNeedUpdate = true;
+    this.geometry.normalsNeedUpdate = true;
+    this.geometry.colorsNeedUpdate = true;
+    this.geometry.tangentsNeedUpdate = true;
+  }
+
   var num = this.points.length;
   var i, j, results;
   if(this.follow === Bach.Inductance3D.FollowUniversal) {
@@ -134,7 +146,33 @@ Bach.Inductance3D.RelativisticGrid.prototype.updateVertices = function(t) {
 };
 
 Bach.Inductance3D.RelativisticGrid.prototype.getMinAndMaxTimes = function() {
+  var point = this.points[0];
+  var times = point.getObservedTimeRange();
+  this.startTimeObserved = times.start;
+  this.endTimeObserved = times.end;
+  this.startTimeUniversal = point.sampledDataByUniversalTime.x[0];
+  this.endTimeUniversal = point.sampledDataByUniversalTime.x[point.sampledDataByUniversalTime.x.length-1];
   for(var i=1; i<this.points.length; i++) {
+    point = this.points[i];
 
+    times = point.getObservedTimeRange();
+
+    if(times.start > this.startTimeObserved) {
+      this.startTimeObserved = times.start;
+    }
+
+    if(times.end < this.endTimeObserved) {
+      this.endTimeObserved = times.end;
+    }
+
+    var startUniversal = point.sampledDataByUniversalTime.x[0];
+    var endUniversal = point.sampledDataByUniversalTime.x[point.sampledDataByUniversalTime.x.length-1];
+
+    if(startUniversal > this.startTimeUniversal) {
+      this.startTimeUniversal = this.startTimeUniversal;
+    }
+    if(endUniversal < this.endTimeUniversal) {
+      this.endTimeUniversal = endUniversal;
+    }
   }
 };

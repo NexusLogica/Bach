@@ -48,10 +48,13 @@ Bach.RelativityScene.prototype.create = function(config) {
 /***
  * @method renderContinuously
  */
-Bach.RelativityScene.prototype.renderContinuously = function() {
+Bach.RelativityScene.prototype.renderContinuously = function(onRenderFunction) {
   var _this = this;
   this.stopRendering = false;
   var rf = function() {
+    if(onRenderFunction) {
+      onRenderFunction();
+    }
     _this.render();
     if(!_this.stopRendering) {
       requestAnimationFrame(rf);

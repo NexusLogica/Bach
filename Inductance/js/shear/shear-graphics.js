@@ -15,5 +15,4 @@ Shear.Graphics.prototype.initialize = function(container) {
   var w = this.svg.width();
   var h = this.svg.height();
   this.observerCoordGroup.move(0.5*w, 0.5*h);
-
 };

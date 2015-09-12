@@ -17,7 +17,11 @@ body {
   border: solid 1px #555459;
   padding: 10px 10px; }
 
+.shear-time {
+  position: absolute; }
+
 .shear-canvas-container {
+  position: relative;
   box-sizing: border-box;
   margin: 10px auto;
   background-color: #fcfaf7;

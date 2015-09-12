@@ -5,7 +5,7 @@
 var Shear = Shear || {};
 
 Shear.Run = function() {
-  this.numFieldPoints = 25;
+  this.numFieldPoints = 32;
   this.fieldPointSets = [];
   this.scale = 10000.0; // pixels per light-second
   this.timeScale = 0.001;
@@ -23,9 +23,16 @@ Shear.Run.prototype.initialize = function(canvasContainerElement, controlContain
 
 Shear.Run.prototype.configureRunParameters = function(runParameters) {
   this.runParameters = runParameters;
+  if(runParameters.pathType === "straight") {
+    this.path = new Shear.StraightPath();
+    this.path.configure(runParameters);
+  }
+  this.particleInitialPosition = new Bach.Vector(0, 0, 0);
 };
 
 Shear.Run.prototype.start = function() {
+
+  console.assert(this.path);
 
   this.particle = new Shear.Particle();
   this.particle.initialize(this.graphics.observerCoordGroup);
@@ -65,10 +72,13 @@ Shear.Run.prototype.update = function() {
   var tReal = 0.001*(now-this.startRealTime);
   var tSim = tReal*this.timeScale;
 
-  var particlePositionKLUDGE = new Bach.Vector();
+  var particlePosition = this.path.position(tSim);
+  particlePosition.add(this.particleInitialPosition);
+
+  this.particle.update(particlePosition, this.scale);
 
   if(tReal > this.next) {
-    this.generateFieldPoints(particlePositionKLUDGE, tSim);
+    this.generateFieldPoints(particlePosition, tSim);
     this.next += 1.0;
   }
 

@@ -13,7 +13,6 @@ Shear.Particle.prototype.initialize = function(svgGroup) {
   this.circle = svgGroup.circle(0.5*this.width).attr("fill", "red").center(0, 0);
 };
 
-Shear.Particle.prototype.update = function(time) {
-  //var pos = this.path(time);
-  //this.circle.move(pos.x, pos.y);
+Shear.Particle.prototype.update = function(position, scale) {
+  this.circle.center(position.x*scale, position.y*scale);
 };

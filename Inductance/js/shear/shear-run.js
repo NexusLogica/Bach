@@ -14,6 +14,8 @@ Shear.Run = function() {
 };
 
 Shear.Run.prototype.initialize = function(canvasContainerElement, controlContainerElement) {
+  this.$container = canvasContainerElement;
+
   this.graphics = new Shear.Graphics();
   this.graphics.initialize(canvasContainerElement);
 
@@ -73,8 +75,17 @@ Shear.Run.prototype.update = function() {
   var tSim = tReal*this.timeScale;
 
   var particlePosition = this.path.position(tSim);
+  var velocity = this.path.velocity(tSim);
+  var acceleration = this.path.acceleration(tSim).vectorLength();
   particlePosition.add(this.particleInitialPosition);
 
+  var speed = velocity.vectorLength();
+
+  $(this.$container).find('.time').text(sprintf('%5.4f', tSim));
+  $(this.$container).find('.speed').text(sprintf('%5.4f', speed));
+  $(this.$container).find('.acceleration').text(sprintf('%5.4f', acceleration));
+
+  this.graphics.update(particlePosition, velocity, this.scale);
   this.particle.update(particlePosition, this.scale);
 
   if(tReal > this.next) {

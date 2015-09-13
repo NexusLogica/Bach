@@ -21,6 +21,7 @@
   <script src="lib/random/random-0.26.js"></script>
   <script src="lib/bower_components/q/q.js"></script>
   <script src="lib/bower_components/svg.js/dist/svg.js"></script>
+  <script src="lib/bower_components/sprintf/dist/sprintf.min.js"></script>
   <script src="lib/bower_components/signals/dist/signals.js"></script>
   <script src="lib/bower_components/toastr/toastr.js"></script>
   <script src="lib/bower_components/threejs/build/three.js"></script>
@@ -64,7 +65,20 @@
   </div>
 
   <div class="shear-canvas-container">
-    <div class="shear-time">Time</div>
+    <div class="shear-stats">
+      <div class="line">
+        <div class="shear-label">Time</div>
+        <div class="shear-value time">0</div>
+      </div>
+      <div class="line">
+        <div class="shear-label">Speed</div>
+        <div class="shear-value speed">0</div>
+      </div>
+      <div class="line">
+        <div class="shear-label">Acceleration</div>
+        <div class="shear-value acceleration">0</div>
+      </div>
+    </div>
   </div>
 
   <script>

@@ -32,8 +32,21 @@ body {
   padding: 10px 10px;
 }
 
-.shear-time {
+.shear-stats {
   position: absolute;
+  top: 10px;
+  left: 10px;
+  .line {
+
+    .shear-label {
+      display: inline-block;
+      width: 100px;
+    }
+    .shear-value {
+      display: inline-block;
+      width: 100px;
+    }
+  }
 }
 
 .shear-canvas-container {

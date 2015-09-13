@@ -40,8 +40,8 @@ Shear.Controls.prototype.validateAndConfigure = function() {
   localStorage.setItem('lastAcceleration', acceleration);
 
   var config = {
-    "initialVelocity": velocity,
-    "acceleration": acceleration,
+    "initialVelocity": parseFloat(velocity),
+    "acceleration": parseFloat(acceleration),
     "pathType": "straight"
   };
   this.runParent.configureRunParameters(config);

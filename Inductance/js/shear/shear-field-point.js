@@ -5,9 +5,10 @@
 
 var Shear = Shear || {};
 
-Shear.FieldPoint = function() {
+Shear.FieldPoint = function(color) {
   this.position = new Bach.Vector();
   this.velocity = 1.0; // c
+  this.color = color;
 };
 
 Shear.FieldPoint.prototype.initialize = function(svgGroup, initialPosition, direction, startTime) {
@@ -16,7 +17,7 @@ Shear.FieldPoint.prototype.initialize = function(svgGroup, initialPosition, dire
   this.startTime = startTime;
 
   this.width = 3.0;
-  this.circle = svgGroup.circle(0.5*this.width).attr("fill", "blue");
+  this.circle = svgGroup.circle(0.5*this.width).attr("fill", this.color);
 };
 
 Shear.FieldPoint.prototype.update = function(time, scale) {

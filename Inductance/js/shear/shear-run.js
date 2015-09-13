@@ -28,8 +28,13 @@ Shear.Run.prototype.configureRunParameters = function(runParameters) {
   if(runParameters.pathType === "straight") {
     this.path = new Shear.StraightPath();
     this.path.configure(runParameters);
+  } else if(runParameters.pathType === "circular") {
+    this.path = new Shear.CircularPath();
+    this.path.configure(runParameters);
   }
   this.particleInitialPosition = new Bach.Vector(0, 0, 0);
+
+  this.graphics.afterConfigure(runParameters, this.path, this.scale);
 };
 
 Shear.Run.prototype.start = function() {
@@ -77,6 +82,7 @@ Shear.Run.prototype.update = function() {
   var particlePosition = this.path.position(tSim);
   var velocity = this.path.velocity(tSim);
   var acceleration = this.path.acceleration(tSim).vectorLength();
+  var rotation = this.path.rotation(tSim);
   particlePosition.add(this.particleInitialPosition);
 
   var speed = velocity.vectorLength();
@@ -84,12 +90,14 @@ Shear.Run.prototype.update = function() {
   $(this.$container).find('.time').text(sprintf('%5.4f', tSim));
   $(this.$container).find('.speed').text(sprintf('%5.4f', speed));
   $(this.$container).find('.acceleration').text(sprintf('%5.4f', acceleration));
+  $(this.$container).find('.distance').text(sprintf('%5.4f', this.path.distanceTraveled(tSim)));
+  $(this.$container).find('.angle').text(sprintf('%5.4f', 180*rotation/Math.PI));
 
   this.graphics.update(particlePosition, velocity, this.scale);
   this.particle.update(particlePosition, this.scale);
 
   if(tReal > this.next) {
-    this.generateFieldPoints(particlePosition, tSim);
+    this.generateFieldPoints(particlePosition, rotation, tSim);
     this.next += 1.0;
   }
 
@@ -102,12 +110,12 @@ Shear.Run.prototype.update = function() {
   }
 };
 
-Shear.Run.prototype.generateFieldPoints = function(particlePosition, time) {
+Shear.Run.prototype.generateFieldPoints = function(particlePosition, particleRotation, time) {
   var set = [];
-  var angle = 0.0;
+  var angle = Math.PI*particleRotation/180;
   var incAngle = Math.PI*(360.0/this.numFieldPoints)/180.0;
   for(var i=0; i<this.numFieldPoints; i++) {
-    var point = new Shear.FieldPoint();
+    var point = new Shear.FieldPoint(i%2 ? "red" : "blue");
     var direction = new Bach.Vector(Math.sin(angle), Math.cos(angle));
     point.initialize(this.graphics.observerCoordGroup, particlePosition, direction, time);
     set.push(point);

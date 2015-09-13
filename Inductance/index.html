@@ -47,6 +47,7 @@
   <script src="js/shear/shear-field-point.js"></script>
   <script src="js/shear/shear-controls.js"></script>
   <script src="js/shear/shear-straight-path.js"></script>
+  <script src="js/shear/shear-circular-path.js"></script>
 
 </head>
 <body>
@@ -59,6 +60,15 @@
         <input type="number" min="0.0" max="1.0" step="0.05" class="form-control" id="velocity" placeholder="(1.0 is c)">
         <label for="acceleration">Acceleration</label>
         <input type="number" min="0.0" max="1.0" step="0.05" class="form-control" id="acceleration" placeholder="(1.0 is c)">
+      </div>
+      <div class="form-group">
+        <label>
+          <input id="use-radius" type="checkbox" value="circular" checked>
+          Circular path
+        </label>
+        <br/>
+        <label for="radius">Radius</label>
+        <input type="number" step="0.05" class="form-control" id="radius" placeholder="Light seconds">
       </div>
       <button type="submit" class="btn pause-play-button">Run</button>
     </form>
@@ -77,6 +87,14 @@
       <div class="line">
         <div class="shear-label">Acceleration</div>
         <div class="shear-value acceleration">0</div>
+      </div>
+      <div class="line">
+        <div class="shear-label">Distance traveled</div>
+        <div class="shear-value distance">0</div>
+      </div>
+      <div class="line">
+        <div class="shear-label">Angle</div>
+        <div class="shear-value angle">0</div>
       </div>
     </div>
   </div>

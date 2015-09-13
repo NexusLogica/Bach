@@ -4,29 +4,56 @@
 
 var Shear = Shear || {};
 
-Shear.StraightPath = function() {
+Shear.CircularPath = function() {
 
 };
 
-Shear.StraightPath.prototype.configure = function(config) {
+Shear.CircularPath.prototype.configure = function(config) {
   this.initialVelocity = config.initialVelocity;
   this.accelerationX = config.acceleration;
+  this.radius = config.radius;
+
+  this.center = new Bach.Vector(0.0, -this.radius, 0.0);
 };
 
-Shear.StraightPath.prototype.position = function(t) {
-  var pos = new Bach.Vector(t*this.initialVelocity+0.5*this.accelerationX*t*t);
-  pos.x = -pos.x;
+Shear.CircularPath.prototype.position = function(t) {
+  var distanceTraveled = this.distanceTraveled(t);
+
+  var circumference = 2.0*Math.PI*this.radius;
+  var angle = distanceTraveled/circumference*360;
+  var radians = Math.PI*angle/180;
+
+  var pos = new Bach.Vector(this.radius*Math.sin(radians), this.radius*Math.cos(radians)+this.radius);
   return pos;
 };
 
-Shear.StraightPath.prototype.velocity = function(t) {
-  var vel = new Bach.Vector(this.initialVelocity+this.accelerationX*t, 0);
-  vel.x = -vel.x;
+Shear.CircularPath.prototype.velocity = function(t) {
+  var distanceTraveled = this.distanceTraveled(t);
+
+  var circumference = 2.0*Math.PI*this.radius;
+  var angle = distanceTraveled/circumference*360;
+  var radians = Math.PI*angle/180;
+
+  var speed = this.initialVelocity+this.accelerationX*t;
+  var vel = new Bach.Vector(speed*Math.sin(radians+Math.PI/2), speed*Math.cos(radians+Math.PI/2));
   return vel;
 };
 
-Shear.StraightPath.prototype.acceleration = function(t) {
+Shear.CircularPath.prototype.acceleration = function(t) {
   var accel = new Bach.Vector(this.accelerationX, 0);
-  accel.x = -accel.x;
   return accel;
+};
+
+Shear.CircularPath.prototype.rotation = function(t) {
+  var distanceTraveled = this.distanceTraveled(t);
+
+  var circumference = 2.0*Math.PI*this.radius;
+  var angle = distanceTraveled/circumference*360;
+  var radians = Math.PI*angle/180;
+
+  return radians;
+};
+
+Shear.CircularPath.prototype.distanceTraveled = function(t) {
+  return this.initialVelocity*t+0.5*this.accelerationX*t*t;
 };

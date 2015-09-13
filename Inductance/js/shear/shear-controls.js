@@ -17,8 +17,15 @@ Shear.Controls.prototype.initialize = function(runParent, $root) {
   var acceleration = localStorage.getItem('lastAcceleration') || 0.0;
   this.$root.find('#acceleration').val(acceleration);
 
+  var radius = localStorage.getItem('lastRadius') || 1.0;
+  this.$root.find('#radius').val(radius);
+
+  var useRadius = (localStorage.getItem('lastUseRadius') === 'true');
+  this.$root.find('#use-radius').prop('checked', useRadius);
+  if(!useRadius) { this.$root.find('#radius').prop('disabled', true); }
+
   var _this = this;
-  $root.find('.pause-play-button').on('click', function(event) {
+  this.$root.find('.pause-play-button').on('click', function(event) {
     if(_this.runParent.state === "playing") {
       _this.runParent.pause();
       $(event.target).text('Run');
@@ -30,6 +37,10 @@ Shear.Controls.prototype.initialize = function(runParent, $root) {
     return false;
   });
 
+  this.$root.find('#use-radius').on('change', function() {
+    var checked = _this.$root.find('#use-radius').prop('checked');
+    _this.$root.find('#radius').prop('disabled', !checked);
+  });
 };
 
 Shear.Controls.prototype.validateAndConfigure = function() {
@@ -41,8 +52,20 @@ Shear.Controls.prototype.validateAndConfigure = function() {
 
   var config = {
     "initialVelocity": parseFloat(velocity),
-    "acceleration": parseFloat(acceleration),
-    "pathType": "straight"
+    "acceleration": parseFloat(acceleration)
   };
+
+  var useRadius = this.$root.find('#use-radius').prop('checked');
+  if(useRadius) {
+    config.pathType = 'circular';
+    config.radius = parseFloat(this.$root.find('#radius').val());
+
+    localStorage.setItem('lastRadius', config.radius);
+    localStorage.setItem('lastUseRadius', true);
+  } else {
+    config.pathType = 'straight';
+    localStorage.setItem('lastUseRadius', false);
+  }
+
   this.runParent.configureRunParameters(config);
 };

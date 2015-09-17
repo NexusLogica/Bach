@@ -28,6 +28,13 @@ Shear.StraightPath.prototype.acceleration = function(t) {
   return accel;
 };
 
+Shear.StraightPath.prototype.rotation = function(t) {
+  if(this.initialVelocity >= 0) {
+    return 0;
+  }
+  return Math.PI;
+};
+
 Shear.StraightPath.prototype.distanceTraveled = function(t) {
   return this.initialVelocity*t+0.5*this.accelerationX*t*t;
 };

@@ -17,6 +17,9 @@ Shear.Controls.prototype.initialize = function(runParent, $root) {
   var acceleration = localStorage.getItem('lastAcceleration') || 0.0;
   this.$root.find('#acceleration').val(acceleration);
 
+  var delay = localStorage.getItem('lastDelay') || 0.0;
+  this.$root.find('#delay').val(delay);
+
   var radius = localStorage.getItem('lastRadius') || 1.0;
   this.$root.find('#radius').val(radius);
 
@@ -50,9 +53,13 @@ Shear.Controls.prototype.validateAndConfigure = function() {
   var acceleration = this.$root.find('#acceleration').val();
   localStorage.setItem('lastAcceleration', acceleration);
 
+  var delay = this.$root.find('#delay').val();
+  localStorage.setItem('lastDelay', delay);
+
   var config = {
     "initialVelocity": parseFloat(velocity),
-    "acceleration": parseFloat(acceleration)
+    "acceleration": parseFloat(acceleration),
+    "delay": parseFloat(delay)
   };
 
   var useRadius = this.$root.find('#use-radius').prop('checked');

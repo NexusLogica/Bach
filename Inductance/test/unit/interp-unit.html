@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title>Bach - Relativity</title>
+
+  <base href="../../.." />
+  <link rel="stylesheet" href="lib/bower_components/qunit/qunit/qunit.css"/>
+
+  <script src="lib/bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="lib/bower_components/lodash/dist/lodash.js"></script>
+  <script src="lib/bower_components/lodash-deep/lodash-deep.js"></script>
+  <script src="lib/bower_components/underscore.string/dist/underscore.string.min.js"></script>
+  <script src="lib/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+  <script src="lib/bower_components/bootbox/bootbox.js"></script>
+  <script src="lib/bower_components/javascript-state-machine/state-machine.js"></script>
+  <script src="lib/random/random-0.26.js"></script>
+  <script src="lib/bower_components/q/q.js"></script>
+  <script src="lib/bower_components/svg.js/dist/svg.js"></script>
+  <script src="lib/bower_components/signals/dist/signals.js"></script>
+  <script src="lib/bower_components/toastr/toastr.js"></script>
+  <script src="lib/bower_components/qunit/qunit/qunit.js"></script>
+
+  <script src="js/inductance.js"></script>
+  <script src="js/vector.js"></script>
+  <script src="js/table-search.js"></script>
+  <script src="js/polynomial-interpolation.js"></script>
+  <script src="js/sampled-data.js"></script>
+  <script src="js/relativistic-point.js"></script>
+
+  <script>
+    QUnit.test('Vector object', function(assert) {
+      var v1 = new Bach.Vector(1.0, 2.0, 3.0);
+      var v2 = new Bach.Vector(2.0, 2.0, 3.0);
+      equal(v1.y, v2.y, "y for v1 equals v2");
+      notEqual(v1.x, v2.x, "x for v1 does not equal v2");
+
+      var v3 = new Bach.Vector(v1);
+      equal(v1.x, v3.x, "vector copy x");
+
+      assert.near(v1.vectorLength(), Math.sqrt(14.0), 1.0e-10, 'scalar length of v1');
+
+      var v4 = v1.scalarMultiply(2.0);
+      equal(v4.x, 2.0, "scalar multiply of v1 x");
+      equal(v4.y, 4.0, "scalar multiply of v1 y");
+      equal(v4.z, 6.0, "scalar multiply of v1 z");
+
+      var v5 = v1.scalarAdd(2.0);
+      equal(v5.x, 3.0, "scalar add of v1 x");
+      equal(v5.y, 4.0, "scalar add of v1 y");
+      equal(v5.z, 5.0, "scalar add of v1 z");
+
+      var v6 = v1.add(v2);
+      equal(v6.x, 3.0, "add of v1 and v2 x");
+      equal(v6.y, 4.0, "add of v1 and v2 y");
+      equal(v6.z, 6.0, "add of v1 and v2 z");
+
+      v3.normalize();
+      equal(v3.x, 1.0/Math.sqrt(14.0), "v3 normalized x");
+      equal(v3.y, 2.0/Math.sqrt(14.0), "v3 normalized y");
+      equal(v3.z, 3.0/Math.sqrt(14.0), "v3 normalized z");
+
+      var dp = v1.dotProduct(v2);
+      equal(dp, 15.0, "v1 dotProduct v2");
+
+      var d = v1.distance(v2.scalarMultiply(2.0));
+      equal(dp, 15.0, "v1 dotProduct v2");
+
+      var v7 = v2.clone();
+      equal(v7.x, 2.0, "clone v2 x");
+      equal(v7.y, 2.0, "clone v2 y");
+      equal(v7.z, 3.0, "clone v2 z");
+
+      var v8 = v1.applyToNew(function(r) { return r*r; });
+      equal(v8.x, 1.0, "applyToNew v1.x^2");
+      equal(v8.y, 4.0, "applyToNew v1.y^2");
+      equal(v8.z, 9.0, "applyToNew v1.z^2");
+    });
+
+    QUnit.test('Table search', function(assert) {
+      var search = new Bach.TableSearch();
+      var table = [ 0.0 ];
+      for(var i=1; i<10; i++) {
+        table[i] = table[i-1]+0.1;
+      }
+
+      var index = search.find(0.01, table);
+      equal(index, 0, "index near the front is 0");
+
+      index = search.find(table[table.length-1]-0.001, table);
+      equal(index, table.length-2, "index near the end is length-2");
+
+      index = search.find(table[2]+0.001, table);
+      equal(index, 2, "index at 2");
+
+      index = search.find(table[5]+0.001, table);
+      equal(index, 5, "index at 5");
+
+      index = search.find(table[2]+0.001, table);
+      equal(index, 2, "index at 2 - again");
+
+      index = search.find(-0.01, table);
+      equal(index, -1, "index near the front is -1");
+
+      index = search.find(table[table.length-1]+0.001, table);
+      equal(index, table.length-1, "index past end is length-1");
+    });
+
+    QUnit.test('Polynomial interpolation', function(assert) {
+      var maxErrorEstimate = 0.005;
+
+      var vx = [0.1, 0.2, 0.3];
+      var vy = vx.map(function(r) { return Math.sin(r); });
+
+      var interp = new Bach.PolynomialInterpolation;
+      var out = interp.interpolate(vx[0], vx, vy, 0);
+      equal(out, vy[0], "target is x[0]");
+      out = interp.interpolate(vx[1], vx, vy, 0);
+      equal(out, vy[1], "target is x[1]");
+      out = interp.interpolate(vx[2], vx, vy, 0);
+      equal(out, vy[2], "target is x[2]");
+
+      out = interp.interpolate(0.5*(vx[1]+vx[0]), vx, vy, 0);
+      assert.near(out, Math.sin(0.5*(vx[1]+vx[0])), interp.errorEstimate, "target is between x[0] and x[1] +/-"+interp.errorEstimate);
+      assert.lessThan(interp.errorEstimate, maxErrorEstimate, "error estimate is small for target between x[0] and x[1]");
+
+      out = interp.interpolate(0.5*(vx[2]+vx[1]), vx, vy, 0);
+      assert.near(out, Math.sin(0.5*(vx[2]+vx[1])), interp.errorEstimate, "target is between x[1] and x[2] +/-"+interp.errorEstimate);
+      assert.lessThan(interp.errorEstimate, maxErrorEstimate, "error estimate is small for target between x[1] and x[2]");
+
+      var rand = new Random(42);
+      vx = [];
+      vy = [];
+      var diff;
+      var x = 0.0;
+      for(var i=0; i<10; i++) {
+        do {
+          diff = rand.normal(0.1, 0.05);
+        } while(diff < 0.0);
+        x += diff;
+        vx.push(x);
+        vy.push(Math.sin(x));
+      }
+
+      var search = new Bach.TableSearch();
+
+      var iterations = 100;
+      var min = vx[0];
+      var max = vx[vx.length-1];
+      var target, index, result;
+      for(var j=0; j<iterations; j++) {
+        target = (max-min)*rand.random(min, max)+min;
+        index = search.find(target, vx);
+        if(index > vx.length-3) {
+          index = vx.length-3;
+        }
+        result = interp.interpolate(target, vx, vy, index);
+
+        assert.near(result, Math.sin(target), interp.errorEstimate, "target["+j+"] is "+target);
+        assert.lessThan(interp.errorEstimate, maxErrorEstimate, "error estimate is "+interp.errorEstimate);
+      }
+
+      vx = [];
+      var vyy = [ [], [], [] ];
+      var funcs = [
+        function(x) { return Math.sin(x); },
+        function(x) { return x*x; },
+        function(x) { return 3.0*Math.cos(x); }
+      ];
+
+      x = -0.2;
+      for(i=1; i<12; i++) {
+        do {
+          diff = rand.normal(0.2, 0.15);
+        } while(diff < 0.0);
+        x += diff;
+        vx.push(x);
+        for(var ii = 0; ii<funcs.length; ii++) {
+          vyy[ii].push(funcs[ii](x));
+        }
+      }
+
+      min = vx[0];
+      max = vx[vx.length-1];
+      var maxError = [ 0.0, 0.0, 0.0];
+      var maxErrorEstimates = [ 0.060, 0.14, 0.192 ];
+      for(j=0; j<iterations; j++) {
+        target = (max-min)*rand.random(min, max)+min;
+        index = search.find(target, vx);
+
+        if(index > vx.length-3) {
+          index = vx.length-3;
+        }
+
+        result = interp.interpolateArrayOfVectors(target, vx, vyy, index);
+
+        for(var k=0; k<vyy.length; k++) {
+          var error = Math.abs(result[k]-funcs[k](target));
+          if(error > maxError[k]) {
+            maxError[k] = error;
+          }
+          assert.near(result[k], funcs[k](target), interp.errorEstimateVector[k]*5.0, "target["+j+"]["+k+"] at " + target+" -> "+result[k]+" vs exact "+funcs[k](target));
+          assert.lessThan(Math.abs(interp.errorEstimateVector[k]), maxErrorEstimates[k], "error estimate["+j+"]["+k+"] is " + interp.errorEstimateVector[k]);
+        }
+
+        // For use in verifying curves...
+        // console.log(target+"\t"+result[0]+"\t"+result[1]+"\t"+result[2]);
+      }
+
+      assert.lessThan(maxError[0], 0.007, "Maximum error of curve 0");
+      assert.lessThan(maxError[1], 0.000001, "Maximum error of curve 1");
+      assert.lessThan(maxError[2], 0.0193, "Maximum error of curve 2");
+      //console.log("Max errors: "+maxError[0]+"/"+maxError[1]+"/"+maxError[2]);
+    });
+
+    QUnit.test('Sampled data', function(assert) {
+      var maxErrorEstimate = 0.005;
+      var sampledData = new Bach.SampledData(3);
+      var rand = new Random(42);
+
+      var iterations = 100;
+      var target, index, result, diff;
+
+      var funcs = [
+        function(x) { return Math.sin(x); },
+        function(x) { return x*x; },
+        function(x) { return 3.0*Math.cos(x); }
+      ];
+      var x = -0.2;
+      for(var i=0; i<12; i++) {
+        do {
+          diff = rand.normal(0.2, 0.15);
+        } while(diff < 0.0);
+        x += diff;
+        var y = [];
+        for(var ii = 0; ii<funcs.length; ii++) {
+          y.push(funcs[ii](x));
+        }
+        sampledData.append(x, y);
+      }
+
+      var min = sampledData.x[0];
+      var max = sampledData.x[sampledData.x.length-1];
+      var maxError = [ 0.0, 0.0, 0.0];
+      var maxErrorEstimates = [ 0.060, 0.14, 0.192 ];
+      for(var j=0; j<iterations; j++) {
+        target = (max-min)*rand.random(min, max)+min;
+        result = sampledData.retrieve(target);
+
+        for(var k=0; k<result.length; k++) {
+          var error = Math.abs(result[k]-funcs[k](target));
+          if(error > maxError[k]) {
+            maxError[k] = error;
+          }
+          assert.near(result[k], funcs[k](target), sampledData.interp.errorEstimateVector[k]*5.0, "target["+j+"]["+k+"] at " + target+" -> "+result[k]+" vs exact "+funcs[k](target));
+          assert.lessThan(sampledData.interp.errorEstimateVector[k], maxErrorEstimates[k], "error estimate["+j+"]["+k+"] is " + sampledData.interp.errorEstimateVector[k]);
+        }
+
+        // For use in verifying curves...
+        // console.log(target+"\t"+result[0]+"\t"+result[1]+"\t"+result[2]);
+      }
+
+      assert.lessThan(maxError[0], 0.007, "Maximum error of curve 0");
+      assert.lessThan(maxError[1], 0.000001, "Maximum error of curve 1");
+      assert.lessThan(maxError[2], 0.0193, "Maximum error of curve 2");
+      //console.log("Max errors: "+maxError[0]+"/"+maxError[1]+"/"+maxError[2]);
+    });
+
+  </script>
+
+</head>
+<body>
+  <div id="qunit"></div>
+</body>
+</html>

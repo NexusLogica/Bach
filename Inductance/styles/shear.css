@@ -1,0 +1,38 @@
+body {
+  background-color: #f2ddb6; }
+
+.page-title {
+  color: white;
+  font-family: "Raleway", sans-serif; }
+  .page-title .subtitle {
+    font-weight: 100; }
+
+.shear-controls {
+  position: absolute;
+  top: 30px;
+  left: 20px;
+  width: 200px;
+  height: 500px;
+  background-color: #f9f5f0;
+  border: solid 1px #555459;
+  padding: 10px 10px; }
+
+.shear-stats {
+  position: absolute;
+  top: 10px;
+  left: 10px; }
+  .shear-stats .line .shear-label {
+    display: inline-block;
+    width: 120px; }
+  .shear-stats .line .shear-value {
+    display: inline-block;
+    width: 100px; }
+
+.shear-canvas-container {
+  position: relative;
+  box-sizing: border-box;
+  margin: 10px auto;
+  background-color: #fcfaf7;
+  width: 900px;
+  height: 700px;
+  border: #555459 1px solid; }

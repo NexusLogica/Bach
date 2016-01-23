@@ -4,6 +4,9 @@
 *.o
 *.obj
 
+# Xcode
+xcuserdata/
+
 # Precompiled Headers
 *.gch
 *.pch
@@ -38,3 +41,16 @@ Study/Betatron/Src/Lib/jsoncpp-master
 Study/Study.xcworkspace/xcuserdata
 Study/Study.xcworkspace/xcshareddata
 Study/Betatron/Betatron.xcodeproj/xcuserdata
+
+# Inductance
+Inductance/lib/bower_components
+
+
+logs/*
+!.gitkeep
+.idea
+.DS_Store
+.sass-cache
+src/lib/bower_components
+src/npm-debug.log
+node_modules/

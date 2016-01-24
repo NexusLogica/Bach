@@ -122,13 +122,14 @@
     // smooth my curve over this many points
     var numPoints = 100;
 
+    var scale = 0.2;
     var pts = [
       [0, 0, 0],
-      [0, 2, 0],
-      [1.5, 1.5, 0],
-      [1.50, .50, 0],
-      [2.50, 1.00, 0],
-      [2.50, 3.00, 0]
+      [0, 2*scale, 0],
+      [1.5*scale, 1.5*scale, 0],
+      [1.50*scale, .50*scale, 0],
+      [2.50*scale, 1.00*scale, 0],
+      [2.50*scale, 3.00*scale, 0]
     ];
 
     var spline = new Bach.DynamicSpline({
@@ -136,6 +137,21 @@
       color: 0xff0000,
       dock: relativityScene.scene
     });
+
+    var start = (new Date()).getTime();
+    relativityScene.addBeforeRenderListener(function() {
+      var elapsed = (new Date()).getTime()-start;
+      var ptsCopy = [];
+      for(var i=0; i<pts.length; i++) {
+        var x = pts[i][0];
+        var y = pts[i][1];
+        var z = pts[i][2];
+        ptsCopy.push([x+y*0.2*Math.sin(elapsed*0.01), y, z]);
+      }
+
+      spline.updatePoints(ptsCopy);
+    });
+
 
     var tStart = 0.0;
     var t = tStart;

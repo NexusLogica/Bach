@@ -19,7 +19,7 @@ Bach = Bach || {};
  */
 Bach.DynamicSpline = function(configuration) {
   this.config = _.clone(configuration);
-  this.initialNumPoints = this.config.initialNumPoints || 50;
+  this.initialNumPoints = this.config.initialNumPoints || 100;
   this.points = this.config.points || [];
   this.color = this.config.hasOwnProperty('color') ? this.config.color: 0xff0000;
   this.lineWidth = this.config.hasOwnProperty('lineWidth') ? this.config.lineWidth: 2;
@@ -35,15 +35,15 @@ Bach.DynamicSpline = function(configuration) {
 };
 
 Bach.DynamicSpline.prototype.create3dObjects = function() {
-  this.geometry = new THREE.Geometry();
-  //this.geometry = new THREE.BufferGeometry();
+  //this.geometry = new THREE.Geometry();
+  this.geometry = new THREE.BufferGeometry();
 
   // There are 3 vertices per point.
-  //var positions = new Float32Array(this.initialNumPoints*3);
-  //this.geometry.addAttribute('position', new THREE.BufferAttribute(positions, 3));
-  //
-  //var drawCount = this.points.length;
-  //this.geometry.setDrawRange(0, drawCount);
+  var positions = new Float32Array(this.initialNumPoints*3);
+  this.geometry.addAttribute('position', new THREE.BufferAttribute(positions, 3));
+
+  var drawCount = this.points.length;
+  this.geometry.setDrawRange(0, drawCount);
 
   // material
   this.material = new THREE.LineBasicMaterial({ color: this.color, linewidth: this.lineWidth });
@@ -55,7 +55,6 @@ Bach.DynamicSpline.prototype.create3dObjects = function() {
 
 Bach.DynamicSpline.prototype.updatePoints = function(points) {
   this.points = points;
-  //var positions = this.geometry.attributes.position.array;
   var n = this.points.length;
 
   var ptArray = [];
@@ -66,8 +65,18 @@ Bach.DynamicSpline.prototype.updatePoints = function(points) {
 
   var curve = new THREE.SplineCurve3(ptArray);
 
-  this.geometry.vertices = curve.getPoints( 50 );
+  this.displayPoints = 50;
+  var curvePts = curve.getPoints(this.displayPoints);
 
-//  this.geometry.attributes.position.needsUpdate = true;
-//  this.geometry.setDrawRange(0, n);
+  var ps = this.geometry.attributes.position.array;
+  var j = 0;
+  for(i=0; i<curvePts.length; i++) {
+    var cpt = curvePts[i];
+    ps[j++] = cpt.x;
+    ps[j++] = cpt.y;
+    ps[j++] = cpt.z;
+  }
+
+  this.geometry.attributes.position.needsUpdate = true;
+  this.geometry.setDrawRange(0, this.displayPoints);
 };

@@ -60,7 +60,7 @@ Bach.RelativityScene.prototype.addBeforeRenderListener = function(onBefore) {
  * Removed a previously added function that is called before each render.
  * @param {Function} onBefore
  */
-Bach.RelativityScene.prototype.addBeforeRenderListener = function(onBefore) {
+Bach.RelativityScene.prototype.removeBeforeRenderListener = function(onBefore) {
   this.beforeRenderSignal.remove(onBefore);
 };
 

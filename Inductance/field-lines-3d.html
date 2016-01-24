@@ -8,8 +8,7 @@
   <link href='http://fonts.googleapis.com/css?family=Anonymous+Pro:400,700' rel='stylesheet' type='text/css'>
   <link href='http://fonts.googleapis.com/css?family=Overlock|Amatic+SC|Share|Love+Ya+Like+A+Sister|Roboto+Condensed:400,300|Roboto:400,100,300,500' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="lib/bower_components/bootstrap/dist/css/bootstrap.css"/>
-  <link rel="stylesheet" href="styles/inductance.css"/>
-  <link rel="stylesheet" href="styles/shear.css"/>
+  <link rel="stylesheet" href="styles/bach-common.css"/>
 
   <script src="lib/bower_components/jquery/dist/jquery.min.js"></script>
   <script src="lib/bower_components/lodash/dist/lodash.js"></script>
@@ -22,7 +21,7 @@
   <script src="lib/bower_components/q/q.js"></script>
   <script src="lib/bower_components/svg.js/dist/svg.js"></script>
   <script src="lib/bower_components/sprintf/dist/sprintf.min.js"></script>
-  <script src="lib/bower_components/signals/dist/signals.min.js"></script>
+  <script src="lib/bower_components/signals/dist/signals.js"></script>
   <script src="lib/bower_components/toastr/toastr.js"></script>
   <script src="lib/bower_components/threejs/build/three.js"></script>
   <script src="lib/bower_components/threejs/examples/js/controls/EditorControls.js"></script>
@@ -38,6 +37,7 @@
   <script src="js/relativistic-cube.js"></script>
   <script src="js/graphics/relativity-scene.js"></script>
   <script src="js/graphics/relativistic-grid.js"></script>
+  <script src="js/graphics/dynamic-spline.js"></script>
 
   <script src="js/shear/shear-model.js"></script>
   <script src="js/shear/shear-simulation.js"></script>
@@ -76,7 +76,7 @@
     </form>
   </div>
 
-  <div class="shear-canvas-container">
+  <div class="scene-container">
     <div class="shear-stats">
       <div class="line">
         <div class="shear-label">Time</div>
@@ -103,19 +103,6 @@
 
   <script>
 
-    var shearRun = new Shear.Run();
-    shearRun.initialize($('.shear-canvas-container'), $('.shear-controls'));
-
-/*
-    var cube = new Bach.RelativisticCube({
-      initial: new Bach.Vector(0, 0, 0),
-      direction: new Bach.Vector(-5, 0, 0),
-      speed: 0.75,
-      size: new Bach.Vector(0.25, 0.25, 0.25)
-    });
-
-    cube.calculateObserverTime(0.0, 4.0, new Bach.Vector(0, 0, 0), 0.10);
-
     var relativityScene = new Bach.RelativityScene();
     relativityScene.create({
       containerElement: $('.scene-container'),
@@ -123,35 +110,46 @@
     });
 
 
-    var cubeGraphic = new Bach.Inductance3D.RelativisticGrid();
-    cubeGraphic.create({
-      points: cube.points,
-      follow: Bach.Inductance3D.FollowRelativistic,
-      connectionSets: cube.connectionSets
-    });
-
 //    var cubeGraphic = new Bach.Inductance3D.RelativisticGrid();
 //    cubeGraphic.create({
 //      points: cube.points,
-//      follow: Bach.Inductance3D.FollowUniversal,
+//      follow: Bach.Inductance3D.FollowRelativistic,
 //      connectionSets: cube.connectionSets
 //    });
-//
-    relativityScene.scene.add(cubeGraphic.threeJsLine);
+
+//    relativityScene.scene.add(cubeGraphic.threeJsLine);
+
+    // smooth my curve over this many points
+    var numPoints = 100;
+
+    var pts = [
+      [0, 0, 0],
+      [0, 2, 0],
+      [1.5, 1.5, 0],
+      [1.50, .50, 0],
+      [2.50, 1.00, 0],
+      [2.50, 3.00, 0]
+    ];
+
+    var spline = new Bach.DynamicSpline({
+      points: pts,
+      color: 0xff0000,
+      dock: relativityScene.scene
+    });
 
     var tStart = 0.0;
     var t = tStart;
     var tEnd = 1.0;
     var tInc = 0.01;
     var onRenderFunction = function() {
-      cubeGraphic.updateVertices(t);
+//      cubeGraphic.updateVertices(t);
       t += tInc;
       if(t > tEnd) {
         t = tStart;
       }
     };
     relativityScene.renderContinuously(onRenderFunction);
-*/
+
   </script>
 </body>
 </html>

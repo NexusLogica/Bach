@@ -24,7 +24,9 @@ Bach.RelativityScene.prototype.create = function(config) {
     this.scale = config.scale;
   }
 
-  this.renderer = new THREE.WebGLRenderer(); //{ antialias: true });
+  this.beforeRenderSignal = new signals.Signal();
+
+  this.renderer = new THREE.WebGLRenderer({ antialias: true });
   this.width = config.containerElement.innerWidth();
   this.height = config.containerElement.innerHeight();
   this.renderer.setViewport(0, 0, this.width, this.height);
@@ -46,6 +48,24 @@ Bach.RelativityScene.prototype.create = function(config) {
 };
 
 /***
+ * Adds a function that is called before each render.
+ * @param {Function} onBefore - Called with 'this' as the only argument.
+ */
+Bach.RelativityScene.prototype.addBeforeRenderListener = function(onBefore) {
+  this.beforeRenderSignal.add(onBefore);
+};
+
+
+/***
+ * Removed a previously added function that is called before each render.
+ * @param {Function} onBefore
+ */
+Bach.RelativityScene.prototype.addBeforeRenderListener = function(onBefore) {
+  this.beforeRenderSignal.remove(onBefore);
+};
+
+
+/***
  * @method renderContinuously
  */
 Bach.RelativityScene.prototype.renderContinuously = function(onRenderFunction) {
@@ -65,9 +85,10 @@ Bach.RelativityScene.prototype.renderContinuously = function(onRenderFunction) {
 };
 
 /***
- * @method renderContinuously
+ * Do the actual render.
  */
 Bach.RelativityScene.prototype.render = function() {
+  this.beforeRenderSignal.dispatch(this);
   this.renderer.render(this.scene, this.camera);
 };
 

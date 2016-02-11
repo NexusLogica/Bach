@@ -39,15 +39,11 @@
   <script src="js/graphics/relativistic-grid.js"></script>
   <script src="js/graphics/dynamic-spline.js"></script>
 
-  <script src="js/shear/shear-model.js"></script>
-  <script src="js/shear/shear-simulation.js"></script>
-  <script src="js/shear/shear-graphics.js"></script>
-  <script src="js/shear/shear-run.js"></script>
-  <script src="js/shear/shear-particle.js"></script>
-  <script src="js/shear/shear-field-point.js"></script>
-  <script src="js/shear/shear-controls.js"></script>
-  <script src="js/shear/shear-straight-path.js"></script>
-  <script src="js/shear/shear-circular-path.js"></script>
+  <script src="js/field/charged-particle.js"></script>
+  <script src="js/field/field-line.js"></script>
+  <script src="js/field/field-point.js"></script>
+  <script src="js/field/trajectories/straight-trajectory.js"></script>
+  <script src="js/simulations/straight-particle-simulation.js"></script>
 
 </head>
 <body>
@@ -103,68 +99,60 @@
 
   <script>
 
-    var relativityScene = new Bach.RelativityScene();
-    relativityScene.create({
+    var straightParticle = new Bach.StraightParticleSimulation({
       containerElement: $('.scene-container'),
       showGrid: true
     });
 
 
-//    var cubeGraphic = new Bach.Inductance3D.RelativisticGrid();
-//    cubeGraphic.create({
-//      points: cube.points,
-//      follow: Bach.Inductance3D.FollowRelativistic,
-//      connectionSets: cube.connectionSets
+
+
+//    // smooth my curve over this many points
+//    var numPoints = 100;
+//
+//    var scale = 0.2;
+//    var pts = [
+//      [0, 0, 0],
+//      [0, 2*scale, 0],
+//      [1.5*scale, 1.5*scale, 0],
+//      [1.50*scale, .50*scale, 0],
+//      [2.50*scale, 1.00*scale, 0],
+//      [2.50*scale, 3.00*scale, 0]
+//    ];
+//
+//    var spline = new Bach.DynamicSpline({
+//      points: pts,
+//      color: 0xff0000,
+//      dock: relativityScene.scene,
+//      lineWidth: 6
 //    });
-
-//    relativityScene.scene.add(cubeGraphic.threeJsLine);
-
-    // smooth my curve over this many points
-    var numPoints = 100;
-
-    var scale = 0.2;
-    var pts = [
-      [0, 0, 0],
-      [0, 2*scale, 0],
-      [1.5*scale, 1.5*scale, 0],
-      [1.50*scale, .50*scale, 0],
-      [2.50*scale, 1.00*scale, 0],
-      [2.50*scale, 3.00*scale, 0]
-    ];
-
-    var spline = new Bach.DynamicSpline({
-      points: pts,
-      color: 0xff0000,
-      dock: relativityScene.scene
-    });
-
-    var start = (new Date()).getTime();
-    relativityScene.addBeforeRenderListener(function() {
-      var elapsed = (new Date()).getTime()-start;
-      var ptsCopy = [];
-      for(var i=0; i<pts.length; i++) {
-        var x = pts[i][0];
-        var y = pts[i][1];
-        var z = pts[i][2];
-        ptsCopy.push([x+y*0.2*Math.sin(elapsed*0.01), y, z]);
-      }
-
-      spline.updatePoints(ptsCopy);
-    });
-
-
-    var tStart = 0.0;
-    var t = tStart;
-    var tEnd = 1.0;
-    var tInc = 0.01;
-    var onRenderFunction = function() {
-//      cubeGraphic.updateVertices(t);
-      t += tInc;
-      if(t > tEnd) {
-        t = tStart;
-      }
-    };
-    relativityScene.renderContinuously(onRenderFunction);
+//
+//    var start = (new Date()).getTime();
+//    relativityScene.addBeforeRenderListener(function() {
+//      var elapsed = (new Date()).getTime()-start;
+//      var ptsCopy = [];
+//      for(var i=0; i<pts.length; i++) {
+//        var x = pts[i][0];
+//        var y = pts[i][1];
+//        var z = pts[i][2];
+//        ptsCopy.push([x+y*0.2*Math.sin(elapsed*0.005), y, z]);
+//      }
+//
+//      spline.updatePoints(ptsCopy);
+//    });
+//
+//
+//    var tStart = 0.0;
+//    var t = tStart;
+//    var tEnd = 1.0;
+//    var tInc = 0.01;
+//    var onRenderFunction = function() {
+////      cubeGraphic.updateVertices(t);
+//      t += tInc;
+//      if(t > tEnd) {
+//        t = tStart;
+//      }
+//    };
 
   </script>
 </body>

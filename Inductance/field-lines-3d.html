@@ -100,8 +100,8 @@
 
   <script>
 
-    var distance = 0.01;     // meters
-    var speed = 0.01;        // C
+    var distance = 1.0*Bach.C;     // meters
+    var speed = 1.0;        // C
     var t = distance/(speed*Bach.C); // dist / (dist/time) -> m/(m/s) -> s
 
     var straightParticle = new Bach.ParticleSimulation({
@@ -116,7 +116,8 @@
       }),
       renderer: {
         containerElement: $('.scene-container'),
-        showGrid: true
+        showGrid: false,
+        showAxisOrigin: false
       }
     });
 

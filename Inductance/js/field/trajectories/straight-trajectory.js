@@ -32,7 +32,7 @@ BachField.StraightTrajectory = function(config) {
 
 BachField.StraightTrajectory.prototype.updatePosition = function(time) {
   var currentTime = time;
-  var currentPosition = this.initialPosition.addScaledVector(this.initialDirection, this.initialSpeed*time+0.5*this.acceleration*time*time);
+  var currentPosition = this.initialPosition.clone().addScaledVector(this.initialDirection, this.initialSpeed*time+0.5*this.acceleration*time*time);
   var currentVelocity = this.initialDirection.clone().multiplyScalar(this.initialSpeed+this.acceleration*time);
   var currentAcceleration = this.initialDirection.clone().multiplyScalar(this.acceleration);
 

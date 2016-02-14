@@ -38,7 +38,11 @@ Bach.RelativityRenderer = function(config) {
   this.camera.translateZ(-0.8*this.baseScale);
   this.camera.translateY(0.4*this.baseScale);
   this.addDefaultLighting(this.scene);
-  this.addAxisMarker();
+
+  if(this.config.showAxisOrigin) {
+    this.addAxisMarker();
+  }
+
   if(this.config.debugCloud) {
     this.createDebugCloud();
   }

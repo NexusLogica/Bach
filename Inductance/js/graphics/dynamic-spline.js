@@ -13,8 +13,9 @@ Bach = Bach || {};
 /***
  * Create the spline object and add it to the scene.
  * @param configuration
- * @param configuration.initialNumPoints {Number} - Number of points in initial buffer. If exceeded the buffer will be resized.
- * @param configuration.points {Array} - Optional, an array of points to plot
+ * @param {Number} configuration.initialNumPoints - Number of points in initial buffer. If exceeded the buffer will be resized.
+ * @param {Array} configuration.points - An array THREE.Vector3 points to plot. This can initially be zero length.
+ * @param configuration.parent3d
  * @constructor
  */
 Bach.DynamicSpline = function(configuration) {
@@ -29,8 +30,8 @@ Bach.DynamicSpline = function(configuration) {
     this.updatePoints(this.points);
   }
 
-  if(this.config.dock) {
-    this.config.dock.add(this.line);
+  if(this.config.parent3d) {
+    this.config.parent3d.add(this.curve);
   }
 };
 
@@ -49,28 +50,23 @@ Bach.DynamicSpline.prototype.create3dObjects = function() {
   this.material = new THREE.LineBasicMaterial({ color: this.color, linewidth: this.lineWidth });
 
   // line
-  this.line = new THREE.Line(this.geometry,  this.material);
-  this.config.dock.add(this.line);
+  this.curve = new THREE.Line(this.geometry,  this.material);
+  this.config.parent3d.add(this.curve);
 };
 
+/***
+ * Update the rendered curve with new points.
+ * @param points - An array of THREE.Vector3 points to be interpolated and rendered.
+ */
 Bach.DynamicSpline.prototype.updatePoints = function(points) {
-  this.points = points;
-  var n = this.points.length;
-
-  var ptArray = [];
-  for(var i=0; i<n; i++) {
-    var pt = this.points[i];
-    ptArray.push(new THREE.Vector3(pt[0], pt[1], pt[2]));
-  }
-
-  var curve = new THREE.SplineCurve3(ptArray);
+  var curve = new THREE.CatmullRomCurve3(points);
 
   this.displayPoints = 50;
   var curvePts = curve.getPoints(this.displayPoints);
 
   var ps = this.geometry.attributes.position.array;
   var j = 0;
-  for(i=0; i<curvePts.length; i++) {
+  for(var i=0; i<curvePts.length; i++) {
     var cpt = curvePts[i];
     ps[j++] = cpt.x;
     ps[j++] = cpt.y;

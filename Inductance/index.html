@@ -29,6 +29,7 @@
   <script src="lib/bower_components/threejs/examples/js/controls/TransformControls.js"></script>
   <script src="lib/bower_components/threejs/examples/js/controls/OrbitControls.js"></script>
 
+  <script src="js/bach.js"></script>
   <script src="js/inductance.js"></script>
   <script src="js/vector.js"></script>
   <script src="js/table-search.js"></script>
@@ -116,8 +117,8 @@
 
     cube.calculateObserverTime(0.0, 4.0, new Bach.Vector(0, 0, 0), 0.10);
 
-    var relativityScene = new Bach.RelativityScene();
-    relativityScene.create({
+    var relativityRenderer = new Bach.RelativityRenderer();
+    relativityRenderer.create({
       containerElement: $('.scene-container'),
       showGrid: true
     });
@@ -137,7 +138,7 @@
 //      connectionSets: cube.connectionSets
 //    });
 //
-    relativityScene.scene.add(cubeGraphic.threeJsLine);
+    relativityRenderer.scene.add(cubeGraphic.threeJsLine);
 
     var tStart = 0.0;
     var t = tStart;
@@ -150,7 +151,7 @@
         t = tStart;
       }
     };
-    relativityScene.renderContinuously(onRenderFunction);
+    relativityRenderer.renderContinuously(onRenderFunction);
 */
   </script>
 </body>

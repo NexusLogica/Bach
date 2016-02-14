@@ -18,11 +18,15 @@ BachField.FieldLine = function(config) {
   this.points = [];
 };
 
-BachField.FieldLine.prototype.addPoint = function(time, particle) {
-  this.points.push(new BachField.FieldPoint(
+/***
+ * Add a new field point at time 'time' and using the particles current state.
+ * @param time
+ * @param particle
+ */
+BachField.FieldLine.prototype.addPoint = function(time, particleState) {
+  this.points.push(new BachField.FieldPoint({
     direction: this.direction.clone(),
-    startPoint: particle. config.startPoint;
-    startTime = config.startTime;
-
-  ));
+    startPoint: particleState.position.clone(),
+    startTime: time
+  }));
 };

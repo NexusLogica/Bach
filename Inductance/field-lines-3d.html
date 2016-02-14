@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <title>Bach - Relativity</title>
 
-  <link href='http://fonts.googleapis.com/css?family=Raleway:400,100,200,700' rel='stylesheet' type='text/css'>
-  <link href='http://fonts.googleapis.com/css?family=Anonymous+Pro:400,700' rel='stylesheet' type='text/css'>
-  <link href='http://fonts.googleapis.com/css?family=Overlock|Amatic+SC|Share|Love+Ya+Like+A+Sister|Roboto+Condensed:400,300|Roboto:400,100,300,500' rel='stylesheet' type='text/css'>
+  <!--<link href='http://fonts.googleapis.com/css?family=Raleway:400,100,200,700' rel='stylesheet' type='text/css'>-->
+  <!--<link href='http://fonts.googleapis.com/css?family=Anonymous+Pro:400,700' rel='stylesheet' type='text/css'>-->
+  <!--<link href='http://fonts.googleapis.com/css?family=Overlock|Amatic+SC|Share|Love+Ya+Like+A+Sister|Roboto+Condensed:400,300|Roboto:400,100,300,500' rel='stylesheet' type='text/css'>-->
   <link rel="stylesheet" href="lib/bower_components/bootstrap/dist/css/bootstrap.css"/>
   <link rel="stylesheet" href="styles/bach-common.css"/>
 
@@ -28,6 +28,7 @@
   <script src="lib/bower_components/threejs/examples/js/controls/TransformControls.js"></script>
   <script src="lib/bower_components/threejs/examples/js/controls/OrbitControls.js"></script>
 
+  <script src="js/bach.js"></script>
   <script src="js/inductance.js"></script>
   <script src="js/vector.js"></script>
   <script src="js/table-search.js"></script>
@@ -35,7 +36,7 @@
   <script src="js/sampled-data.js"></script>
   <script src="js/relativistic-point.js"></script>
   <script src="js/relativistic-cube.js"></script>
-  <script src="js/graphics/relativity-scene.js"></script>
+  <script src="js/graphics/relativity-renderer.js"></script>
   <script src="js/graphics/relativistic-grid.js"></script>
   <script src="js/graphics/dynamic-spline.js"></script>
 
@@ -43,7 +44,7 @@
   <script src="js/field/field-line.js"></script>
   <script src="js/field/field-point.js"></script>
   <script src="js/field/trajectories/straight-trajectory.js"></script>
-  <script src="js/simulations/straight-particle-simulation.js"></script>
+  <script src="js/simulations/particle-simulation.js"></script>
 
 </head>
 <body>
@@ -99,9 +100,24 @@
 
   <script>
 
-    var straightParticle = new Bach.StraightParticleSimulation({
-      containerElement: $('.scene-container'),
-      showGrid: true
+    var distance = 0.01;     // meters
+    var speed = 0.01;        // C
+    var t = distance/(speed*Bach.C); // dist / (dist/time) -> m/(m/s) -> s
+
+    var straightParticle = new Bach.ParticleSimulation({
+      endTime: t,
+      stepSize: t/20.0,
+      particle: new BachField.ChargedParticle({
+        trajectory: new BachField.StraightTrajectory({
+          initialDirection: new THREE.Vector3(0.0, 0.0, 1.0),
+          initialSpeed: speed
+        }),
+        fieldLines: []
+      }),
+      renderer: {
+        containerElement: $('.scene-container'),
+        showGrid: true
+      }
     });
 
 
@@ -123,12 +139,12 @@
 //    var spline = new Bach.DynamicSpline({
 //      points: pts,
 //      color: 0xff0000,
-//      dock: relativityScene.scene,
+//      dock: relativityRenderer.scene,
 //      lineWidth: 6
 //    });
 //
 //    var start = (new Date()).getTime();
-//    relativityScene.addBeforeRenderListener(function() {
+//    relativityRenderer.addBeforeRenderListener(function() {
 //      var elapsed = (new Date()).getTime()-start;
 //      var ptsCopy = [];
 //      for(var i=0; i<pts.length; i++) {

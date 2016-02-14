@@ -14,13 +14,15 @@
  * @param {DomElement} config.containerElement - canvas container
  * @constructor
  */
-Bach.RelativityScene = function(config) {
+Bach.RelativityRenderer = function(config) {
   this.config = $.extend({}, config);
 
   this.scene =  new THREE.Scene();
   this.baseScale = this.fromConfig('baseScale', 1.0);
 
-  this.beforeRenderSignal = new signals.Signal();
+  this.signals = {
+    beforeRender: new signals.Signal()
+  };
 
   this.containerElement = config.containerElement;
   this.renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -52,7 +54,7 @@ Bach.RelativityScene = function(config) {
  * Adds a function that is called before each render.
  * @param {Function} onBefore - Called with 'this' as the only argument.
  */
-Bach.RelativityScene.prototype.addBeforeRenderListener = function(onBefore) {
+Bach.RelativityRenderer.prototype.addBeforeRenderListener = function(onBefore) {
   this.beforeRenderSignal.add(onBefore);
 };
 
@@ -61,7 +63,7 @@ Bach.RelativityScene.prototype.addBeforeRenderListener = function(onBefore) {
  * Removed a previously added function that is called before each render.
  * @param {Function} onBefore
  */
-Bach.RelativityScene.prototype.removeBeforeRenderListener = function(onBefore) {
+Bach.RelativityRenderer.prototype.removeBeforeRenderListener = function(onBefore) {
   this.beforeRenderSignal.remove(onBefore);
 };
 
@@ -69,13 +71,10 @@ Bach.RelativityScene.prototype.removeBeforeRenderListener = function(onBefore) {
 /***
  * @method renderContinuously
  */
-Bach.RelativityScene.prototype.renderContinuously = function(onRenderFunction) {
+Bach.RelativityRenderer.prototype.renderContinuously = function() {
   var _this = this;
   this.stopRendering = false;
   var rf = function() {
-    if(onRenderFunction) {
-      onRenderFunction();
-    }
     _this.render();
     if(!_this.stopRendering) {
       requestAnimationFrame(rf);
@@ -88,12 +87,12 @@ Bach.RelativityScene.prototype.renderContinuously = function(onRenderFunction) {
 /***
  * Do the actual render.
  */
-Bach.RelativityScene.prototype.render = function() {
-  this.beforeRenderSignal.dispatch(this);
+Bach.RelativityRenderer.prototype.render = function() {
+  this.signals.beforeRender.dispatch(this);
   this.renderer.render(this.scene, this.camera);
 };
 
-Bach.RelativityScene.prototype.showGrid = function(show) {
+Bach.RelativityRenderer.prototype.showGrid = function(show) {
   if(show) {
     if(!this.gridHelper) {
       var gridHelperWidth = 1.0*this.baseScale;
@@ -107,7 +106,7 @@ Bach.RelativityScene.prototype.showGrid = function(show) {
   }
 };
 
-Bach.RelativityScene.prototype.addDefaultLighting = function (object3D) {
+Bach.RelativityRenderer.prototype.addDefaultLighting = function (object3D) {
   // Add default ambient light.
   //var light = new THREE.AmbientLight(0xffffff);
   var light = new THREE.AmbientLight(0x106060);
@@ -132,12 +131,12 @@ Bach.RelativityScene.prototype.addDefaultLighting = function (object3D) {
   object3D.add(light);
 };
 
-Bach.RelativityScene.prototype.addAxisMarker = function() {
+Bach.RelativityRenderer.prototype.addAxisMarker = function() {
   var axisHelper = new THREE.AxisHelper(0.25);
   this.scene.add(axisHelper);
 };
 
-Bach.RelativityScene.prototype.enablePanAndRotate = function(enable) {
+Bach.RelativityRenderer.prototype.enablePanAndRotate = function(enable) {
   if(enable) {
     if(!this.panAndRotateControl) {
       this.panAndRotateControl = new THREE.OrbitControls(this.camera, this.renderer.domElement);
@@ -154,7 +153,7 @@ Bach.RelativityScene.prototype.enablePanAndRotate = function(enable) {
   }
 };
 
-Bach.RelativityScene.prototype.createDebugCloud = function() {
+Bach.RelativityRenderer.prototype.createDebugCloud = function() {
   var geometry = new THREE.BoxGeometry(0.02*this.baseScale, 0.02*this.baseScale, 0.02*this.baseScale);
   var material = new THREE.MeshBasicMaterial( {color: 0xF2995F} );
   material.wireframe = true;
@@ -179,6 +178,6 @@ Bach.RelativityScene.prototype.createDebugCloud = function() {
  * @param key
  * @param defaultValue
  */
-Bach.RelativityScene.prototype.fromConfig = function(key, defaultValue) {
+Bach.RelativityRenderer.prototype.fromConfig = function(key, defaultValue) {
   return _.isUndefined(this.config[key]) ? defaultValue : this.config[key];
 };

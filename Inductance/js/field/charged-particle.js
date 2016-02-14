@@ -9,14 +9,11 @@ var BachField = BachField || {};
 /***
  *
  * @param config
- * @param {THREE.Vector3} config.direction - A unit vector that is the direction of travel of the field point.
- * @param {THREE.Vector3} config.startPoint - A vector with units of meters that is the position of the emitting particle is at when the field point leaves it.
- * @param {Number} config.startTime - The time, in seconds, when the field point is emitted.
+ * @param {Bach.Trajectory} config.trajectory - The particle trajectory.
  * @constructor
  */
 BachField.ChargedParticle = function(config) {
   this.config = _.clone(config);
-  this.startPoint = config.startPoint;
   this.currentPosition = undefined;
 
   this.fieldLines = [];
@@ -26,16 +23,17 @@ BachField.ChargedParticle = function(config) {
 
   this.trajectory = this.config.trajectory;
 
-  var times = [];
-  var positions = [];
-  var velocities = [];
-  var accelerations = [];
+  this.times = [];
+  this.positions = [];
+  this.velocities = [];
+  this.accelerations = [];
 };
 
 BachField.ChargedParticle.prototype.updatePosition = function(time) {
+  var state = this.trajectory.updatePosition(time);
+
   this.times.push(time);
-  var state = this.trajectory.getPositionalState(time);
-  this.position.push(state.position);
+  this.positions.push(state.position);
   this.velocities.push(state.velocity);
   this.accelerations.push(state.acceleration);
 
@@ -43,6 +41,9 @@ BachField.ChargedParticle.prototype.updatePosition = function(time) {
     var fieldLine = this.fieldLines[i];
     fieldLine.addPoint(time, state);
   }
+
+  this.currentState = state;
+  return state;
 };
 
 BachField.ChargedParticle.prototype.getPositionAtTime = function(time) {

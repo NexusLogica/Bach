@@ -27,8 +27,20 @@ BachField.ChargedParticle = function(config) {
   this.positions = [];
   this.velocities = [];
   this.accelerations = [];
+
+  this.floatTimes = undefined;
+  this.floatTables = {};
+
+  this.search = new Bach.TableSearch();
+  this.interp = new Bach.PolynomialInterpolation();
 };
 
+/***
+ * Using the trajectory, find the position, velocity and acceleration at the given time. The values are stored
+ * in arrays of THREE.Vector3's.
+ * @param time
+ * @returns {*}
+ */
 BachField.ChargedParticle.prototype.updatePosition = function(time) {
   var state = this.trajectory.updatePosition(time);
 
@@ -46,12 +58,46 @@ BachField.ChargedParticle.prototype.updatePosition = function(time) {
   return state;
 };
 
-BachField.ChargedParticle.prototype.getPositionAtTime = function(time) {
-  var dist = Bach.C*(time-this.startTime);
-  if(dist < 0) {
-    return undefined;
-  }
+/***
+ * This is called after all of the calls to updatePosition are done. It is used to create vectors
+ * of Float64Array' for each states x, y, and z.
+ */
+BachField.ChargedParticle.prototype.updateTables = function() {
+  this.floatTimes = new Float64Array(this.times);
 
-  this.currentPosition = this.startPoint.clone().addScaledVector(this.direction, (time-this.startTime)*Bach.C);
+  this.updateTable('positions');
+  this.updateTable('velocities');
+  this.updateTable('accelerations');
+};
+
+/***
+ * Private: A helper function for converting THREE.Vector3 arrays into Float64 arrays of that type.
+ * @param tableName
+ */
+BachField.ChargedParticle.prototype.updateTable = function(tableName) {
+  var dims = ['x', 'y', 'z'];
+  var ar = this[tableName];
+  for(var i = 0; i<dims.length; i++) {
+    var floats = new Float64Array(ar.length);
+    var dim = dims[i];
+    for(var j = 0; j<ar.length; j++) {
+      floats[j] = ar[j][dim];
+    }
+    this.floatTables[tableName+dim.toUpperCase()] = floats;
+  }
+};
+
+BachField.ChargedParticle.prototype.getStateAtTime = function(time) {
+  var index = this.search.find(time, this.floatTimes);
+  if(index > this.x.length-3) {
+    index = this.x.length-3;
+  }
+  var state = {};
+  state.position = new THREE.Vector3(
+    this.interp.interpolateArrayOfVectors(time, this.floatTimes, this.floatTables.positionX, index),
+    this.interp.interpolateArrayOfVectors(time, this.floatTimes, this.floatTables.positionY, index),
+    this.interp.interpolateArrayOfVectors(time, this.floatTimes, this.floatTables.positionZ, index)
+  );
+  return state;
 };
 

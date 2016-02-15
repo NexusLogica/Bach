@@ -24,20 +24,58 @@ Bach.ParticleSimulation = function(config) {
   this.config = _.clone(config);
   this.particle = this.config.particle;
 
+  this.startTime = this.fromConfig('startTime', 0.0);
+  this.endTime = this.fromConfig('endTime', function() { throw 'Bach.ParticleSimulation: Must have an end time'});
+  this.playbackTime = this.fromConfig('playbackTime', 10.0);
+
+  this.playbackTimeScaling = this.playbackTime/(this.endTime-this.startTime);
+
   this.runSimulation();
   this.configureRenderer();
   this.fillRenderer();
 
+  this.animation = {
+    isAnimating: false,
+    looping: false,
+    refresh: false
+  };
+
+
   this.renderer.renderContinuously();
+
+  this.stateMachine = StateMachine.create({
+    initial: 'notAnimating',
+      events: [
+        { name: 'beginLooping',   from: 'notAnimating', to: 'looping'      },
+        { name: 'beginAnimation', from: 'notAnimating', to: 'animating'    },
+        { name: 'stopLooping',    from: 'looping',      to: 'notAnimating' }
+      ],
+    callbacks: {
+      onenterlooping: function() {
+        this.animation.isAnimating = true;
+        this.animation.looping = true;
+        this.animation.currentTime = this.startTime;
+        this.animation.refresh = true;
+      }.bind(this)
+    }
+  });
+};
+
+
+Bach.ParticleSimulation.prototype.startAnimation = function(loop, rateScaling) {
+
+};
+
+Bach.ParticleSimulation.prototype.stopAnimation = function() {
+
 };
 
 Bach.ParticleSimulation.prototype.runSimulation = function() {
 
-  var time = this.fromConfig('startTime', 0.0);
-  var endTime = this.fromConfig('endTime', 0.0);
+  var time = this.startTime;
   var stepSize = this.config.stepSize;
   if(_.isUndefined(stepSize) || stepSize <= 0.0) {
-    throw 'Bach.ParticleSimulation.runSimulation: step size was zero or negative: '+step;
+    throw 'Bach.ParticleSimulation.runSimulation: step size was zero or negative: '+stepSize;
   }
 
   var initialDirection = this.fromConfig('initialDirection', new THREE.Vector3(1.0, 0.0, 0.0));
@@ -53,12 +91,14 @@ Bach.ParticleSimulation.prototype.runSimulation = function() {
       break;
     }
     time += stepSize;
-    if(time >= endTime) {
-      time = endTime;
+    if(time >= this.endTime) {
+      time = this.endTime;
       lastIteration = true;
     }
   }
 
+  // Update the floating point array tables in the particle.
+  this.particle.updateTables();
 };
 
 
@@ -79,14 +119,19 @@ Bach.ParticleSimulation.prototype.fillRenderer = function() {
  * Called before each render. Update when doing animations.
  */
 Bach.ParticleSimulation.prototype.beforeRender = function() {
+  var now = (new Date()).getTime();
+  if(this.animation.refresh) {
+    this.animation.startComputerTime = now;
+  } else {
+    var dt = now-this.animation.startComputerTime;
+    this.animation.time += dt*this.animation.playbackTimeScaling;
+  }
 
+  //this.particle.
 };
 
 Bach.ParticleSimulation.prototype.addFramesToScene = function() {
   this.calculateBoundingBox();
-
-
-
 };
 
 Bach.ParticleSimulation.prototype.calculateBoundingBox = function() {
@@ -94,6 +139,7 @@ Bach.ParticleSimulation.prototype.calculateBoundingBox = function() {
   all.push.apply(all, this.getMinMax(this.particle.positions));
   var final = this.getMinMax(all);
   this.boundingBox = { min: final[0], max: final[1] };
+  this.characteristicLength = this.boundingBox.min.distanceTo(this.boundingBox.max);
 };
 
 Bach.ParticleSimulation.prototype.addParticleTrajectory = function() {
@@ -103,6 +149,10 @@ Bach.ParticleSimulation.prototype.addParticleTrajectory = function() {
     parent3d: this.renderer.scene
   });
 
+  var geometry = new THREE.SphereGeometry(this.characteristicLength*0.01, 16, 16);
+  var material = new THREE.MeshBasicMaterial( {color: 0x0000ff} );
+  this.particleGraphic = new THREE.Mesh( geometry, material );
+  this.renderer.scene.add(this.particleGraphic);
 };
 
 /***
@@ -143,5 +193,12 @@ Bach.ParticleSimulation.prototype.getMinMax = function(points) {
 };
 
 Bach.ParticleSimulation.prototype.fromConfig = function(key, defaultValue) {
-  return _.isUndefined(this.config[key]) ? defaultValue : this.config[key];
+  if(!_.isUndefined(this.config[key])) {
+    return this.config[key];
+  } else {
+    if(_.isFunction(defaultValue)) {
+      return defaultValue();
+    }
+    return defaultValue;
+  }
 };

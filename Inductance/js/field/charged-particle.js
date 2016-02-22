@@ -89,14 +89,15 @@ BachField.ChargedParticle.prototype.updateTable = function(tableName) {
 
 BachField.ChargedParticle.prototype.getStateAtTime = function(time) {
   var index = this.search.find(time, this.floatTimes);
-  if(index > this.x.length-3) {
-    index = this.x.length-3;
+  if(index > this.floatTimes.length-3) {
+    index = this.floatTimes.length-3;
   }
+
   var state = {};
   state.position = new THREE.Vector3(
-    this.interp.interpolateArrayOfVectors(time, this.floatTimes, this.floatTables.positionX, index),
-    this.interp.interpolateArrayOfVectors(time, this.floatTimes, this.floatTables.positionY, index),
-    this.interp.interpolateArrayOfVectors(time, this.floatTimes, this.floatTables.positionZ, index)
+    this.interp.interpolate(time, this.floatTimes, this.floatTables.positionsX, index),
+    this.interp.interpolate(time, this.floatTimes, this.floatTables.positionsY, index),
+    this.interp.interpolate(time, this.floatTimes, this.floatTables.positionsZ, index)
   );
   return state;
 };

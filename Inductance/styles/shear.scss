@@ -13,10 +13,10 @@
 .shear-controls {
   position: absolute;
   box-sizing: border-box;
-  top: $shear-controls-vert-margin;
+  top: 124px;
   left: $shear-controls-horiz-margin;
   width: $shear-controls-width;
-  height: 500px;
+  height: 400px;
   background-color: darken($theme-background, 2%);
   border: solid 1px #e19241;
   padding: 10px 10px;

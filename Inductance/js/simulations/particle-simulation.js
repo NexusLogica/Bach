@@ -25,10 +25,10 @@ Bach.ParticleSimulation = function(config) {
   this.particle = this.config.particle;
 
   this.startTime = this.fromConfig('startTime', 0.0);
-  this.endTime = this.fromConfig('endTime', function() { throw 'Bach.ParticleSimulation: Must have an end time'});
+  this.endTime = this.fromConfig('endTime', function() { throw 'Bach.ParticleSimulation: Must have an end time'; });
   this.playbackTime = this.fromConfig('playbackTime', 10.0);
 
-  this.playbackTimeScaling = this.playbackTime/(this.endTime-this.startTime);
+  this.playbackTimeScaling = (this.endTime-this.startTime)/this.playbackTime;
 
   this.runSimulation();
   this.configureRenderer();
@@ -51,7 +51,7 @@ Bach.ParticleSimulation = function(config) {
         { name: 'stopLooping',    from: 'looping',      to: 'notAnimating' }
       ],
     callbacks: {
-      onenterlooping: function() {
+      onenteranimating: function() {
         this.animation.isAnimating = true;
         this.animation.looping = true;
         this.animation.currentTime = this.startTime;
@@ -63,7 +63,11 @@ Bach.ParticleSimulation = function(config) {
 
 
 Bach.ParticleSimulation.prototype.startAnimation = function(loop, rateScaling) {
-
+  if(this.stateMachine.can('beginAnimation')) {
+    this.stateMachine.beginAnimation();
+  } else {
+    console.error();
+  }
 };
 
 Bach.ParticleSimulation.prototype.stopAnimation = function() {
@@ -120,14 +124,46 @@ Bach.ParticleSimulation.prototype.fillRenderer = function() {
  */
 Bach.ParticleSimulation.prototype.beforeRender = function() {
   var now = (new Date()).getTime();
-  if(this.animation.refresh) {
-    this.animation.startComputerTime = now;
-  } else {
-    var dt = now-this.animation.startComputerTime;
-    this.animation.time += dt*this.animation.playbackTimeScaling;
-  }
+  if(this.animation.isAnimating) {
 
-  //this.particle.
+    if(this.animation.lastTime) {
+      if(this.animation.looping) {
+        this.animation.refresh = true;
+      } else {
+        this.animation.isAnimating = false;
+      }
+    }
+
+    if (this.animation.isAnimating && this.animation.refresh) {
+      this.animation.lastComputerTime = now;
+      this.animation.totalComputerTime = 0;
+      this.animation.lastTime = false;
+      this.animation.refresh = false;
+      this.animation.currentTime = this.startTime;
+    } else {
+
+      var dt = now - this.animation.lastComputerTime;
+
+      // If we are debugging or there was a system delay keep the delta t to a small value.
+      if(dt > 60) { // 60 milliseconds
+        dt = 30;
+      }
+      this.animation.currentTime += 0.001*dt*this.playbackTimeScaling;
+
+      if(this.animation.currentTime > this.endTime) {
+        this.animation.currentTime = this.endTime;
+        this.animation.lastTime = true;
+      } else if(this.animation.currentTime === this.endTime) {
+        if(this.animation.looping) {
+          this.animation.currentTime = this.startTime;
+        } else {
+          this.animation.isAnimating = false;
+        }
+      }
+    }
+
+    this.updateParticlePosition(this.animation.currentTime);
+  }
 };
 
 Bach.ParticleSimulation.prototype.addFramesToScene = function() {
@@ -142,17 +178,32 @@ Bach.ParticleSimulation.prototype.calculateBoundingBox = function() {
   this.characteristicLength = this.boundingBox.min.distanceTo(this.boundingBox.max);
 };
 
+Bach.ParticleSimulation.prototype.setAnimationTime = function(t) {
+  var all = [];
+  all.push.apply(all, this.getMinMax(this.particle.positions));
+  var final = this.getMinMax(all);
+  this.boundingBox = { min: final[0], max: final[1] };
+  this.characteristicLength = this.boundingBox.min.distanceTo(this.boundingBox.max);
+};
+
 Bach.ParticleSimulation.prototype.addParticleTrajectory = function() {
   this.particlePath = new Bach.DynamicSpline({
-    initialNumPoints: this.particle.positions.length*3,
+    initialNumPoints: this.particle.positions.length * 3,
     points: this.particle.positions,
     parent3d: this.renderer.scene
   });
 
-  var geometry = new THREE.SphereGeometry(this.characteristicLength*0.01, 16, 16);
-  var material = new THREE.MeshBasicMaterial( {color: 0x0000ff} );
-  this.particleGraphic = new THREE.Mesh( geometry, material );
+  var geometry = new THREE.SphereGeometry(this.characteristicLength * 0.01, 16, 16);
+  var material = new THREE.MeshBasicMaterial({color: 0x0000ff});
+  this.particleGraphic = new THREE.Mesh(geometry, material);
   this.renderer.scene.add(this.particleGraphic);
+
+  this.updateParticlePosition(this.startTime);
+};
+
+Bach.ParticleSimulation.prototype.updateParticlePosition = function(time) {
+  var state = this.particle.getStateAtTime(time);
+  this.particleGraphic.position.copy(state.position);
 };
 
 /***

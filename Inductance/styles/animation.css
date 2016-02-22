@@ -1,0 +1,66 @@
+/*
+Syntax error: Undefined variable: "$theme-white".
+        on line 6 of animation.scss
+
+1: /***
+2:  * Shear SCSS file.
+3:  *\/
+4: 
+5: .page-title {
+6:   color: $theme-white;
+7:   font-family: "Raleway", sans-serif;
+8:   .subtitle {
+9:     font-weight: 100;
+10:   }
+11: }
+
+Backtrace:
+animation.scss:6
+/Users/lgunn/.rvm/gems/ruby-2.0.0-p247/gems/sass-3.2.14/lib/sass/script/variable.rb:49:in `_perform'
+/Users/lgunn/.rvm/gems/ruby-2.0.0-p247/gems/sass-3.2.14/lib/sass/script/node.rb:40:in `perform'
+/Users/lgunn/.rvm/gems/ruby-2.0.0-p247/gems/sass-3.2.14/lib/sass/tree/visitors/perform.rb:298:in `visit_prop'
+/Users/lgunn/.rvm/gems/ruby-2.0.0-p247/gems/sass-3.2.14/lib/sass/tree/visitors/base.rb:37:in `visit'
+/Users/lgunn/.rvm/gems/ruby-2.0.0-p247/gems/sass-3.2.14/lib/sass/tree/visitors/perform.rb:100:in `visit'
+/Users/lgunn/.rvm/gems/ruby-2.0.0-p247/gems/sass-3.2.14/lib/sass/tree/visitors/base.rb:53:in `block in visit_children'
+/Users/lgunn/.rvm/gems/ruby-2.0.0-p247/gems/sass-3.2.14/lib/sass/tree/visitors/base.rb:53:in `map'
+/Users/lgunn/.rvm/gems/ruby-2.0.0-p247/gems/sass-3.2.14/lib/sass/tree/visitors/base.rb:53:in `visit_children'
+/Users/lgunn/.rvm/gems/ruby-2.0.0-p247/gems/sass-3.2.14/lib/sass/tree/visitors/perform.rb:109:in `block in visit_children'
+/Users/lgunn/.rvm/gems/ruby-2.0.0-p247/gems/sass-3.2.14/lib/sass/tree/visitors/perform.rb:121:in `with_environment'
+/Users/lgunn/.rvm/gems/ruby-2.0.0-p247/gems/sass-3.2.14/lib/sass/tree/visitors/perform.rb:108:in `visit_children'
+/Users/lgunn/.rvm/gems/ruby-2.0.0-p247/gems/sass-3.2.14/lib/sass/tree/visitors/base.rb:37:in `block in visit'
+/Users/lgunn/.rvm/gems/ruby-2.0.0-p247/gems/sass-3.2.14/lib/sass/tree/visitors/perform.rb:320:in `visit_rule'
+/Users/lgunn/.rvm/gems/ruby-2.0.0-p247/gems/sass-3.2.14/lib/sass/tree/visitors/base.rb:37:in `visit'
+/Users/lgunn/.rvm/gems/ruby-2.0.0-p247/gems/sass-3.2.14/lib/sass/tree/visitors/perform.rb:100:in `visit'
+/Users/lgunn/.rvm/gems/ruby-2.0.0-p247/gems/sass-3.2.14/lib/sass/tree/visitors/base.rb:53:in `block in visit_children'
+/Users/lgunn/.rvm/gems/ruby-2.0.0-p247/gems/sass-3.2.14/lib/sass/tree/visitors/base.rb:53:in `map'
+/Users/lgunn/.rvm/gems/ruby-2.0.0-p247/gems/sass-3.2.14/lib/sass/tree/visitors/base.rb:53:in `visit_children'
+/Users/lgunn/.rvm/gems/ruby-2.0.0-p247/gems/sass-3.2.14/lib/sass/tree/visitors/perform.rb:109:in `block in visit_children'
+/Users/lgunn/.rvm/gems/ruby-2.0.0-p247/gems/sass-3.2.14/lib/sass/tree/visitors/perform.rb:121:in `with_environment'
+/Users/lgunn/.rvm/gems/ruby-2.0.0-p247/gems/sass-3.2.14/lib/sass/tree/visitors/perform.rb:108:in `visit_children'
+/Users/lgunn/.rvm/gems/ruby-2.0.0-p247/gems/sass-3.2.14/lib/sass/tree/visitors/base.rb:37:in `block in visit'
+/Users/lgunn/.rvm/gems/ruby-2.0.0-p247/gems/sass-3.2.14/lib/sass/tree/visitors/perform.rb:128:in `visit_root'
+/Users/lgunn/.rvm/gems/ruby-2.0.0-p247/gems/sass-3.2.14/lib/sass/tree/visitors/base.rb:37:in `visit'
+/Users/lgunn/.rvm/gems/ruby-2.0.0-p247/gems/sass-3.2.14/lib/sass/tree/visitors/perform.rb:100:in `visit'
+/Users/lgunn/.rvm/gems/ruby-2.0.0-p247/gems/sass-3.2.14/lib/sass/tree/visitors/perform.rb:7:in `visit'
+/Users/lgunn/.rvm/gems/ruby-2.0.0-p247/gems/sass-3.2.14/lib/sass/tree/root_node.rb:20:in `render'
+/Users/lgunn/.rvm/gems/ruby-2.0.0-p247/gems/sass-3.2.14/lib/sass/engine.rb:315:in `_render'
+/Users/lgunn/.rvm/gems/ruby-2.0.0-p247/gems/sass-3.2.14/lib/sass/engine.rb:262:in `render'
+/Users/lgunn/.rvm/gems/ruby-2.0.0-p247/gems/sass-3.2.14/lib/sass/plugin/compiler.rb:362:in `update_stylesheet'
+/Users/lgunn/.rvm/gems/ruby-2.0.0-p247/gems/sass-3.2.14/lib/sass/plugin/compiler.rb:203:in `block in update_stylesheets'
+/Users/lgunn/.rvm/gems/ruby-2.0.0-p247/gems/sass-3.2.14/lib/sass/plugin/compiler.rb:201:in `each'
+/Users/lgunn/.rvm/gems/ruby-2.0.0-p247/gems/sass-3.2.14/lib/sass/plugin/compiler.rb:201:in `update_stylesheets'
+/Users/lgunn/.rvm/gems/ruby-2.0.0-p247/gems/sass-3.2.14/lib/sass/plugin.rb:81:in `update_stylesheets'
+/Users/lgunn/.rvm/gems/ruby-2.0.0-p247/gems/sass-3.2.14/lib/sass/exec.rb:443:in `watch_or_update'
+/Users/lgunn/.rvm/gems/ruby-2.0.0-p247/gems/sass-3.2.14/lib/sass/exec.rb:326:in `process_result'
+/Users/lgunn/.rvm/gems/ruby-2.0.0-p247/gems/sass-3.2.14/lib/sass/exec.rb:41:in `parse'
+/Users/lgunn/.rvm/gems/ruby-2.0.0-p247/gems/sass-3.2.14/lib/sass/exec.rb:21:in `parse!'
+/Users/lgunn/.rvm/gems/ruby-2.0.0-p247/gems/sass-3.2.14/bin/scss:13:in `<top (required)>'
+/Users/lgunn/.rvm/gems/ruby-2.0.0-p247/bin/scss:23:in `load'
+/Users/lgunn/.rvm/gems/ruby-2.0.0-p247/bin/scss:23:in `<main>'
+/Users/lgunn/.rvm/gems/ruby-2.0.0-p247/bin/ruby_executable_hooks:15:in `eval'
+/Users/lgunn/.rvm/gems/ruby-2.0.0-p247/bin/ruby_executable_hooks:15:in `<main>'
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Syntax error: Undefined variable: \"$theme-white\".\A         on line 6 of animation.scss\A \A 1: /***\A 2:  * Shear SCSS file.\A 3:  */\A 4: \A 5: .page-title {\A 6:   color: $theme-white;\A 7:   font-family: \"Raleway\", sans-serif;\A 8:   .subtitle {\A 9:     font-weight: 100;\A 10:   }\A 11: }"; }

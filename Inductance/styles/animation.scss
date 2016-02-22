@@ -1,0 +1,16 @@
+/***
+ * Animations SCSS file.
+ */
+
+
+.animation-controls {
+  position: absolute;
+  box-sizing: border-box;
+  top: 33px;
+  left: $shear-controls-horiz-margin;
+  width: $shear-controls-width;
+  height: 80px;
+  background-color: darken($theme-background, 2%);
+  border: solid 1px #e19241;
+  padding: 10px 10px;
+}

@@ -1,5 +1,5 @@
 /***
- * Bach Straight Particle Simulation
+ * Bach Field Line Graphic
  */
 
 'use strict';
@@ -9,11 +9,15 @@ Bach = Bach || {};
 /***
  * Create run and display a simulation from the configuration.
  * @param config
- * @param {BachField.ChargedParticle} config.particle - The particle.
- * @param {Number} config.startTime - Optional. default is zero.
+ * @param {Bach.ChargedParticle} config.particle - The particle object.
  * @param {Number} config.endTime - The end time.
  * @param {Bach.Trajectory} config.trajectory - A trajectory object.
- * @param {JSON} config.rendererConfig - configuration for the renderer.
+ * @param {JSON} config.renderer - configuration for the renderer.
+ * @param config
+ * @param config
+ * @param config
+ * @param config
+ * @param config
  * @constructor
  */
 Bach.ParticleSimulation = function(config) {
@@ -28,7 +32,7 @@ Bach.ParticleSimulation = function(config) {
 
   this.runSimulation();
   this.configureRenderer();
-  this.fillRenderer(this.startTime);
+  this.fillRenderer();
 
   this.animation = {
     isAnimating: false,
@@ -104,21 +108,15 @@ Bach.ParticleSimulation.prototype.runSimulation = function() {
 
 Bach.ParticleSimulation.prototype.configureRenderer = function() {
   this.renderer = new Bach.RelativityRenderer($.extend({},
-    this.config.rendererConfig || {}
+    this.config.renderer || {}
   ));
   this.renderer.signals.beforeRender.add(this.beforeRender.bind(this));
 };
 
-Bach.ParticleSimulation.prototype.fillRenderer = function(time) {
+Bach.ParticleSimulation.prototype.fillRenderer = function() {
 
   this.addFramesToScene();
-
-  this.particleGraphic = new Bach.ParticleGraphic({
-    particle: this.particle,
-    startTime: time,
-    parent3d: this.renderer.scene,
-    characteristicLength: this.characteristicLength
-  });
+  this.addParticleTrajectory();
 };
 
 /***
@@ -164,70 +162,28 @@ Bach.ParticleSimulation.prototype.beforeRender = function() {
       }
     }
 
-    this.particleGraphic.updateParticlePosition(this.animation.currentTime);
+    this.updateParticlePosition(this.animation.currentTime);
   }
 };
 
-Bach.ParticleSimulation.prototype.addFramesToScene = function() {
-  this.calculateBoundingBox();
-};
+Bach.ParticleSimulation.prototype.addParticleTrajectory = function() {
+  this.particlePath = new Bach.DynamicSpline({
+    initialNumPoints: this.particle.positions.length * 3,
+    points: this.particle.positions,
+    parent3d: this.renderer.scene
+  });
 
-Bach.ParticleSimulation.prototype.calculateBoundingBox = function() {
-  var all = [];
-  all.push.apply(all, this.getMinMax(this.particle.positions));
-  var final = this.getMinMax(all);
-  this.boundingBox = { min: final[0], max: final[1] };
-  this.characteristicLength = this.boundingBox.min.distanceTo(this.boundingBox.max);
-};
+  var geometry = new THREE.SphereGeometry(this.characteristicLength * 0.01, 16, 16);
+  var material = new THREE.MeshBasicMaterial({color: 0x0000ff});
+  this.particleGraphic = new THREE.Mesh(geometry, material);
+  this.renderer.scene.add(this.particleGraphic);
 
-Bach.ParticleSimulation.prototype.setAnimationTime = function(t) {
-  var all = [];
-  all.push.apply(all, this.getMinMax(this.particle.positions));
-  var final = this.getMinMax(all);
-  this.boundingBox = { min: final[0], max: final[1] };
-  this.characteristicLength = this.boundingBox.min.distanceTo(this.boundingBox.max);
+  this.updateParticlePosition(this.startTime);
 };
 
 Bach.ParticleSimulation.prototype.updateParticlePosition = function(time) {
   var state = this.particle.getStateAtTime(time);
   this.particleGraphic.position.copy(state.position);
-};
-
-/***
- * Return two points representing a bounding box min and max for the points.
- * @param {Array.<THREE.Vector3>} points - The points to find min and max of.
- * @return {Array.<THREE.Vector3>} - An array of two THREE.Vector3 points representing the min and max.
- */
-Bach.ParticleSimulation.prototype.getMinMax = function(points) {
-  // Must have points.
-  if(points.length === 0) {
-    console.error('Bach.ParticleSimulation.getMinMax: zero length array.'+(new Error('NA')).stack);
-    return;
-  }
-
-  var min = points[0].clone();
-  var max = points[1].clone();
-
-  for(var i=1; i<points.length; i++) {
-    var p = points[i];
-    if(p.x < min.x) {
-      min.x = p.x;
-    } else if(p.x > max.x) {
-      max.x = p.x;
-    }
-    if(p.y < min.y) {
-      min.y = p.y;
-    } else if(p.y > max.y) {
-      max.y = p.y;
-    }
-    if(p.z < min.z) {
-      min.z = p.z;
-    } else if(p.z > max.z) {
-      max.z = p.z;
-    }
-  }
-
-  return [ min, max ];
 };
 
 Bach.ParticleSimulation.prototype.fromConfig = function(key, defaultValue) {

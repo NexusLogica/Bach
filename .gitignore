@@ -54,3 +54,7 @@ logs/*
 src/lib/bower_components
 src/npm-debug.log
 node_modules/
+
+# Office/Excel
+~*
+

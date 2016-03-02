@@ -25,7 +25,7 @@ Bach.ParticleGraphic = function(config) {
   });
 
   var geometry = new THREE.SphereGeometry(this.config.characteristicLength * 0.01, 16, 16);
-  var material = new THREE.MeshBasicMaterial({color: 0x0000ff});
+  var material = new THREE.MeshBasicMaterial({color: 0xff0000});
   this.mesh = new THREE.Mesh(geometry, material);
   this.config.parent3d.add(this.mesh);
 
@@ -50,6 +50,6 @@ Bach.ParticleGraphic.prototype.updatePosition = function(time) {
   this.mesh.position.copy(state.position);
 
   for(var i=0; i<this.fieldLineGraphics.length; i++) {
-    this.fieldLineGraphics[i].updatePosition(time);
+    this.fieldLineGraphics[i].updatePosition(time, state.position);
   }
 };

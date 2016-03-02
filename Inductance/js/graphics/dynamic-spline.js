@@ -26,7 +26,7 @@ Bach.DynamicSpline = function(configuration) {
   this.lineWidth = this.config.hasOwnProperty('lineWidth') ? this.config.lineWidth: 2;
 
   this.create3dObjects();
-  if(this.points) {
+  if(this.points.length > 2) {
     this.updatePoints(this.points);
   }
 

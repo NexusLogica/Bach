@@ -116,7 +116,7 @@
     var t = distance/speed;        // dist / (dist/time) -> m/(m/s) -> s
     var numSteps = 20;
 
-    var numFieldLines = 10;
+    var numFieldLines = 20;
 
     var fieldLines = [];
     if(numFieldLines === 1) {
@@ -137,7 +137,7 @@
     window.simulation = new Bach.ParticleSimulation({
       endTime: t,
       stepSize: t/numSteps,
-      fieldPointSpacing: 2,
+      fieldPointSpacing: 1,
       particle: new BachField.ChargedParticle({
         trajectory: new BachField.StraightTrajectory({
           initialDirection: new THREE.Vector3(0.0, 0.0, 1.0),
@@ -148,7 +148,7 @@
       rendererConfig: {
         containerElement: $('.scene-container'),
         showGrid: true,
-        showAxisOrigin: true
+        showAxisOrigin: false
       }
     });
 

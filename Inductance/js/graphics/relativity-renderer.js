@@ -99,8 +99,8 @@ Bach.RelativityRenderer.prototype.render = function() {
 Bach.RelativityRenderer.prototype.showGrid = function(show) {
   if(show) {
     if(!this.gridHelper) {
-      var gridHelperWidth = 1.0*this.baseScale;
-      this.gridHelper = new THREE.GridHelper(Math.floor(gridHelperWidth / 0.025*this.baseScale) * 0.025*this.baseScale, 0.025*this.baseScale);
+      var gridHelperWidth = 4.0*this.baseScale;
+      this.gridHelper = new THREE.GridHelper(Math.floor(gridHelperWidth / 0.025*this.baseScale) * 0.025*this.baseScale, 0.2*this.baseScale);
       this.gridHelper.setColors(0x3662B2, 0x7b99c4);
       this.scene.add(this.gridHelper);
     }

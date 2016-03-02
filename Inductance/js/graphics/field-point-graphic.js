@@ -17,7 +17,7 @@ Bach.FieldPointGraphic = function(config) {
   this.config = _.clone(config);
   this.fieldPoint = this.config.fieldPoint;
 
-  var geometry = new THREE.SphereGeometry(this.config.characteristicLength * 0.005, 10, 10);
+  var geometry = new THREE.SphereGeometry(this.config.characteristicLength * 0.003, 10, 10);
   var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
   this.mesh = new THREE.Mesh(geometry, material);
   this.config.parent3d.add(this.mesh);
@@ -33,4 +33,5 @@ Bach.FieldPointGraphic.prototype.updatePosition = function(time) {
     this.mesh.visible = true;
     this.mesh.position.copy(position);
   }
+  return position;
 };

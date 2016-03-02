@@ -18,12 +18,6 @@ Bach.FieldLineGraphic = function(config) {
   this.config = _.clone(config);
   this.fieldLine = this.config.fieldLine;
 
-  //this.fieldLineSpline = new Bach.DynamicSpline({
-  //  initialNumPoints: this.particle.positions.length * 3,
-  //  points: this.fieldLine.positions,
-  //  parent3d: this.config.parent3d
-  //});
-
   this.fieldPointGraphics = [];
 
   for(var i=0; i<this.fieldLine.points.length; i++) {
@@ -36,14 +30,33 @@ Bach.FieldLineGraphic = function(config) {
     });
     this.fieldPointGraphics.push(pointGraphic);
   }
+
+  this.fieldLineSpline = new Bach.DynamicSpline({
+    initialNumPoints: this.fieldPointGraphics.length * 3,
+    parent3d: this.config.parent3d,
+    color: 0x6666ff
+  });
+
 };
 
-Bach.FieldLineGraphic.prototype.updatePosition = function(time) {
+Bach.FieldLineGraphic.prototype.updatePosition = function(time, particlePosition) {
   //var state = this.particle.getStateAtTime(time);
   //this.mesh.position.copy(state.position);
 
+  var positions = [];
   for(var i=0; i<this.fieldPointGraphics.length; i++) {
-    this.fieldPointGraphics[i].updatePosition(time);
+    var position = this.fieldPointGraphics[i].updatePosition(time);
+    if(position) {
+      positions.push(position);
+    }
   }
 
+  positions.push(particlePosition);
+
+  if(positions.length > 1) {
+    this.fieldLineSpline.curve.visible = true;
+    this.fieldLineSpline.updatePoints(positions);
+  } else {
+    this.fieldLineSpline.curve.visible = false;
+  }
 };

@@ -38,10 +38,11 @@ BachField.ChargedParticle = function(config) {
 /***
  * Using the trajectory, find the position, velocity and acceleration at the given time. The values are stored
  * in arrays of THREE.Vector3's.
- * @param time
+ * @param time - The time, in seconds.
+ * @param {Boolean} createNewFieldPoint - If true then add a new field point to each field line.
  * @returns {*}
  */
-BachField.ChargedParticle.prototype.updatePosition = function(time) {
+BachField.ChargedParticle.prototype.updatePosition = function(time, createNewFieldPoint) {
   var state = this.trajectory.updatePosition(time);
 
   this.times.push(time);
@@ -49,9 +50,11 @@ BachField.ChargedParticle.prototype.updatePosition = function(time) {
   this.velocities.push(state.velocity);
   this.accelerations.push(state.acceleration);
 
-  for(var i=0; i<this.fieldLines.length; i++) {
-    var fieldLine = this.fieldLines[i];
-    fieldLine.addPoint(time, state);
+  if(createNewFieldPoint) {
+    for (var i = 0; i < this.fieldLines.length; i++) {
+      var fieldLine = this.fieldLines[i];
+      fieldLine.addPoint(time, state);
+    }
   }
 
   this.currentState = state;

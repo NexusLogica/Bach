@@ -81,11 +81,15 @@ Bach.ParticleSimulation.prototype.runSimulation = function() {
   var initialDirection = this.fromConfig('initialDirection', new THREE.Vector3(1.0, 0.0, 0.0));
   var startPoint = this.fromConfig('startPoint', new THREE.Vector3(0.0, 0.0, 0.0));
 
+  var numSteps = Math.round((this.endTime-this.startTime)/stepSize);
+  var defaultSpacing = numSteps % 10;
+  var fieldPointSpacing = this.fromConfig('fieldPointSpacing', defaultSpacing);
+
   var lastIteration = false;
   var maxIterations = 200;
   for(var i=0; i<maxIterations; i++) {
 
-    this.particle.updatePosition(time);
+    this.particle.updatePosition(time, (i % fieldPointSpacing) === 0);
 
     if(lastIteration) {
       break;
@@ -115,7 +119,7 @@ Bach.ParticleSimulation.prototype.fillRenderer = function(time) {
 
   this.particleGraphic = new Bach.ParticleGraphic({
     particle: this.particle,
-    startTime: time,
+    time: time,
     parent3d: this.renderer.scene,
     characteristicLength: this.characteristicLength
   });
@@ -164,7 +168,7 @@ Bach.ParticleSimulation.prototype.beforeRender = function() {
       }
     }
 
-    this.particleGraphic.updateParticlePosition(this.animation.currentTime);
+    this.particleGraphic.updatePosition(this.animation.currentTime);
   }
 };
 

@@ -36,6 +36,8 @@
   <script src="js/graphics/relativity-renderer.js"></script>
   <script src="js/graphics/dynamic-spline.js"></script>
   <script src="js/graphics/particle-graphic.js"></script>
+  <script src="js/graphics/field-line-graphic.js"></script>
+  <script src="js/graphics/field-point-graphic.js"></script>
 
   <script src="js/field/charged-particle.js"></script>
   <script src="js/field/field-line.js"></script>
@@ -109,26 +111,44 @@
 
   <script>
 
-    var distance = 1.0*Bach.C;     // meters
-    var speed = 1.0;        // C
-    var t = distance/(speed*Bach.C); // dist / (dist/time) -> m/(m/s) -> s
+    var speed = 0.5*Bach.C;          // Speed, meters per second - m/s
+    var distance = 2.0;              // Distance traveled, meters - m
+    var t = distance/speed;        // dist / (dist/time) -> m/(m/s) -> s
+    var numSteps = 20;
+
+    var numFieldLines = 10;
+
+    var fieldLines = [];
+    if(numFieldLines === 1) {
+      fieldLines.push({ direction: new THREE.Vector3(0.0, 1.0, 0.0) });
+    } else {
+      var angle = 0;
+      var endAngle = Math.PI;
+      var delta = (endAngle-angle)/(numFieldLines-1);
+      for(var i=0; i<numFieldLines; i++) {
+        var y = Math.sin(angle);
+        var z = Math.cos(angle);
+        fieldLines.push({ direction: new THREE.Vector3(0.0, y, z) });
+
+        angle += delta;
+      }
+    }
 
     window.simulation = new Bach.ParticleSimulation({
       endTime: t,
-      stepSize: t/20.0,
+      stepSize: t/numSteps,
+      fieldPointSpacing: 2,
       particle: new BachField.ChargedParticle({
         trajectory: new BachField.StraightTrajectory({
           initialDirection: new THREE.Vector3(0.0, 0.0, 1.0),
           initialSpeed: speed
         }),
-        fieldLines: [
-
-        ]
+        fieldLines: fieldLines
       }),
       rendererConfig: {
         containerElement: $('.scene-container'),
-        showGrid: false,
-        showAxisOrigin: false
+        showGrid: true,
+        showAxisOrigin: true
       }
     });
 

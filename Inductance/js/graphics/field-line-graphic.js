@@ -9,30 +9,41 @@ Bach = Bach || {};
 /***
  * Create run and display a simulation from the configuration.
  * @param config
- * @param {Bach.ChargedParticle} config.particle - The particle object.
+ * @param {Bach.FieldLine} config.fieldLine - The field line object.
  * @param {THREE.Object3D} config.parent3d - The parent object.
  * @param {Number} config.characteristicLength - Used to scale the size of objects.
  * @constructor
  */
 Bach.FieldLineGraphic = function(config) {
   this.config = _.clone(config);
-  this.particle = this.config.particle;
+  this.fieldLine = this.config.fieldLine;
 
-  this.particlePath = new Bach.DynamicSpline({
-    initialNumPoints: this.particle.positions.length * 3,
-    points: this.particle.positions,
-    parent3d: this.config.parent3d
-  });
+  //this.fieldLineSpline = new Bach.DynamicSpline({
+  //  initialNumPoints: this.particle.positions.length * 3,
+  //  points: this.fieldLine.positions,
+  //  parent3d: this.config.parent3d
+  //});
 
-  var geometry = new THREE.SphereGeometry(this.config.characteristicLength * 0.01, 16, 16);
-  var material = new THREE.MeshBasicMaterial({color: 0x0000ff});
-  this.mesh = new THREE.Mesh(geometry, material);
-  this.config.parent3d.add(this.mesh);
+  this.fieldPointGraphics = [];
 
-  this.updateParticlePosition(this.config.time);
+  for(var i=0; i<this.fieldLine.points.length; i++) {
+    var point = this.fieldLine.points[i];
+    var pointGraphic = new Bach.FieldPointGraphic({
+      fieldPoint: point,
+      parent3d: this.config.parent3d,
+      time: this.config.time,
+      characteristicLength: config.characteristicLength
+    });
+    this.fieldPointGraphics.push(pointGraphic);
+  }
 };
 
-Bach.FieldLineGraphic.prototype.updateParticlePosition = function(time) {
-  var state = this.particle.getStateAtTime(time);
-  this.mesh.position.copy(state.position);
+Bach.FieldLineGraphic.prototype.updatePosition = function(time) {
+  //var state = this.particle.getStateAtTime(time);
+  //this.mesh.position.copy(state.position);
+
+  for(var i=0; i<this.fieldPointGraphics.length; i++) {
+    this.fieldPointGraphics[i].updatePosition(time);
+  }
+
 };

@@ -29,10 +29,27 @@ Bach.ParticleGraphic = function(config) {
   this.mesh = new THREE.Mesh(geometry, material);
   this.config.parent3d.add(this.mesh);
 
-  this.updateParticlePosition(this.config.time);
+  this.fieldLineGraphics = [];
+
+  var lines = this.particle.fieldLines;
+  for(var i=0; i<lines.length; i++) {
+    var fieldLineGraphic = new Bach.FieldLineGraphic({
+      fieldLine: lines[i],
+      parent3d: config.parent3d,
+      time: this.config.time,
+      characteristicLength: config.characteristicLength
+    });
+    this.fieldLineGraphics.push(fieldLineGraphic);
+  }
+
+  this.updatePosition(this.config.time);
 };
 
-Bach.ParticleGraphic.prototype.updateParticlePosition = function(time) {
+Bach.ParticleGraphic.prototype.updatePosition = function(time) {
   var state = this.particle.getStateAtTime(time);
   this.mesh.position.copy(state.position);
+
+  for(var i=0; i<this.fieldLineGraphics.length; i++) {
+    this.fieldLineGraphics[i].updatePosition(time);
+  }
 };

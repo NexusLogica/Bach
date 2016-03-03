@@ -13,4 +13,8 @@
   background-color: darken($theme-background, 2%);
   border: solid 1px #e19241;
   padding: 10px 10px;
+
+  .play .fa-pause, .pause .fa-play {
+    display: none;
+  }
 }

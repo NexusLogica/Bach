@@ -32,6 +32,7 @@ Bach.ParticleSimulation = function(config) {
 
   this.animation = {
     isAnimating: false,
+    isPaused: false,
     looping: false,
     refresh: false
   };
@@ -59,7 +60,9 @@ Bach.ParticleSimulation = function(config) {
 
 
 Bach.ParticleSimulation.prototype.startAnimation = function(loop, rateScaling) {
-  if(this.stateMachine.can('beginAnimation')) {
+  if(this.animation.isAnimating) {
+    this.animation.isPaused = false;
+  } else if(this.stateMachine.can('beginAnimation')) {
     this.stateMachine.beginAnimation();
   } else {
     console.error();
@@ -67,7 +70,7 @@ Bach.ParticleSimulation.prototype.startAnimation = function(loop, rateScaling) {
 };
 
 Bach.ParticleSimulation.prototype.stopAnimation = function() {
-
+  this.animation.isPaused = true;
 };
 
 Bach.ParticleSimulation.prototype.runSimulation = function() {
@@ -130,7 +133,7 @@ Bach.ParticleSimulation.prototype.fillRenderer = function(time) {
  */
 Bach.ParticleSimulation.prototype.beforeRender = function() {
   var now = (new Date()).getTime();
-  if(this.animation.isAnimating) {
+  if(this.animation.isAnimating && !this.animation.isPaused) {
 
     if(this.animation.lastTime) {
       if(this.animation.looping) {

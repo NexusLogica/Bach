@@ -82,3 +82,5 @@ label {
   background-color: #32455a;
   border: solid 1px #e19241;
   padding: 10px 10px; }
+  .animation-controls .play .fa-pause, .animation-controls .pause .fa-play {
+    display: none; }

@@ -42,6 +42,13 @@ Bach.ParticleGraphic = function(config) {
     this.fieldLineGraphics.push(fieldLineGraphic);
   }
 
+  this.fieldContourGraphics = new Bach.FieldContourGraphics({
+    particle: this.particle,
+    parent3d: config.parent3d,
+    time: this.config.time,
+    characteristicLength: config.characteristicLength
+  });
+
   this.updatePosition(this.config.time);
 };
 
@@ -52,4 +59,6 @@ Bach.ParticleGraphic.prototype.updatePosition = function(time) {
   for(var i=0; i<this.fieldLineGraphics.length; i++) {
     this.fieldLineGraphics[i].updatePosition(time, state.position);
   }
+
+  this.fieldContourGraphics.updatePosition(time);
 };

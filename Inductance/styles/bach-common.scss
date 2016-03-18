@@ -1,0 +1,22 @@
+$theme-white: #FFFFFF;
+$theme-background: #364A61;
+$theme-black: #0D0D0D;
+$theme-light: #F2DDB6;
+$theme-medium-bland: #D9B991;
+$theme-dark: #000000;
+$theme-medium-sharp: #F2995F;
+
+$shear-controls-width: 200px;
+$shear-controls-horiz-margin: 20px;
+$shear-controls-vert-margin: 33px;
+
+$scene-width: 1100px;
+$scene-height: 650px;
+
+body {
+  background-color: $theme-dark;
+}
+
+@import 'inductance.scss';
+@import 'shear.scss';
+@import 'animation.scss';

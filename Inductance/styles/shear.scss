@@ -1,17 +1,6 @@
-$theme-white: #FFFFFF;
-$theme-background: #fcfaf7;
-$theme-black: #0D0D0D;
-$theme-light: #F2DDB6;
-$theme-medium-bland: #D9B991;
-$theme-dark: #555459;
-$theme-medium-sharp: #F2995F;
-
-$scene-width: 900px;
-$scene-height: 700px;
-
-body {
-  background-color: $theme-light;
-}
+/***
+ * Shear SCSS file.
+ */
 
 .page-title {
   color: $theme-white;
@@ -23,16 +12,18 @@ body {
 
 .shear-controls {
   position: absolute;
-  top: 30px;
-  left: 20px;
-  width: 200px;
-  height: 500px;
+  box-sizing: border-box;
+  top: 124px;
+  left: $shear-controls-horiz-margin;
+  width: $shear-controls-width;
+  height: 400px;
   background-color: darken($theme-background, 2%);
-  border: solid 1px $theme-dark;
+  border: solid 1px #e19241;
   padding: 10px 10px;
 }
 
 .shear-stats {
+  color: $theme-white;
   position: absolute;
   top: 10px;
   left: 10px;
@@ -47,6 +38,12 @@ body {
       width: 100px;
     }
   }
+}
+
+label {
+  color: $theme-white;
+  font-weight: 300;
+  margin-top: 10px;
 }
 
 .shear-canvas-container {

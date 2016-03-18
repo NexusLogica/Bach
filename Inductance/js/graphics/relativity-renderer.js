@@ -8,53 +8,77 @@
  */
 'use strict';
 
-Bach.RelativityScene = function() {
-  this.scale = 1.0;
-};
-
 /***
- *
- * @method create
+ * Create the scene.
  * @param config
  * @param {DomElement} config.containerElement - canvas container
+ * @constructor
  */
-Bach.RelativityScene.prototype.create = function(config) {
-  this.scene =  new THREE.Scene();
-  if(config.hasOwnProperty('scale')) {
-    this.scale = config.scale;
-  }
+Bach.RelativityRenderer = function(config) {
+  this.config = $.extend({}, config);
 
-  this.renderer = new THREE.WebGLRenderer(); //{ antialias: true });
-  this.width = config.containerElement.innerWidth();
-  this.height = config.containerElement.innerHeight();
+  this.scene =  new THREE.Scene();
+  this.baseScale = this.fromConfig('baseScale', 1.0);
+
+  this.signals = {
+    beforeRender: new signals.Signal()
+  };
+
+  this.containerElement = config.containerElement;
+  this.renderer = new THREE.WebGLRenderer({ antialias: true });
+  this.width = this.containerElement.innerWidth();
+  this.height = this.containerElement.innerHeight();
   this.renderer.setViewport(0, 0, this.width, this.height);
   this.renderer.setSize(this.width, this.height);
   this.renderer.setClearColor(0xff0000, 0.0);
 
-  config.containerElement.append(this.renderer.domElement);
+  this.containerElement.append(this.renderer.domElement);
 
   this.camera = new THREE.PerspectiveCamera(60, this.width / this.height, 0.001, 1000);
-  this.camera.translateZ(-0.8*this.scale);
-  this.camera.translateY(-0.4*this.scale);
+  this.camera.translateZ(-0.8*this.baseScale);
+  this.camera.translateY(0.4*this.baseScale);
   this.addDefaultLighting(this.scene);
-  this.addAxisMarker();
-  this.createDebugCloud();
 
-  this.showGrid(config.showGrid);
+  if(this.config.showAxisOrigin) {
+    this.addAxisMarker();
+  }
+
+  if(this.config.debugCloud) {
+    this.createDebugCloud();
+  }
+
+  if(this.config.showGrid) {
+    this.showGrid(true);
+  }
   this.enablePanAndRotate(true);
   this.stopRendering = false;
 };
 
 /***
+ * Adds a function that is called before each render.
+ * @param {Function} onBefore - Called with 'this' as the only argument.
+ */
+Bach.RelativityRenderer.prototype.addBeforeRenderListener = function(onBefore) {
+  this.beforeRenderSignal.add(onBefore);
+};
+
+
+/***
+ * Removed a previously added function that is called before each render.
+ * @param {Function} onBefore
+ */
+Bach.RelativityRenderer.prototype.removeBeforeRenderListener = function(onBefore) {
+  this.beforeRenderSignal.remove(onBefore);
+};
+
+
+/***
  * @method renderContinuously
  */
-Bach.RelativityScene.prototype.renderContinuously = function(onRenderFunction) {
+Bach.RelativityRenderer.prototype.renderContinuously = function() {
   var _this = this;
   this.stopRendering = false;
   var rf = function() {
-    if(onRenderFunction) {
-      onRenderFunction();
-    }
     _this.render();
     if(!_this.stopRendering) {
       requestAnimationFrame(rf);
@@ -65,17 +89,18 @@ Bach.RelativityScene.prototype.renderContinuously = function(onRenderFunction) {
 };
 
 /***
- * @method renderContinuously
+ * Do the actual render.
  */
-Bach.RelativityScene.prototype.render = function() {
+Bach.RelativityRenderer.prototype.render = function() {
+  this.signals.beforeRender.dispatch(this);
   this.renderer.render(this.scene, this.camera);
 };
 
-Bach.RelativityScene.prototype.showGrid = function(show) {
+Bach.RelativityRenderer.prototype.showGrid = function(show) {
   if(show) {
     if(!this.gridHelper) {
-      var gridHelperWidth = 1.0*this.scale;
-      this.gridHelper = new THREE.GridHelper(Math.floor(gridHelperWidth / 0.025*this.scale) * 0.025*this.scale, 0.025*this.scale);
+      var gridHelperWidth = 4.0*this.baseScale;
+      this.gridHelper = new THREE.GridHelper(Math.floor(gridHelperWidth / 0.025*this.baseScale) * 0.025*this.baseScale, 0.2*this.baseScale);
       this.gridHelper.setColors(0x3662B2, 0x7b99c4);
       this.scene.add(this.gridHelper);
     }
@@ -85,7 +110,7 @@ Bach.RelativityScene.prototype.showGrid = function(show) {
   }
 };
 
-Bach.RelativityScene.prototype.addDefaultLighting = function (object3D) {
+Bach.RelativityRenderer.prototype.addDefaultLighting = function (object3D) {
   // Add default ambient light.
   //var light = new THREE.AmbientLight(0xffffff);
   var light = new THREE.AmbientLight(0x106060);
@@ -110,12 +135,12 @@ Bach.RelativityScene.prototype.addDefaultLighting = function (object3D) {
   object3D.add(light);
 };
 
-Bach.RelativityScene.prototype.addAxisMarker = function() {
+Bach.RelativityRenderer.prototype.addAxisMarker = function() {
   var axisHelper = new THREE.AxisHelper(0.25);
   this.scene.add(axisHelper);
 };
 
-Bach.RelativityScene.prototype.enablePanAndRotate = function(enable) {
+Bach.RelativityRenderer.prototype.enablePanAndRotate = function(enable) {
   if(enable) {
     if(!this.panAndRotateControl) {
       this.panAndRotateControl = new THREE.OrbitControls(this.camera, this.renderer.domElement);
@@ -132,14 +157,14 @@ Bach.RelativityScene.prototype.enablePanAndRotate = function(enable) {
   }
 };
 
-Bach.RelativityScene.prototype.createDebugCloud = function() {
-  var geometry = new THREE.BoxGeometry(0.02*this.scale, 0.02*this.scale, 0.02*this.scale);
+Bach.RelativityRenderer.prototype.createDebugCloud = function() {
+  var geometry = new THREE.BoxGeometry(0.02*this.baseScale, 0.02*this.baseScale, 0.02*this.baseScale);
   var material = new THREE.MeshBasicMaterial( {color: 0xF2995F} );
   material.wireframe = true;
   //var geometry = new THREE.CylinderGeometry(0, 10, 30, 4, 1);
   //var material = new THREE.MeshLambertMaterial({color: 0xffffff, shading: THREE.FlatShading});
 
-  var spread = 1.0*this.scale;
+  var spread = 1.0*this.baseScale;
 
   for (var i = 0; i < 200; i++) {
     var mesh = new THREE.Mesh(geometry, material);
@@ -150,4 +175,13 @@ Bach.RelativityScene.prototype.createDebugCloud = function() {
     mesh.matrixAutoUpdate = false;
     this.scene.add(mesh);
   }
+};
+
+/***
+ * Get the value from the config JSON or else return the default value.
+ * @param key
+ * @param defaultValue
+ */
+Bach.RelativityRenderer.prototype.fromConfig = function(key, defaultValue) {
+  return _.isUndefined(this.config[key]) ? defaultValue : this.config[key];
 };

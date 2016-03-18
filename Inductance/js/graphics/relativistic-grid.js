@@ -20,15 +20,16 @@ Bach.Inductance3D.RelativisticGrid = function() {
  * @param {Array} config.connectionSets - vertex numbers to connect. This is of the form { color: _color, lineVertexSets: [ [0, 1,], [1, 2], ...] }.
  */
 Bach.Inductance3D.RelativisticGrid.prototype.create = function(config) {
-  this.points = config.points;
-  this.follow = config.follow;
-  this.connectionSets = config.connectionSets;
+  this.config = _.clone(config);
+  this.points = this.config.points;
+  this.follow = this.config.follow;
+  this.connectionSets = this.config.connectionSets;
   this.pointPositions = [];
 
   this.getMinAndMaxTimes();
 
-  if(config.hasOwnProperty('startTime')) {
-    this.startTime = config.startTime;
+  if(this.config.hasOwnProperty('startTime')) {
+    this.startTime = this.config.startTime;
   } else if(this.follow === Bach.Inductance3D.FollowUniversal) {
     this.startTime = this.startTimeUniversal;
     this.endTime = this.endTimeUniversal;

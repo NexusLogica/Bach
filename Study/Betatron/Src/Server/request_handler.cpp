@@ -20,6 +20,7 @@
 #include "BetatronHandler.h"
 #include "TwoElectronRelativityHandler.h"
 #include "FieldFlowHandler.h"
+#include "MolecularSimHandler.h"
 
 using namespace Bach;
 using namespace Eigen;
@@ -68,15 +69,17 @@ void request_handler::handle_request(const request& req, reply& rep)
     else {
       std::string system = root.get("system", "betatron").asString();
 
-      if(system == "betatron") {
+      if(system == "molecularSim") {
+        boost::shared_ptr<MolecularSimHandler> handler = MolecularSimHandler::CreateInstance();
+        output = handler->HandleRequest(root);
+      }
+      else if(system == "betatron") {
         boost::shared_ptr<BetatronHandler> handler = BetatronHandler::CreateInstance();
         output = handler->HandleRequest(root);
-        
       }
       else if(system == "twoElectronRelativity") {
         boost::shared_ptr<TwoElectronRelativityHandler> handler = TwoElectronRelativityHandler::CreateInstance();
         output = handler->HandleRequest(root);
-        
       }
       else if(system == "fieldFlow") {
         boost::shared_ptr<FieldFlowHandler> handler = FieldFlowHandler::CreateInstance();
